@@ -30,7 +30,7 @@ buildable tree from three pinned ingredients (pristine kernel + `sdk/` vendor co
 ## Build
 
 ```sh
-git clone --recmodules https://github.com/martiancomputer/PhoebusBSP-6
+git clone --recurse-submodules https://github.com/martiancomputer/PhoebusBSP-6
 cd PhoebusBSP-6
 git submodule update --init          # pulls Phoebus-SDK
 ./build.sh                            # -> images/uImage  (load 0x80001000)

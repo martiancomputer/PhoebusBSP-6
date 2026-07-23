@@ -19,7 +19,7 @@ K="$WORK/linux-$KVER"
 CROSS_COMPILE="${CROSS_COMPILE:-mips-buildroot-linux-gnu-}"
 JOBS="${JOBS:-$(nproc)}"
 
-[ -d "$SDK/vendor/rtl86900" ] || { echo "ERROR: Phoebus-SDK submodule missing. Run: git submodule update --init"; exit 1; }
+[ -d "$SDK/vendor/realtek-net" ] || { echo "ERROR: Phoebus-SDK submodule missing. Run: git submodule update --init"; exit 1; }
 
 # --- 1. toolchain (downloaded by the SDK, not committed) ---
 "$SDK/scripts/fetch-toolchain.sh" "$BSP/toolchain"
@@ -32,7 +32,7 @@ mkdir -p "$WORK"; cd "$WORK"
 rm -rf "$K"; tar xf "linux-$KVER.tar.xz"
 
 # --- 3. graft pristine vendor SoC code (must match the baseline the patch was cut against) ---
-cp -a "$SDK/vendor/rtl86900"                                  "$K/drivers/net/ethernet/realtek/"
+cp -a "$SDK/vendor/realtek-net/."                            "$K/drivers/net/ethernet/realtek/"
 cp -a "$SDK/vendor/platform/arch/mips/rtl9607c"              "$K/arch/mips/"
 cp -a "$SDK/vendor/platform/arch/mips/boot/dts/realtek/."    "$K/arch/mips/boot/dts/realtek/"
 cp -a "$SDK/vendor/platform/arch/mips/include/asm/mach-rtl960xc" "$K/arch/mips/include/asm/"
