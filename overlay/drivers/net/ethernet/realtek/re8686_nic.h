@@ -1,0 +1,1 @@
+/home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/ethernet/realtek/rtl86900/nicDriver/re8686_rtl9607c.h
