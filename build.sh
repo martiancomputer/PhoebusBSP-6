@@ -21,6 +21,19 @@ JOBS="${JOBS:-$(nproc)}"
 
 [ -d "$SDK/vendor/realtek-net" ] || { echo "ERROR: Phoebus-SDK submodule missing. Run: git submodule update --init"; exit 1; }
 
+# --- 0. host tool preflight (fail fast, not 10 minutes into the build) ---
+missing=""
+for t in make gcc bison flex bc mkimage lzma; do
+	command -v "$t" >/dev/null 2>&1 || missing="$missing $t"
+done
+if [ -n "$missing" ]; then
+	echo "ERROR: missing host tools:$missing"
+	echo "  Arch/Artix : sudo pacman -S base-devel bc uboot-tools xz"
+	echo "  Debian/Ubu : sudo apt install build-essential bc u-boot-tools xz-utils flex bison"
+	echo "  (mkimage = uboot-tools/u-boot-tools; bc = kernel timeconst; lzma = xz-utils)"
+	exit 1
+fi
+
 # --- 1. toolchain (downloaded by the SDK, not committed) ---
 "$SDK/scripts/fetch-toolchain.sh" "$BSP/toolchain"
 export PATH="$BSP/toolchain/mips32--glibc--stable-2025.08-1/bin:$PATH"

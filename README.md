@@ -29,6 +29,12 @@ buildable tree from three pinned ingredients (pristine kernel + `sdk/` vendor co
 
 ## Build
 
+Host prerequisites (build.sh preflights these):
+- Arch/Artix: `sudo pacman -S base-devel bc uboot-tools xz`
+- Debian/Ubuntu: `sudo apt install build-essential bc u-boot-tools xz-utils flex bison`
+
+(`mkimage` from uboot-tools wraps the uImage; `bc` is needed by the kernel's timeconst; the cross toolchain is fetched automatically.)
+
 ```sh
 git clone --recurse-submodules https://github.com/martiancomputer/PhoebusBSP-6
 cd PhoebusBSP-6
