@@ -48,15 +48,21 @@ cp -a "$SDK/vendor/include/dt-bindings/soc/9607xc_irqs.h"   "$K/include/dt-bindi
 #  unified-diff patch trips on; docs/port-vs-upstream-*.diff is the human changelog)
 cp -a "$BSP/overlay/." "$K/"
 
-# --- 5. configure + build ---
+# --- 5. rootfs (BEFORE the kernel: the initramfs is baked in during the kernel build) ---
+"$SDK/rootfs/build-rootfs.sh" "$WORK/rootfs-tree"
+
+# --- 6. configure + build ---
 cp "$BSP/configs/rtl9607c.config" "$K/.config"
+# Point the built-in initramfs at the rootfs we just built. This overrides any
+# CONFIG_INITRAMFS_SOURCE value in the committed config (which must NOT carry a
+# machine-specific absolute path — that was a portability bug).
+sed -i "s|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE=\"$WORK/rootfs-tree $SDK/rootfs/initramfs-devnodes.txt\"|" "$K/.config"
 # host bc is required by the kernel build; the SDK ships a fallback if the host lacks it
 command -v bc >/dev/null 2>&1 || export PATH="$SDK/tools/hostbin:$PATH"
 make -C "$K" olddefconfig
 make -C "$K" -j"$JOBS" uImage.lzma
 
-# --- 6. rootfs + package ---
-"$SDK/rootfs/build-rootfs.sh" "$WORK/rootfs-tree"
+# --- 7. package ---
 # (initramfs is baked in via CONFIG_INITRAMFS_SOURCE; for a separate squashfs+vm.img
 #  use the SDK image tools — see README)
 mkdir -p "$BSP/images"
