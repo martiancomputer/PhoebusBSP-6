@@ -874,6 +874,22 @@ __weak int bsp_usb_init_9603cvd(void)
 static int __init bsp_usb_init(void)
 {
 	uint32  chipId,rev,subType  = 0;
+
+	/*
+	 * USB host disabled on this board (TP-Link Archer AX10/AX1500 exposes no
+	 * USB port; both WiFi radios are PCIe, not USB). The 9607C EHCI/OHCI
+	 * controllers otherwise fail to probe anyway -- OHCI cannot obtain its
+	 * GIC interrupt, EHCI setup returns -ETIMEDOUT -- and an idle,
+	 * unreachable host stack is needless attack surface. Everything below
+	 * (PHY init + host-controller platform devices) is left compiled in but
+	 * simply never registered, so no USB device can enumerate. To bring USB
+	 * back, define CONFIG_RTK_9607C_USB (add it to this dir's Kconfig).
+	 */
+	if (!IS_ENABLED(CONFIG_RTK_9607C_USB)) {
+		printk("USB: host controllers disabled for this board (no USB port)\n");
+		return 0;
+	}
+
 	if (rtk_switch_version_get(&chipId,&rev,&subType) == RT_ERR_OK) {
 		//printk("\n %s %d\n",__FUNCTION__,__LINE__);
 		if ((chipId==RTL9607C_CHIP_ID) && (rev==CHIP_REV_ID_C)) {
