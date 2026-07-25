@@ -1,6 +1,6 @@
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.c drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.c	2026-07-25 01:34:32.618583938 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.c	2026-07-25 01:34:32.618583938 +0530
 @@ -89,7 +89,7 @@
  
  
@@ -19,9 +19,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  		size_t data_len, u8 *mac)
  {
  	return hmac_sha256_vector(key, key_len, 1, &data, &data_len, mac);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.h drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.h	2026-07-25 01:34:32.632932494 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/core/crypto/sha256.h	2026-07-25 01:34:32.632932494 +0530
 @@ -13,7 +13,7 @@
  
  int hmac_sha256_vector(const u8 *key, size_t key_len, size_t num_elem,
@@ -31,9 +31,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  		size_t data_len, u8 *mac);
  int sha256_prf(const u8 *key, size_t key_len, const char *label,
  	       const u8 *data, size_t data_len, u8 *buf, size_t buf_len);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_br_ext.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_br_ext.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_br_ext.c drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_br_ext.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_br_ext.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_br_ext.c	2026-07-25 01:35:25.456315983 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_br_ext.c	2026-07-25 01:35:25.456315983 +0530
 @@ -17,7 +17,7 @@
  #ifdef __KERNEL__
  	#include <linux/if_arp.h>
@@ -43,9 +43,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	#include <linux/atalk.h>
  	#include <linux/udp.h>
  	#include <linux/if_pppox.h>
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_cmd.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_cmd.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_cmd.c drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_cmd.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_cmd.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_cmd.c	2026-07-25 01:23:04.078809894 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_cmd.c	2026-07-25 01:23:04.078809894 +0530
 @@ -11692,7 +11692,7 @@
  		// WB zero memory
  		_os_cache_wback(phl_to_drvpriv(adapter->dvobj),
@@ -98,9 +98,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  		} else if (addr >= 0x90000000) {
  			iounmap(ptr);
  		}
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_trx_pci.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_trx_pci.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_trx_pci.c drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_trx_pci.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_trx_pci.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_trx_pci.c	2026-07-25 01:23:04.066523965 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_trx_pci.c	2026-07-25 01:23:04.066523965 +0530
 @@ -539,10 +539,10 @@
  			_rtw_init_listhead(&precvframe->u.hdr.list);
  			precvframe->u.hdr.len = 0;
@@ -140,9 +140,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  		}
  done:
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit.c drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit.c	2026-07-25 01:17:32.058736597 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit.c	2026-07-25 01:17:32.058736597 +0530
 @@ -7776,7 +7776,7 @@
  			phy_addr |= (phy_addr_h << 32);
  		}
@@ -161,9 +161,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
  			pkt_list->phy_addr_h =  phy_addr >> 32;
  #else
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit_shortcut.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit_shortcut.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit_shortcut.c drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit_shortcut.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit_shortcut.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit_shortcut.c	2026-07-25 01:17:32.049736704 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/core/rtw_xmit_shortcut.c	2026-07-25 01:17:32.049736704 +0530
 @@ -2114,7 +2114,7 @@
  #ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
  			phy_addr |= ((u64)pkt_list->phy_addr_h << 32);
@@ -191,9 +191,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
  	pkt_list->phy_addr_h =  phy_addr >> 32;
  #else
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/autoconf.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/autoconf.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/autoconf.h drivers/net/wireless/realtek/g6_wifi_driver/include/autoconf.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/autoconf.h	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/autoconf.h	2026-07-25 01:12:05.505045255 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/include/autoconf.h	2026-07-25 01:12:05.505045255 +0530
 @@ -0,0 +1,367 @@
 +/******************************************************************************
 + *
@@ -562,9 +562,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
 +#endif
 +#endif
 +
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/drv_types.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/drv_types.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/drv_types.h drivers/net/wireless/realtek/g6_wifi_driver/include/drv_types.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/drv_types.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/drv_types.h	2026-07-25 01:17:50.994510285 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/include/drv_types.h	2026-07-25 01:17:50.994510285 +0530
 @@ -247,6 +247,7 @@
  
  #define RTL_MS_TO_256US(x) (((x*1000)%256) ? (((x*1000)/256)+1) : ((x*1000)/256))
@@ -573,9 +573,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
  
  #define SPEC_DEV_ID_NONE BIT(0)
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/ipx_compat.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/ipx_compat.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/ipx_compat.h drivers/net/wireless/realtek/g6_wifi_driver/include/ipx_compat.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/ipx_compat.h	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/ipx_compat.h	2026-07-25 01:35:25.453214748 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/include/ipx_compat.h	2026-07-25 01:35:25.453214748 +0530
 @@ -0,0 +1,21 @@
 +/* IPX was removed from the kernel (net/ipx.h). rtw_br_ext.c's bridge helper
 + * still parses IPX frames, so provide just the on-wire definitions it needs.
@@ -598,9 +598,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
 +	struct ipx_address	ipx_source __packed;
 +};
 +#endif
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/osdep_service_linux.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/osdep_service_linux.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/osdep_service_linux.h drivers/net/wireless/realtek/g6_wifi_driver/include/osdep_service_linux.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/osdep_service_linux.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/osdep_service_linux.h	2026-07-25 01:17:31.993023456 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/include/osdep_service_linux.h	2026-07-25 01:17:31.993023456 +0530
 @@ -499,7 +499,7 @@
  
  static inline void rtw_thread_exit(_completion *comp)
@@ -634,9 +634,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  }
  
  /*
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/rtw_rm_util.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/rtw_rm_util.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/rtw_rm_util.h drivers/net/wireless/realtek/g6_wifi_driver/include/rtw_rm_util.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/include/rtw_rm_util.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/include/rtw_rm_util.h	2026-07-25 01:17:51.008046023 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/include/rtw_rm_util.h	2026-07-25 01:17:51.008046023 +0530
 @@ -23,6 +23,7 @@
   * {36,40,44,48,52,56,60,64,100,104,108,112,116,120,124,128,132,136,140,144,149,153,157,161,165}
   */
@@ -645,9 +645,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #define MAX(x, y) (((x) > (y)) ? (x) : (y))
  #endif
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile drivers/net/wireless/realtek/g6_wifi_driver/Makefile
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile	2026-07-25 08:38:26.837466118 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/Makefile	2026-07-25 08:38:26.837466118 +0530
 @@ -992,3 +992,19 @@
  	rm -fr .tmp_versions
  endif
@@ -668,9 +668,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
 +             -Wno-error=array-bounds -Wno-error=restrict \
 +             -Wno-error=missing-prototypes -Wno-error=misleading-indentation \
 +             -Wno-error=enum-int-mismatch -Wno-error=unused-function
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c	2026-07-25 08:39:06.321494899 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c	2026-07-25 08:39:06.321494899 +0530
 @@ -491,7 +491,8 @@
  
  #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0))
@@ -842,9 +842,21 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  		RTW_INFO(FUNC_ADPT_FMT" clear current_bss by cfg80211_disconnected\n", FUNC_ADPT_ARG(adapter));
  		rtw_cfg80211_indicate_disconnect(adapter, 0, 1);
  	}
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/os_intfs.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/os_intfs.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/mlme_linux.c drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/mlme_linux.c
+--- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/mlme_linux.c	2025-08-31 18:28:43.000000000 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/mlme_linux.c	2026-07-25 17:33:12.067890147 +0530
+@@ -395,7 +395,7 @@
+ 	mac[4] = 0x11;
+ 	mac[5] = 0x12;
+ 
+-	_rtw_memcpy(pnetdev->dev_addr, mac, ETH_ALEN);
++	eth_hw_addr_set(pnetdev, mac);
+ 
+ 
+ 	rtw_netif_carrier_off(pnetdev);
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/os_intfs.c drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/os_intfs.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/os_intfs.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/os_intfs.c	2026-07-25 01:34:32.599823573 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/os_intfs.c	2026-07-25 17:33:12.076142879 +0530
 @@ -522,13 +522,13 @@
  
  	wdev = dev->ieee80211_ptr;
@@ -876,9 +888,18 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  			sizeof(info->bus_info));
  	}
  }
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/pci_intf.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/pci_intf.c
+@@ -657,7 +657,7 @@
+ 	/* alloc netdev name */
+ 	rtw_init_netdev_name(ndev, name);
+ 
+-	_rtw_memcpy(ndev->dev_addr, adapter_mac_addr(adapter), ETH_ALEN);
++	eth_hw_addr_set(ndev, adapter_mac_addr(adapter));
+ 
+ 	/* Tell the network stack we exist */
+ 
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/pci_intf.c drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/pci_intf.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/pci_intf.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/pci_intf.c	2026-07-25 01:34:32.611894114 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/pci_intf.c	2026-07-25 01:34:32.611894114 +0530
 @@ -587,9 +587,9 @@
  	}
  
@@ -902,9 +923,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  			if (err != 0) {
  				RTW_ERR("Unable to obtain 32bit DMA for consistent allocations\n");
  				goto disable_picdev;
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtl_wfo/rtl_wfo_priv.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtl_wfo/rtl_wfo_priv.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtl_wfo/rtl_wfo_priv.c drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtl_wfo/rtl_wfo_priv.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtl_wfo/rtl_wfo_priv.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtl_wfo/rtl_wfo_priv.c	2026-07-25 01:17:32.084289092 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtl_wfo/rtl_wfo_priv.c	2026-07-25 01:17:32.084289092 +0530
 @@ -416,10 +416,10 @@
  		resource[i].res_size = (1 << (resource[i].res_order + PAGE_SHIFT));
  		// WB zero memory
@@ -950,9 +971,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	} else {
  		RTW_ERR("dma_mapping_error 0x%llx\n", bus_addr);
  		__free_pages(res_pages, order);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtw_proc.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtw_proc.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtw_proc.c drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtw_proc.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtw_proc.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtw_proc.c	2026-07-25 01:34:32.606823492 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/rtw_proc.c	2026-07-25 01:34:32.606823492 +0530
 @@ -43,7 +43,7 @@
  #endif
  
@@ -1052,9 +1073,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	const struct rtw_proc_hdl *hdl = mcc_proc_hdls + index;
  	ssize_t (*write)(struct file *, const char __user *, size_t, loff_t *, void *) = hdl->write;
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/xmit_linux.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/xmit_linux.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/xmit_linux.c drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/xmit_linux.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/xmit_linux.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/xmit_linux.c	2026-07-25 01:34:32.646404332 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/xmit_linux.c	2026-07-25 01:34:32.646404332 +0530
 @@ -14,6 +14,7 @@
   *****************************************************************************/
  #define _XMIT_OSDEP_C_
@@ -1063,9 +1084,18 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #include <drv_types.h>
  
  #ifdef CONFIG_RTL_VLAN_8021Q
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/osdep_service_linux.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/osdep_service_linux.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/osdep_service_linux.c drivers/net/wireless/realtek/g6_wifi_driver/os_dep/osdep_service_linux.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/osdep_service_linux.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/osdep_service_linux.c	2026-07-25 01:35:25.445380992 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/os_dep/osdep_service_linux.c	2026-07-25 17:33:12.071197050 +0530
+@@ -752,7 +752,7 @@
+ 
+ 	rtw_init_netdev_name(pnetdev, ifname);
+ 
+-	_rtw_memcpy(pnetdev->dev_addr, adapter_mac_addr(padapter), ETH_ALEN);
++	eth_hw_addr_set(pnetdev, adapter_mac_addr(padapter));
+ 
+ 	if (rtnl_lock_needed)
+ 		ret = register_netdev(pnetdev);
 @@ -792,7 +792,7 @@
  inline u32 rtw_random32(void)
  {
@@ -1084,9 +1114,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	}
  }
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_def_pcie.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_def_pcie.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_def_pcie.h drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_def_pcie.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_def_pcie.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_def_pcie.h	2026-07-25 01:17:32.094736166 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_def_pcie.h	2026-07-25 01:17:32.094736166 +0530
 @@ -124,7 +124,7 @@
  	_os_vm_cache_inv(d, rx_buf->vir_addr, sz);
  	#else /* CONFIG_RTW_VM_CACHE_HANDLING */
@@ -1096,9 +1126,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	#endif /*CONFIG_RTW_VM_CACHE_HANDLING */
  }
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_pcie.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_pcie.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_pcie.c drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_pcie.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_pcie.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_pcie.c	2026-07-25 01:23:04.124809355 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/hci/phl_trx_pcie.c	2026-07-25 01:23:04.124809355 +0530
 @@ -571,7 +571,7 @@
  			       	&wd_page_ring->wd_work[i].phy_addr_h,
  			       	wd_page_ring->wd_work[i].buf_len,
@@ -1258,9 +1288,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	#endif /* PHL_DMA_NONCOHERENT */
  
  	_os_convert_buf_to_pkt(rxbuf->vir_addr, buf_ptr, bd_sz);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_fsm.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_fsm.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_fsm.c drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_fsm.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_fsm.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_fsm.c	2026-07-25 01:17:51.015151818 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_fsm.c	2026-07-25 01:17:51.015151818 +0530
 @@ -20,6 +20,7 @@
  
  /* #define DEBUG_CMD_FSM_MODULE */
@@ -1269,9 +1299,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
  #ifdef FSM_DBG_MEM_OVERWRITE
  #define _os_kmem_alloc(a, b) fsm_kmalloc(b)
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.c drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.c	2026-07-25 01:17:51.033067584 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.c	2026-07-25 01:17:51.033067584 +0530
 @@ -18,6 +18,7 @@
  
  #ifdef CONFIG_FSM
@@ -1280,9 +1310,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
  
  /**
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.h drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.h	2026-07-25 01:17:51.037427708 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_cmd_job.h	2026-07-25 01:17:51.037427708 +0530
 @@ -19,6 +19,7 @@
  
  #define RTW_PHL_JOB_NAME_LEN 32
@@ -1291,9 +1321,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
  #endif
  struct fsm_msg;
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_fsm.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_fsm.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_fsm.c drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_fsm.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_fsm.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_fsm.c	2026-07-25 01:17:51.026509903 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_fsm.c	2026-07-25 01:17:51.026509903 +0530
 @@ -26,7 +26,9 @@
  #define IS_CLK_ON(clk) (clk->remain >= 0)
  #define IS_CLK_EXP(clk) (clk->remain < (CLOCK_UNIT >> 1)) /* expire */
@@ -1304,9 +1334,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
  #define pstr(s) (s +_os_strlen((u8 *)s))
  #define lstr(s, l) (size_t)(l - _os_strlen((u8 *)s))
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_types.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_types.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_types.h drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_types.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_types.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_types.h	2026-07-25 01:17:32.079312968 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_types.h	2026-07-25 01:17:32.079312968 +0530
 @@ -59,8 +59,8 @@
  
  	#define BUG_ON
@@ -1318,9 +1348,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #endif /*#ifndef PHL_PLATFORM_LINUX*/
  
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_util.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_util.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_util.h drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_util.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_util.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_util.h	2026-07-25 01:17:51.020350597 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/phl_util.h	2026-07-25 01:17:51.020350597 +0530
 @@ -24,6 +24,7 @@
  					(((addr[5]) & 0xff) == 0xff))
  #endif
@@ -1329,9 +1359,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
  #endif
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_ecos.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_ecos.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_ecos.h drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_ecos.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_ecos.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_ecos.h	2026-07-25 01:23:04.113980595 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_ecos.h	2026-07-25 01:23:04.113980595 +0530
 @@ -269,9 +269,9 @@
  #endif
  	skb->len = 0;
@@ -1393,9 +1423,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #endif
  	rtw_skb_free(skb);
  }
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_linux.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_linux.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_linux.h drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_linux.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_linux.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_linux.h	2026-07-25 01:23:04.117809437 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/pltfm_ops_linux.h	2026-07-25 01:23:04.117809437 +0530
 @@ -15,7 +15,7 @@
  #ifndef _PLTFM_OPS_LINUX_H_
  #define _PLTFM_OPS_LINUX_H_
@@ -1478,9 +1508,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  #endif
  	rtw_skb_free(skb);
  }
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/test/trx_test.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/test/trx_test.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/test/trx_test.c drivers/net/wireless/realtek/g6_wifi_driver/phl/test/trx_test.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/test/trx_test.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/phl/test/trx_test.c	2026-07-25 01:17:32.089970194 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/phl/test/trx_test.c	2026-07-25 01:17:32.089970194 +0530
 @@ -384,7 +384,7 @@
  						&tpkt->pkt.phy_addr_h,
  						MAX_TEST_PAYLOAD_SIZE,
@@ -1499,9 +1529,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  						  &tpkt[i].os_rsvd[0]);
  			#else /*USB/SDIO*/
  			tpkt[i].pkt.vir_addr = _os_mem_alloc(drv_priv, tx_pkt_size);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_pon_pci.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_pon_pci.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_pon_pci.c drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_pon_pci.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_pon_pci.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_pon_pci.c	2026-07-25 01:35:25.441214886 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_pon_pci.c	2026-07-25 01:35:25.441214886 +0530
 @@ -18,7 +18,7 @@
  			dma_addr_t *bus_addr, size_t size, int direction)
  {
@@ -1553,9 +1583,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	vir_addr = NULL;
  }
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_xdsl_pci.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_xdsl_pci.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_xdsl_pci.c drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_xdsl_pci.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_xdsl_pci.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_xdsl_pci.c	2026-07-25 01:23:04.101353491 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_mips_xdsl_pci.c	2026-07-25 01:23:04.101353491 +0530
 @@ -36,7 +36,7 @@
  			size_t size, int direction)
  {
@@ -1574,9 +1604,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	else
  		RTW_ERR("pcie hwdev handle or bus addr is NULL!\n");
  }
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_pc_pci.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_pc_pci.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_pc_pci.c drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_pc_pci.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_pc_pci.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_pc_pci.c	2026-07-25 01:23:04.105492149 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_linux_pc_pci.c	2026-07-25 01:23:04.105492149 +0530
 @@ -36,7 +36,7 @@
  			size_t size, int direction)
  {
@@ -1595,9 +1625,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  	else
  		RTW_ERR("pcie hwdev handle or bus addr is NULL!\n");
  }
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_97f_pci.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_97f_pci.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_97f_pci.c drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_97f_pci.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_97f_pci.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_97f_pci.c	2026-07-25 01:23:04.090105683 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_97f_pci.c	2026-07-25 01:23:04.090105683 +0530
 @@ -37,7 +37,7 @@
  			size_t size, int direction)
  {
@@ -1625,9 +1655,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  }
  void *pci_alloc_cache_mem(struct pci_dev *pdev,
  			dma_addr_t *bus_addr, size_t size, int direction)
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_98d_pci.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_98d_pci.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_98d_pci.c drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_98d_pci.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_98d_pci.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_98d_pci.c	2026-07-25 01:23:04.095437092 +0530
++++ drivers/net/wireless/realtek/g6_wifi_driver/platform/platform_mips_98d_pci.c	2026-07-25 01:23:04.095437092 +0530
 @@ -37,7 +37,7 @@
  			size_t size, int direction)
  {

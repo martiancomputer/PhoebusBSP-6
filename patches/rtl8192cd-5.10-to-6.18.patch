@@ -1,6 +1,6 @@
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_aes.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_aes.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_aes.c drivers/net/wireless/realtek/rtl8192cd/8192cd_aes.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_aes.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_aes.c	2026-07-25 14:59:24.725086414 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_aes.c	2026-07-25 14:59:24.725086414 +0530
 @@ -360,7 +360,7 @@
  	const unsigned char *pos, *end;	
  	int i, e, left, total_len;
@@ -95,9 +95,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  	}
  #endif
  	
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_br_ext.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_br_ext.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_br_ext.c drivers/net/wireless/realtek/rtl8192cd/8192cd_br_ext.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_br_ext.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_br_ext.c	2026-07-25 14:42:48.059383166 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_br_ext.c	2026-07-25 14:42:48.059383166 +0530
 @@ -13,7 +13,7 @@
  #ifdef __KERNEL__
  #include <linux/if_arp.h>
@@ -107,9 +107,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #include <linux/atalk.h>
  #include <linux/udp.h>
  #include <linux/if_pppox.h>
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg80211.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg80211.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg80211.c drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg80211.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg80211.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg80211.c	2026-07-25 15:07:27.429330588 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg80211.c	2026-07-25 15:07:27.429330588 +0530
 @@ -16,6 +16,8 @@
   */
  
@@ -379,9 +379,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
   
      /* create first device */
      rtk->dev = device_create(rtk->cl, NULL, rtk_wifi_dev[idx], NULL, rtk_dev_name[idx]);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg.h drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg.h	2026-07-25 15:09:04.512110639 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_cfg.h	2026-07-25 15:09:04.512110639 +0530
 @@ -3712,8 +3712,8 @@
  #define LED_INTERVAL_TIME		RTL_MILISECONDS_TO_JIFFIES(500)	// 500ms
  #define LED_ON_TIME				RTL_MILISECONDS_TO_JIFFIES(40)	// 40ms
@@ -393,9 +393,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #define LED_0 					0
  #define LED_1 					1
  #define LED_2					2
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_debug.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_debug.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_debug.c drivers/net/wireless/realtek/rtl8192cd/8192cd_debug.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_debug.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_debug.c	2026-07-25 14:56:11.006026136 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_debug.c	2026-07-25 14:56:11.006026136 +0530
 @@ -231,7 +231,7 @@
  		unsigned char i;
  	
@@ -405,9 +405,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  			if (token) {
  				strcpy(Argv[Argc], token);
  				Argc++;
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd.h drivers/net/wireless/realtek/rtl8192cd/8192cd.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd.h	2026-07-25 15:09:04.516110664 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd.h	2026-07-25 15:09:04.516110664 +0530
 @@ -83,6 +83,22 @@
  #define TX_SC_ENT           _PARA_NAME(tx_sc_ent)
  #define TX_SC_REPLACE_IDX   _PARA_NAME(tx_sc_replace_idx)
@@ -440,9 +440,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  
  
  	int				ther_offset;
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_hw.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_hw.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_hw.c drivers/net/wireless/realtek/rtl8192cd/8192cd_hw.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_hw.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_hw.c	2026-07-25 15:39:21.277978226 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_hw.c	2026-07-25 15:39:21.277978226 +0530
 @@ -9,7 +9,10 @@
   */
  
@@ -484,9 +484,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  		*/
  
  #if defined(CONFIG_RTL_92C_SUPPORT) || defined(CONFIG_RTL_92D_SUPPORT)
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_led.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_led.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_led.c drivers/net/wireless/realtek/rtl8192cd/8192cd_led.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_led.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_led.c	2026-07-25 14:35:30.503516367 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_led.c	2026-07-25 14:35:30.503516367 +0530
 @@ -108,7 +108,7 @@
  {
  #if defined(CONFIG_RTL8672) && defined(CONFIG_LEDPWR_PBC)
@@ -764,9 +764,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  		}
  		priv->pshare->set_led_in_progress = 0;
  	}
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_net80211.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_net80211.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_net80211.c drivers/net/wireless/realtek/rtl8192cd/8192cd_net80211.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_net80211.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_net80211.c	2026-07-25 14:55:02.171981154 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_net80211.c	2026-07-25 14:55:02.171981154 +0530
 @@ -9,6 +9,7 @@
   */
  
@@ -775,9 +775,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #include <linux/module.h>
  #include <linux/init.h>
  #include <asm/uaccess.h>
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_osdep.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_osdep.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_osdep.c drivers/net/wireless/realtek/rtl8192cd/8192cd_osdep.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_osdep.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_osdep.c	2026-07-25 16:48:40.769118485 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_osdep.c	2026-07-25 16:48:40.769118485 +0530
 @@ -691,10 +691,13 @@
  };
  #else
@@ -1022,9 +1022,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  
  #ifndef NOT_RTK_BSP
  #ifdef PCIE_POWER_SAVING
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_proc.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_proc.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_proc.c drivers/net/wireless/realtek/rtl8192cd/8192cd_proc.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_proc.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_proc.c	2026-07-25 14:35:30.591213294 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_proc.c	2026-07-25 14:35:30.591213294 +0530
 @@ -85,7 +85,7 @@
  #endif // !(__LINUX_3_9__)
  
@@ -1087,9 +1087,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #else
  	struct net_device *dev = (struct net_device *)data;
  #endif
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_psk_hapd.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_psk_hapd.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_psk_hapd.c drivers/net/wireless/realtek/rtl8192cd/8192cd_psk_hapd.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_psk_hapd.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_psk_hapd.c	2026-07-25 15:04:22.636514601 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_psk_hapd.c	2026-07-25 15:04:22.636514601 +0530
 @@ -680,6 +680,8 @@
  #endif // RTL_WPA2
  
@@ -1099,9 +1099,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  static int MIN(unsigned char *ucStr1, unsigned char *ucStr2, unsigned int ulLen)
  {
  	int i;
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_rx.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_rx.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_rx.h drivers/net/wireless/realtek/rtl8192cd/8192cd_rx.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_rx.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_rx.h	2026-07-25 15:09:04.525034454 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_rx.h	2026-07-25 15:09:04.525034454 +0530
 @@ -102,16 +102,16 @@
  #endif
  
@@ -1122,9 +1122,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #endif
  	phw->rx_descL[i].Dword0 = set_desc((i == (NUM_RX_DESC_IF(priv) - 1)? RX_EOR : 0) | RX_OWN |((RX_BUF_LEN - sizeof(struct rx_frinfo)-64) & RX_PktLenMask));	//32 for alignment, 32 for TKIP MIC
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_sme.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_sme.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_sme.c drivers/net/wireless/realtek/rtl8192cd/8192cd_sme.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_sme.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_sme.c	2026-07-25 14:37:30.743222846 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_sme.c	2026-07-25 14:37:30.743222846 +0530
 @@ -14088,7 +14088,7 @@
  	memset(pdesc, 0, 40);	
  	pdesc->Dword0 |= set_desc(TX_FirstSeg | TX_LastSeg);
@@ -1179,9 +1179,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  
      if (priv->pmib->dot11StationConfigEntry.beacon_rate != 0xff) {
          if (priv->pmib->dot11StationConfigEntry.beacon_rate > 11)
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tkip.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tkip.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tkip.c drivers/net/wireless/realtek/rtl8192cd/8192cd_tkip.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tkip.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tkip.c	2026-07-25 14:37:30.792956434 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_tkip.c	2026-07-25 14:37:30.792956434 +0530
 @@ -241,7 +241,7 @@
  		!(priv->pmib->dot11StationConfigEntry.swTkipMic))
  	{
@@ -1191,9 +1191,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  		
  		*(volatile unsigned int *)GDMACNR  = 0;
  		*(volatile unsigned int *)GDMACNR  = GDMA_ENABLE;
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tx.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tx.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tx.c drivers/net/wireless/realtek/rtl8192cd/8192cd_tx.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tx.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_tx.c	2026-07-25 14:37:30.767222459 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_tx.c	2026-07-25 14:37:30.767222459 +0530
 @@ -1099,7 +1099,7 @@
  		ppdesc = (unsigned int *)pdesc;
  		// Clear all status
@@ -1221,9 +1221,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #endif
  		*tx_head = (*tx_head + 1) & (NUM_CMD_DESC - 1);
  	}
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_util.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_util.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_util.h drivers/net/wireless/realtek/rtl8192cd/8192cd_util.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_util.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/8192cd_util.h	2026-07-25 15:09:04.526638668 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/8192cd_util.h	2026-07-25 15:09:04.526638668 +0530
 @@ -1176,9 +1176,9 @@
  
  #if (defined(CONFIG_USB_HCI) || defined(CONFIG_SDIO_HCI)) && !defined(CONFIG_RTL_TRIBAND_SUPPORT)
@@ -1237,9 +1237,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #define PCI_DMA_NONE			3
  
  static __inline__ void rtl_cache_sync_wback(struct rtl8192cd_priv *priv, unsigned long start,
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.c drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.c	2026-07-25 14:59:24.775924490 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.c	2026-07-25 14:59:24.775924490 +0530
 @@ -8346,7 +8346,7 @@
  #if defined(CONFIG_NET_PCI) && !defined(USE_RTL8186_SDK)
  					if (GET_HCI_TYPE(priv) == RTL_HCI_PCIE) {
@@ -1322,9 +1322,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #endif
  				pdesc->Dword0 = set_desc((tail == (NUM_RX_DESC_IF(priv) - 1)? RX_EOR : 0) | RX_OWN | (RX_BUF_LEN - sizeof(struct rx_frinfo)-64));
  				//SMP_UNLOCK_SKB(x);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.h drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.h	2026-07-25 14:59:24.779774419 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_rx.h	2026-07-25 14:59:24.779774419 +0530
 @@ -262,9 +262,9 @@
  
      phw->rx_infoL[i].pbuf   = (void *)pskb;
@@ -1355,9 +1355,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  	else
  #endif
  	if ((priv->pshare->veriwave_sta_num) && (NULL != priv->pshare->highTP_found_pstat) &&
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_tx.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_tx.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_tx.c drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_tx.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_tx.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_tx.c	2026-07-25 14:59:24.788924322 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_tx.c	2026-07-25 14:59:24.788924322 +0530
 @@ -1017,9 +1017,9 @@
  
  	pbuf = ((struct sk_buff *)txcfg->pframe)->data;
@@ -1814,9 +1814,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #endif
  
  #ifdef RESERVE_TXDESC_FOR_EACH_IF
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_util.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_util.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_util.h drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_util.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_util.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_util.h	2026-07-25 14:59:24.767924594 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/core/8192cd_core_util.h	2026-07-25 14:59:24.767924594 +0530
 @@ -66,11 +66,11 @@
  #define os_dma_alloc(priv, size, dma)		dma_alloc_coherent(priv->pshare->cma_dev, size, dma, GFP_KERNEL)
  #define os_dma_free(priv, size, cpu, dma)	dma_free_coherent(priv->pshare->cma_dev, size, cpu, dma)
@@ -1883,9 +1883,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  			pci_dma_sync_single_for_device(priv->pshare->pdev, start, size, direction);
  #else
  		pci_dma_sync_single(priv->pshare->pdev, start, size, direction);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_2G_n.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_2G_n.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_2G_n.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_2G_n.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_2G_n.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_2G_n.c	2026-07-25 15:04:24.369063181 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_2G_n.c	2026-07-25 15:04:24.369063181 +0530
 @@ -0,0 +1,446 @@
 +unsigned char data_AGC_TAB_2G_n[] = {
 +  0x2f, 0x2f, 0x20, 0x41, 0x47, 0x43, 0x5f, 0x54, 0x41, 0x42, 0x4c, 0x45, 0x20,
@@ -2333,9 +2333,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x63, 0x74, 0x20, 0x0a, 0x30, 0x78, 0x63, 0x37, 0x38, 0x20, 0x20, 0x20, 0x30,
 +  0x78, 0x36, 0x65, 0x31, 0x66, 0x30, 0x30, 0x30, 0x30, 0x0a, 0x30, 0x78, 0x66,
 +  0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_5G_n.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_5G_n.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_5G_n.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_5G_n.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_5G_n.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_5G_n.c	2026-07-25 15:04:24.391062899 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_5G_n.c	2026-07-25 15:04:24.391062899 +0530
 @@ -0,0 +1,475 @@
 +unsigned char data_AGC_TAB_5G_n[] = {
 +  0x2f, 0x2f, 0x20, 0x41, 0x47, 0x43, 0x5f, 0x54, 0x41, 0x42, 0x4c, 0x45, 0x20,
@@ -2812,9 +2812,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x65, 0x6c, 0x65, 0x63, 0x74, 0x20, 0x0a, 0x30, 0x78, 0x63, 0x37, 0x38, 0x20,
 +  0x20, 0x20, 0x30, 0x78, 0x36, 0x65, 0x31, 0x66, 0x30, 0x30, 0x30, 0x30, 0x0a,
 +  0x30, 0x78, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F.c	2026-07-25 16:48:59.703923544 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F.c	2026-07-25 17:33:17.761696246 +0530
 @@ -0,0 +1,360 @@
 +unsigned char data_AGC_TAB_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x20, 0x41, 0x47, 0x43, 0x5f, 0x54, 0x41, 0x42, 0x4c,
@@ -3176,9 +3176,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x78, 0x34, 0x30, 0x37, 0x66, 0x30, 0x30, 0x30, 0x31, 0x20, 0x2f, 0x2f,
 +  0x31, 0x36, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x0a, 0x30,
 +  0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna.c	2026-07-25 16:48:59.707923503 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna.c	2026-07-25 17:33:17.750697100 +0530
 @@ -0,0 +1,236 @@
 +unsigned char data_AGC_TAB_8192F_extlna[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -3416,9 +3416,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x30, 0x34, 0x30, 0x32, 0x32, 0x30, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_2L.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_2L.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_2L.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_2L.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_2L.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_2L.c	2026-07-25 16:48:59.737923194 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_2L.c	2026-07-25 17:33:17.775695157 +0530
 @@ -0,0 +1,1349 @@
 +unsigned char data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_2L[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -4769,9 +4769,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x09, 0x0a, 0x0a,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_4L.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_4L.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_4L.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_4L.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_4L.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_4L.c	2026-07-25 16:48:59.719923380 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_4L.c	2026-07-25 17:33:17.752696945 +0530
 @@ -0,0 +1,234 @@
 +unsigned char data_AGC_TAB_8192F_extlna_dslpon_sky85201_11_4L[] = {
 +  0x2f, 0x2f, 0x72, 0x74, 0x6c, 0x38, 0x31, 0x39, 0x32, 0x65, 0x20, 0x76, 0x65,
@@ -5007,9 +5007,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x38, 0x09, 0x30, 0x78, 0x30, 0x30, 0x30, 0x30, 0x30, 0x32, 0x32, 0x30, 0x20,
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66,
 +  0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type1.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type1.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type1.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type1.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type1.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type1.c	2026-07-25 16:48:59.723923339 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type1.c	2026-07-25 17:33:17.780694769 +0530
 @@ -0,0 +1,236 @@
 +unsigned char data_AGC_TAB_8192F_extlna_type1[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -5247,9 +5247,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x30, 0x30, 0x30, 0x32, 0x32, 0x30, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type2.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type2.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type2.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type2.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type2.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type2.c	2026-07-25 16:48:59.728923287 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type2.c	2026-07-25 17:33:17.780694769 +0530
 @@ -0,0 +1,236 @@
 +unsigned char data_AGC_TAB_8192F_extlna_type2[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -5487,9 +5487,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x30, 0x34, 0x30, 0x32, 0x32, 0x30, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type3.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type3.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type3.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type3.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type3.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type3.c	2026-07-25 16:48:59.737923194 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extlna_type3.c	2026-07-25 17:33:17.786694303 +0530
 @@ -0,0 +1,236 @@
 +unsigned char data_AGC_TAB_8192F_extlna_type3[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -5727,9 +5727,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x30, 0x34, 0x30, 0x32, 0x32, 0x30, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extpa.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extpa.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extpa.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extpa.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extpa.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extpa.c	2026-07-25 16:48:59.743923133 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_extpa.c	2026-07-25 17:33:17.787694225 +0530
 @@ -0,0 +1,236 @@
 +unsigned char data_AGC_TAB_8192F_extpa[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -5967,9 +5967,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x30, 0x34, 0x30, 0x32, 0x32, 0x30, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_hp.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_hp.c	2026-07-25 16:48:59.751923050 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192F_hp.c	2026-07-25 17:33:17.788694147 +0530
 @@ -0,0 +1,236 @@
 +unsigned char data_AGC_TAB_8192F_hp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -6207,9 +6207,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x30, 0x34, 0x30, 0x32, 0x32, 0x30, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192Fmp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192Fmp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192Fmp.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192Fmp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192Fmp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192Fmp.c	2026-07-25 16:48:59.754923019 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192Fmp.c	2026-07-25 17:33:17.796693525 +0530
 @@ -0,0 +1,375 @@
 +unsigned char data_AGC_TAB_8192Fmp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -6586,9 +6586,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x78, 0x63, 0x35, 0x38, 0x09, 0x30, 0x78, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
 +  0x32, 0x30, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS.c	2026-07-25 16:48:59.702923555 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS.c	2026-07-25 17:33:17.763696090 +0530
 @@ -0,0 +1,376 @@
 +unsigned char data_AGC_TAB_8192FS[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -6966,9 +6966,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x09, 0x0a, 0x30, 0x78, 0x63, 0x35, 0x30, 0x09, 0x30, 0x78, 0x30, 0x30, 0x30,
 +  0x34, 0x30, 0x30, 0x32, 0x30, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66,
 +  0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS_extlna.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS_extlna.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS_extlna.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS_extlna.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS_extlna.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS_extlna.c	2026-07-25 16:48:59.706923514 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_8192FS_extlna.c	2026-07-25 17:33:17.753696867 +0530
 @@ -0,0 +1,236 @@
 +unsigned char data_AGC_TAB_8192FS_extlna[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -7206,9 +7206,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x30, 0x34, 0x30, 0x32, 0x32, 0x30, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n_92d_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n_92d_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n_92d_hp.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n_92d_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n_92d_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n_92d_hp.c	2026-07-25 15:04:24.389062925 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n_92d_hp.c	2026-07-25 15:04:24.389062925 +0530
 @@ -0,0 +1,437 @@
 +unsigned char data_AGC_TAB_n_92d_hp[] = {
 +  0x2f, 0x2f, 0x20, 0x41, 0x47, 0x43, 0x5f, 0x54, 0x41, 0x42, 0x4c, 0x45, 0x20,
@@ -7647,9 +7647,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x6c, 0x65, 0x20, 0x73, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x20, 0x0a, 0x30,
 +  0x78, 0x63, 0x37, 0x38, 0x20, 0x20, 0x20, 0x30, 0x78, 0x36, 0x65, 0x31, 0x66,
 +  0x30, 0x30, 0x30, 0x30, 0x0a, 0x30, 0x78, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n.c drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n.c	2026-07-25 15:04:24.391062899 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_AGC_TAB_n.c	2026-07-25 15:04:24.391062899 +0530
 @@ -0,0 +1,437 @@
 +unsigned char data_AGC_TAB_n[] = {
 +  0x2f, 0x2f, 0x20, 0x41, 0x47, 0x43, 0x5f, 0x54, 0x41, 0x42, 0x4c, 0x45, 0x20,
@@ -8088,9 +8088,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x65, 0x6c, 0x65, 0x63, 0x74, 0x20, 0x0a, 0x30, 0x78, 0x63, 0x37, 0x38, 0x20,
 +  0x20, 0x20, 0x30, 0x78, 0x36, 0x65, 0x31, 0x66, 0x30, 0x30, 0x30, 0x30, 0x0a,
 +  0x30, 0x78, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_high_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_high_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_high_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_high_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_high_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_high_8192F.c	2026-07-25 16:48:59.756922999 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_high_8192F.c	2026-07-25 17:33:17.801693137 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_def_high_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8100,9 +8100,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x32, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_low_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_low_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_low_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_low_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_low_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_low_8192F.c	2026-07-25 16:48:59.759922968 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_low_8192F.c	2026-07-25 17:33:17.801693137 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_def_low_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8112,9 +8112,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09, 0x30,
 +  0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_normal_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_normal_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_normal_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_normal_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_normal_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_normal_8192F.c	2026-07-25 16:48:59.763922927 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_def_normal_8192F.c	2026-07-25 17:33:17.801693137 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_def_normal_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8124,9 +8124,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x31, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_high_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_high_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_high_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_high_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_high_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_high_8192F.c	2026-07-25 16:48:59.765922906 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_high_8192F.c	2026-07-25 17:33:17.810692437 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_gen_high_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8136,9 +8136,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x35, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_low_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_low_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_low_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_low_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_low_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_low_8192F.c	2026-07-25 16:48:59.771922844 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_low_8192F.c	2026-07-25 17:33:17.810692437 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_gen_low_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8148,9 +8148,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x33, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_normal_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_normal_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_normal_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_normal_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_normal_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_normal_8192F.c	2026-07-25 16:48:59.778922772 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_gen_normal_8192F.c	2026-07-25 17:33:17.818691816 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_gen_normal_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8160,9 +8160,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x34, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_state_criteria_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_state_criteria_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_state_criteria_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_state_criteria_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_state_criteria_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_state_criteria_8192F.c	2026-07-25 16:48:59.776922793 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_state_criteria_8192F.c	2026-07-25 17:33:17.818691816 +0530
 @@ -0,0 +1,55 @@
 +unsigned char data_MACDM_state_criteria_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8219,9 +8219,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x0a, 0x30, 0x78, 0x33, 0x61, 0x0a, 0x30, 0x78, 0x33, 0x62, 0x0a, 0x30, 0x78,
 +  0x33, 0x63, 0x0a, 0x30, 0x78, 0x34, 0x61, 0x0a, 0x30, 0x78, 0x34, 0x62, 0x0a,
 +  0x30, 0x78, 0x34, 0x63, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_high_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_high_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_high_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_high_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_high_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_high_8192F.c	2026-07-25 16:48:59.778922772 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_high_8192F.c	2026-07-25 17:33:17.824691349 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_txop_high_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8231,9 +8231,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x38, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_low_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_low_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_low_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_low_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_low_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_low_8192F.c	2026-07-25 16:48:59.785922700 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_low_8192F.c	2026-07-25 17:33:17.828691039 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_txop_low_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8243,9 +8243,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x36, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_normal_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_normal_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_normal_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_normal_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_normal_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_normal_8192F.c	2026-07-25 16:48:59.792922628 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACDM_txop_normal_8192F.c	2026-07-25 17:33:17.826691194 +0530
 @@ -0,0 +1,8 @@
 +unsigned char data_MACDM_txop_normal_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8255,9 +8255,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x62, 0x65, 0x72, 0x3a, 0x20, 0x33, 0x30, 0x0a, 0x30, 0x78, 0x34, 0x36, 0x30,
 +  0x09, 0x30, 0x78, 0x30, 0x37, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x09,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACPHY_REG.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACPHY_REG.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACPHY_REG.c drivers/net/wireless/realtek/rtl8192cd/data_MACPHY_REG.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MACPHY_REG.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MACPHY_REG.c	2026-07-25 15:04:24.403062745 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MACPHY_REG.c	2026-07-25 15:04:24.403062745 +0530
 @@ -0,0 +1,174 @@
 +unsigned char data_MACPHY_REG[] = {
 +  0x2f, 0x2f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x20, 0x30, 0x34, 0x20,
@@ -8433,9 +8433,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x09, 0x30, 0x78, 0x34, 0x33, 0x0a, 0x30, 0x78, 0x37, 0x30, 0x61, 0x09, 0x30,
 +  0x78, 0x36, 0x35, 0x0a, 0x30, 0x78, 0x37, 0x30, 0x62, 0x09, 0x30, 0x78, 0x38,
 +  0x37, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fb.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fb.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fb.c drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fb.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fb.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fb.c	2026-07-25 16:48:59.795922597 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fb.c	2026-07-25 17:33:17.840690106 +0530
 @@ -0,0 +1,88 @@
 +unsigned char data_MAC_REG_8192Fb[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8525,9 +8525,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x09, 0x30, 0x78, 0x36, 0x35, 0x0a, 0x30, 0x78, 0x37, 0x30, 0x62, 0x09, 0x30,
 +  0x78, 0x38, 0x37, 0x0a, 0x0a, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66,
 +  0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192F.c	2026-07-25 16:48:59.790922649 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192F.c	2026-07-25 17:33:17.836690417 +0530
 @@ -0,0 +1,96 @@
 +unsigned char data_MAC_REG_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -8625,9 +8625,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x09, 0x30, 0x78, 0x36, 0x35, 0x0a, 0x30, 0x78, 0x37, 0x30, 0x62, 0x09, 0x30,
 +  0x78, 0x38, 0x37, 0x0a, 0x0a, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66,
 +  0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fmp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fmp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fmp.c drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fmp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fmp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fmp.c	2026-07-25 16:48:59.798922566 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_MAC_REG_8192Fmp.c	2026-07-25 17:33:17.843689873 +0530
 @@ -0,0 +1,115 @@
 +unsigned char data_MAC_REG_8192Fmp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -8744,9 +8744,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x61, 0x09, 0x30, 0x78, 0x36, 0x35, 0x09, 0x0a, 0x30, 0x78, 0x37, 0x30,
 +  0x62, 0x09, 0x30, 0x78, 0x38, 0x37, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fb.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fb.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fb.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fb.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fb.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fb.c	2026-07-25 16:48:59.875921774 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fb.c	2026-07-25 17:33:17.908684821 +0530
 @@ -0,0 +1,1267 @@
 +unsigned char data_PHY_REG_8192Fb[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -10015,9 +10015,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x20, 0x20, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F.c	2026-07-25 16:48:59.833922206 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F.c	2026-07-25 17:33:17.871687697 +0530
 @@ -0,0 +1,1274 @@
 +unsigned char data_PHY_REG_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76,
@@ -11293,9 +11293,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extlna.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extlna.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extlna.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extlna.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extlna.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extlna.c	2026-07-25 16:48:59.828922258 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extlna.c	2026-07-25 17:33:17.890686220 +0530
 @@ -0,0 +1,1349 @@
 +unsigned char data_PHY_REG_8192F_extlna[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -12646,9 +12646,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x09, 0x0a, 0x0a,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extpa.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extpa.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extpa.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extpa.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extpa.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extpa.c	2026-07-25 16:48:59.865921877 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_extpa.c	2026-07-25 17:33:17.882686842 +0530
 @@ -0,0 +1,1360 @@
 +unsigned char data_PHY_REG_8192F_extpa[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -14010,9 +14010,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x20, 0x20, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66,
 +  0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_hp.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_hp.c	2026-07-25 16:48:59.860921928 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192F_hp.c	2026-07-25 17:33:17.912684510 +0530
 @@ -0,0 +1,1361 @@
 +unsigned char data_PHY_REG_8192F_hp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -15375,9 +15375,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66,
 +  0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fmp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fmp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fmp.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fmp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fmp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fmp.c	2026-07-25 16:48:59.871921815 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192Fmp.c	2026-07-25 17:33:17.918684044 +0530
 @@ -0,0 +1,1382 @@
 +unsigned char data_PHY_REG_8192Fmp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -16761,9 +16761,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 +  0x20, 0x20, 0x20, 0x20, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66,
 +  0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192FS_extlna.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192FS_extlna.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192FS_extlna.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192FS_extlna.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192FS_extlna.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192FS_extlna.c	2026-07-25 16:48:59.826922278 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_8192FS_extlna.c	2026-07-25 17:33:17.873687541 +0530
 @@ -0,0 +1,1371 @@
 +unsigned char data_PHY_REG_8192FS_extlna[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -18136,23 +18136,23 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x09,
 +  0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66,
 +  0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192F.c	2026-07-25 16:48:59.880921722 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192F.c	2026-07-25 17:33:17.893685987 +0530
 @@ -0,0 +1,3 @@
 +unsigned char data_PHY_REG_MP_8192F[] = {
 +  0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192Fmp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192Fmp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192Fmp.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192Fmp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192Fmp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192Fmp.c	2026-07-25 16:48:59.890921619 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_8192Fmp.c	2026-07-25 17:33:17.899685521 +0530
 @@ -0,0 +1,3 @@
 +unsigned char data_PHY_REG_MP_8192Fmp[] = {
 +  0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_n.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_n.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_n.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_n.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_n.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_n.c	2026-07-25 15:04:24.423062488 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_MP_n.c	2026-07-25 15:04:24.423062488 +0530
 @@ -0,0 +1,33 @@
 +unsigned char data_PHY_REG_MP_n[] = {
 +  0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76, 0x65, 0x72,
@@ -18187,9 +18187,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x6e, 0x70, 0x75, 0x74, 0x20, 0x70, 0x6f, 0x77, 0x65, 0x72, 0x20, 0x69, 0x6d,
 +  0x70, 0x72, 0x6f, 0x76, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x0a, 0x30, 0x78, 0x66,
 +  0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n_92d_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n_92d_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n_92d_hp.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n_92d_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n_92d_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n_92d_hp.c	2026-07-25 15:04:24.502061474 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n_92d_hp.c	2026-07-25 15:04:24.502061474 +0530
 @@ -0,0 +1,558 @@
 +unsigned char data_PHY_REG_n_92d_hp[] = {
 +  0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76, 0x65, 0x72,
@@ -18749,9 +18749,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x61, 0x62, 0x6c, 0x65, 0x20, 0x42, 0x42, 0x52, 0x53, 0x54, 0x42, 0x2c, 0x20,
 +  0x62, 0x63, 0x7a, 0x20, 0x48, 0x53, 0x53, 0x49, 0x20, 0x75, 0x73, 0x65, 0x20,
 +  0x63, 0x6c, 0x6b, 0x5f, 0x62, 0x62, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n.c	2026-07-25 15:04:24.482061731 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_n.c	2026-07-25 15:04:24.482061731 +0530
 @@ -0,0 +1,541 @@
 +unsigned char data_PHY_REG_n[] = {
 +  0x2f, 0x2f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20, 0x76, 0x65, 0x72,
@@ -19294,9 +19294,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x65, 0x20, 0x42, 0x42, 0x52, 0x53, 0x54, 0x42, 0x2c, 0x20, 0x62, 0x63, 0x7a,
 +  0x20, 0x48, 0x53, 0x53, 0x49, 0x20, 0x75, 0x73, 0x65, 0x20, 0x63, 0x6c, 0x6b,
 +  0x5f, 0x62, 0x62, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F.c	2026-07-25 16:48:59.904921475 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F.c	2026-07-25 17:33:17.923683655 +0530
 @@ -0,0 +1,673 @@
 +unsigned char data_PHY_REG_PG_8192F[] = {
 +  0x2f, 0x2f, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d,
@@ -19971,9 +19971,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x35, 0x2c, 0x31, 0x34, 0x2c, 0x31, 0x33, 0x2c, 0x31, 0x32, 0x0a, 0x30, 0x78,
 +  0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x2f,
 +  0x2f, 0x65, 0x6e, 0x64, 0x20, 0x6f, 0x66, 0x20, 0x66, 0x69, 0x6c, 0x65, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp.c	2026-07-25 16:48:59.903921485 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp.c	2026-07-25 17:33:17.917684122 +0530
 @@ -0,0 +1,99 @@
 +unsigned char data_PHY_REG_PG_8192Fmp[] = {
 +  0x2f, 0x2f, 0x4d, 0x41, 0x43, 0x5f, 0x50, 0x48, 0x59, 0x5f, 0x50, 0x61, 0x72,
@@ -20074,9 +20074,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x4d, 0x43, 0x53, 0x31, 0x34, 0x20, 0x4d, 0x43, 0x53, 0x31, 0x33, 0x20,
 +  0x4d, 0x43, 0x53, 0x31, 0x32, 0x7d, 0x0a, 0x09, 0x09, 0x0a, 0x30, 0x78, 0x66,
 +  0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp_hp.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp_hp.c	2026-07-25 16:48:59.905921465 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192Fmp_hp.c	2026-07-25 17:33:17.930683111 +0530
 @@ -0,0 +1,101 @@
 +unsigned char data_PHY_REG_PG_8192Fmp_hp[] = {
 +  0x2f, 0x2f, 0x52, 0x4c, 0x36, 0x32, 0x38, 0x36, 0x5f, 0x4d, 0x41, 0x43, 0x5f,
@@ -20179,9 +20179,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x34, 0x20, 0x4d, 0x43, 0x53, 0x31, 0x33, 0x20, 0x4d, 0x43, 0x53, 0x31, 0x32,
 +  0x7d, 0x0a, 0x09, 0x09, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30,
 +  0x78, 0x66, 0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F_new.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F_new.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F_new.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F_new.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F_new.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F_new.c	2026-07-25 16:48:59.897921547 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_8192F_new.c	2026-07-25 17:33:17.912684510 +0530
 @@ -0,0 +1,99 @@
 +unsigned char data_PHY_REG_PG_8192F_new[] = {
 +  0x2f, 0x2f, 0x4d, 0x41, 0x43, 0x5f, 0x50, 0x48, 0x59, 0x5f, 0x50, 0x61, 0x72,
@@ -20282,9 +20282,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x4d, 0x43, 0x53, 0x31, 0x34, 0x20, 0x4d, 0x43, 0x53, 0x31, 0x33, 0x20,
 +  0x4d, 0x43, 0x53, 0x31, 0x32, 0x7d, 0x0a, 0x09, 0x09, 0x0a, 0x30, 0x78, 0x66,
 +  0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_92d_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_92d_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_92d_hp.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_92d_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_92d_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_92d_hp.c	2026-07-25 15:04:24.459062026 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_92d_hp.c	2026-07-25 15:04:24.459062026 +0530
 @@ -0,0 +1,1289 @@
 +unsigned char data_PHY_REG_PG_92d_hp[] = {
 +  0x2f, 0x2f, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d,
@@ -21575,9 +21575,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x3d, 0x31, 0x35, 0x2c, 0x31, 0x34, 0x2c, 0x31, 0x33, 0x2c, 0x31, 0x32, 0x0a,
 +  0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20, 0x2f, 0x2f, 0x65, 0x6e, 0x64, 0x20,
 +  0x6f, 0x66, 0x20, 0x66, 0x69, 0x6c, 0x65, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG.c	2026-07-25 15:04:24.439062283 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG.c	2026-07-25 15:04:24.439062283 +0530
 @@ -0,0 +1,1361 @@
 +unsigned char data_PHY_REG_PG[] = {
 +  0x2f, 0x2f, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d,
@@ -22940,9 +22940,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x31, 0x33, 0x2c, 0x31, 0x32, 0x0a, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20,
 +  0x2f, 0x2f, 0x65, 0x6e, 0x64, 0x20, 0x6f, 0x66, 0x20, 0x66, 0x69, 0x6c, 0x65,
 +  0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_CE.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_CE.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_CE.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_CE.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_CE.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_CE.c	2026-07-25 15:04:24.467061924 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_CE.c	2026-07-25 15:04:24.467061924 +0530
 @@ -0,0 +1,1361 @@
 +unsigned char data_PHY_REG_PG_CE[] = {
 +  0x2f, 0x2f, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d,
@@ -24305,9 +24305,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x31, 0x33, 0x2c, 0x31, 0x32, 0x0a, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20,
 +  0x2f, 0x2f, 0x65, 0x6e, 0x64, 0x20, 0x6f, 0x66, 0x20, 0x66, 0x69, 0x6c, 0x65,
 +  0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_FCC.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_FCC.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_FCC.c drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_FCC.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_FCC.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_FCC.c	2026-07-25 15:04:24.487061667 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_PHY_REG_PG_FCC.c	2026-07-25 15:04:24.487061667 +0530
 @@ -0,0 +1,1361 @@
 +unsigned char data_PHY_REG_PG_FCC[] = {
 +  0x2f, 0x2f, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d, 0x3d,
@@ -25670,9 +25670,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x31, 0x33, 0x2c, 0x31, 0x32, 0x0a, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20,
 +  0x2f, 0x2f, 0x65, 0x6e, 0x64, 0x20, 0x6f, 0x66, 0x20, 0x66, 0x69, 0x6c, 0x65,
 +  0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fb.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fb.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fb.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fb.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fb.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fb.c	2026-07-25 16:48:59.970920796 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fb.c	2026-07-25 17:33:17.971679925 +0530
 @@ -0,0 +1,588 @@
 +unsigned char data_RadioA_8192Fb[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x4c, 0x45, 0x30, 0x35, 0x36, 0x30, 0x41, 0x20,
@@ -26262,9 +26262,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x6d, 0x6f, 0x64, 0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e,
 +  0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F.c	2026-07-25 16:48:59.933921177 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F.c	2026-07-25 17:33:17.944682023 +0530
 @@ -0,0 +1,592 @@
 +unsigned char data_RadioA_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x4c, 0x45, 0x30, 0x35, 0x36, 0x30, 0x41, 0x20,
@@ -26858,9 +26858,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x0a,
 +  0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extlna.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extlna.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extlna.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extlna.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extlna.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extlna.c	2026-07-25 16:48:59.931921197 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extlna.c	2026-07-25 17:33:17.964680469 +0530
 @@ -0,0 +1,490 @@
 +unsigned char data_RadioA_8192F_extlna[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -27352,9 +27352,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x09, 0x0a,
 +  0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extpa.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extpa.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extpa.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extpa.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extpa.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extpa.c	2026-07-25 16:48:59.957920930 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_extpa.c	2026-07-25 17:33:17.963680547 +0530
 @@ -0,0 +1,514 @@
 +unsigned char data_RadioA_8192F_extpa[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -27870,9 +27870,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x09,
 +  0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66,
 +  0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_hp.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_hp.c	2026-07-25 16:48:59.954920960 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192F_hp.c	2026-07-25 17:33:17.954681246 +0530
 @@ -0,0 +1,496 @@
 +unsigned char data_RadioA_8192F_hp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -28370,9 +28370,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x64, 0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20,
 +  0x6f, 0x6e, 0x6c, 0x79, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66,
 +  0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FmpA.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FmpA.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FmpA.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FmpA.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FmpA.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FmpA.c	2026-07-25 16:48:59.977920724 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FmpA.c	2026-07-25 17:33:17.984678915 +0530
 @@ -0,0 +1,496 @@
 +unsigned char data_RadioA_8192FmpA[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -28870,9 +28870,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x58, 0x20, 0x6d, 0x6f, 0x64, 0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77,
 +  0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x0a, 0x0a, 0x30, 0x78, 0x66,
 +  0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fmp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fmp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fmp.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fmp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fmp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fmp.c	2026-07-25 16:48:59.964920857 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192Fmp.c	2026-07-25 17:33:17.996677982 +0530
 @@ -0,0 +1,534 @@
 +unsigned char data_RadioA_8192Fmp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -29408,9 +29408,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f,
 +  0x6e, 0x6c, 0x79, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS.c	2026-07-25 16:48:59.926921249 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS.c	2026-07-25 17:33:17.952681402 +0530
 @@ -0,0 +1,530 @@
 +unsigned char data_RadioA_8192FS[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -29942,9 +29942,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79,
 +  0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66,
 +  0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS_extlna.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS_extlna.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS_extlna.c drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS_extlna.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS_extlna.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS_extlna.c	2026-07-25 16:48:59.937921135 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioA_8192FS_extlna.c	2026-07-25 17:33:17.947681790 +0530
 @@ -0,0 +1,512 @@
 +unsigned char data_RadioA_8192FS_extlna[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -30458,9 +30458,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x09,
 +  0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66,
 +  0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA.c drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA.c	2026-07-25 15:04:24.553060820 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA.c	2026-07-25 15:04:24.553060820 +0530
 @@ -0,0 +1,376 @@
 +unsigned char data_radio_a_intPA[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -30838,9 +30838,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x0a, 0x2f, 0x2f, 0x30, 0x78, 0x31, 0x38, 0x20, 0x30, 0x78, 0x31, 0x37,
 +  0x35, 0x32, 0x34, 0x20, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66,
 +  0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM.c drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM.c	2026-07-25 15:04:24.553060820 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM.c	2026-07-25 15:04:24.553060820 +0530
 @@ -0,0 +1,376 @@
 +unsigned char data_radio_a_intPA_GM[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -31218,9 +31218,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x0a, 0x2f, 0x2f, 0x30, 0x78, 0x31, 0x38, 0x20, 0x30, 0x78, 0x31, 0x37,
 +  0x35, 0x32, 0x34, 0x20, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66,
 +  0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new1.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new1.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new1.c drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new1.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new1.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new1.c	2026-07-25 15:04:24.575060537 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new1.c	2026-07-25 15:04:24.575060537 +0530
 @@ -0,0 +1,386 @@
 +unsigned char data_radio_a_intPA_GM_new1[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -31608,9 +31608,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x0a, 0x2f, 0x2f, 0x30, 0x78,
 +  0x31, 0x38, 0x20, 0x30, 0x78, 0x31, 0x37, 0x35, 0x32, 0x34, 0x20, 0x0a, 0x30,
 +  0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new.c drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new.c	2026-07-25 15:04:24.569060614 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_GM_new.c	2026-07-25 15:04:24.569060614 +0530
 @@ -0,0 +1,379 @@
 +unsigned char data_radio_a_intPA_GM_new[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -31991,9 +31991,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x0a, 0x2f, 0x2f, 0x30,
 +  0x78, 0x31, 0x38, 0x20, 0x30, 0x78, 0x31, 0x37, 0x35, 0x32, 0x34, 0x20, 0x0a,
 +  0x30, 0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_new.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_new.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_new.c drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_new.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_new.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_new.c	2026-07-25 15:04:24.611060075 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_a_intPA_new.c	2026-07-25 15:04:24.611060075 +0530
 @@ -0,0 +1,379 @@
 +unsigned char data_radio_a_intPA_new[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -32374,9 +32374,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x0a, 0x2f, 0x2f, 0x30,
 +  0x78, 0x31, 0x38, 0x20, 0x30, 0x78, 0x31, 0x37, 0x35, 0x32, 0x34, 0x20, 0x0a,
 +  0x30, 0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n_92d_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n_92d_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n_92d_hp.c drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n_92d_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n_92d_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n_92d_hp.c	2026-07-25 15:04:24.595060281 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n_92d_hp.c	2026-07-25 15:04:24.595060281 +0530
 @@ -0,0 +1,356 @@
 +unsigned char data_radio_a_n_92d_hp[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -32734,9 +32734,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x20, 0x20, 0x20, 0x20, 0x0a, 0x2f, 0x2f, 0x30, 0x78, 0x31, 0x38, 0x20,
 +  0x30, 0x78, 0x31, 0x37, 0x35, 0x32, 0x34, 0x20, 0x0a, 0x30, 0x78, 0x66, 0x66,
 +  0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n.c drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n.c	2026-07-25 15:04:24.611060075 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_a_n.c	2026-07-25 15:04:24.611060075 +0530
 @@ -0,0 +1,346 @@
 +unsigned char data_radio_a_n[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -33084,9 +33084,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x2f, 0x30, 0x78, 0x31, 0x38, 0x20, 0x30, 0x78, 0x31, 0x37, 0x35, 0x32, 0x34,
 +  0x20, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66,
 +  0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fb.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fb.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fb.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fb.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fb.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fb.c	2026-07-25 16:49:00.026920219 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fb.c	2026-07-25 17:33:18.027675581 +0530
 @@ -0,0 +1,414 @@
 +unsigned char data_RadioB_8192Fb[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x4c, 0x45, 0x30, 0x35, 0x36, 0x30, 0x41, 0x20,
@@ -33502,9 +33502,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x2f, 0x52, 0x58, 0x20, 0x6d, 0x6f, 0x64, 0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63,
 +  0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x20, 0x0a, 0x0a,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F.c	2026-07-25 16:48:59.983920662 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F.c	2026-07-25 17:33:17.982679070 +0530
 @@ -0,0 +1,424 @@
 +unsigned char data_RadioB_8192F[] = {
 +  0x2f, 0x2f, 0x2f, 0x2f, 0x52, 0x4c, 0x45, 0x30, 0x35, 0x36, 0x30, 0x41, 0x20,
@@ -33930,9 +33930,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x6d, 0x6f, 0x64, 0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61,
 +  0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x20, 0x0a, 0x0a, 0x30, 0x78, 0x66,
 +  0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extlna.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extlna.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extlna.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extlna.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extlna.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extlna.c	2026-07-25 16:48:59.998920507 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extlna.c	2026-07-25 17:33:17.999677749 +0530
 @@ -0,0 +1,252 @@
 +unsigned char data_RadioB_8192F_extlna[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -34186,9 +34186,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x52, 0x58, 0x20, 0x6d, 0x6f, 0x64, 0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f,
 +  0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x20, 0x09, 0x0a, 0x0a,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extpa.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extpa.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extpa.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extpa.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extpa.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extpa.c	2026-07-25 16:49:00.001920477 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_extpa.c	2026-07-25 17:33:18.012676742 +0530
 @@ -0,0 +1,275 @@
 +unsigned char data_RadioB_8192F_extpa[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -34465,9 +34465,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x64, 0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20,
 +  0x6f, 0x6e, 0x6c, 0x79, 0x20, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_hp.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_hp.c	2026-07-25 16:49:00.007920415 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192F_hp.c	2026-07-25 17:33:18.006677207 +0530
 @@ -0,0 +1,259 @@
 +unsigned char data_RadioB_8192F_hp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -34728,9 +34728,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f,
 +  0x6e, 0x6c, 0x79, 0x20, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66,
 +  0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FmpA.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FmpA.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FmpA.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FmpA.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FmpA.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FmpA.c	2026-07-25 16:49:00.023920250 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FmpA.c	2026-07-25 17:33:18.021676046 +0530
 @@ -0,0 +1,275 @@
 +unsigned char data_RadioB_8192FmpA[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -35007,9 +35007,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x6f, 0x64, 0x65, 0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67,
 +  0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x20, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fmp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fmp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fmp.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fmp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fmp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fmp.c	2026-07-25 16:49:00.026920219 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192Fmp.c	2026-07-25 17:33:18.020676123 +0530
 @@ -0,0 +1,290 @@
 +unsigned char data_RadioB_8192Fmp[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -35301,9 +35301,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e,
 +  0x6c, 0x79, 0x20, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS.c	2026-07-25 16:48:59.985920641 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS.c	2026-07-25 17:33:17.991678371 +0530
 @@ -0,0 +1,290 @@
 +unsigned char data_RadioB_8192FS[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -35595,9 +35595,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x2f, 0x2f, 0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e,
 +  0x6c, 0x79, 0x20, 0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20,
 +  0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS_extlna.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS_extlna.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS_extlna.c drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS_extlna.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS_extlna.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS_extlna.c	2026-07-25 16:48:59.997920518 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_RadioB_8192FS_extlna.c	2026-07-25 17:33:17.993678215 +0530
 @@ -0,0 +1,275 @@
 +unsigned char data_RadioB_8192FS_extlna[] = {
 +  0x2f, 0x2f, 0x52, 0x54, 0x4c, 0x38, 0x31, 0x39, 0x32, 0x45, 0x5f, 0x4d, 0x41,
@@ -35874,9 +35874,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x70, 0x63, 0x5f, 0x77, 0x61, 0x6e, 0x67, 0x20, 0x6f, 0x6e, 0x6c, 0x79, 0x20,
 +  0x09, 0x0a, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66,
 +  0x66, 0x66, 0x66, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA.c drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA.c	2026-07-25 15:04:24.625059896 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA.c	2026-07-25 15:04:24.625059896 +0530
 @@ -0,0 +1,353 @@
 +unsigned char data_radio_b_intPA[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -36231,9 +36231,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x34, 0x30, 0x31, 0x20, 0x2f, 0x2f, 0x32, 0x47, 0x20, 0x63, 0x68, 0x61, 0x6e,
 +  0x6e, 0x65, 0x6c, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66,
 +  0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM.c drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM.c	2026-07-25 15:04:24.635059767 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM.c	2026-07-25 15:04:24.635059767 +0530
 @@ -0,0 +1,353 @@
 +unsigned char data_radio_b_intPA_GM[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -36588,9 +36588,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x34, 0x30, 0x31, 0x20, 0x2f, 0x2f, 0x32, 0x47, 0x20, 0x63, 0x68, 0x61, 0x6e,
 +  0x6e, 0x65, 0x6c, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66,
 +  0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new1.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new1.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new1.c drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new1.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new1.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new1.c	2026-07-25 15:04:24.648059600 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new1.c	2026-07-25 15:04:24.648059600 +0530
 @@ -0,0 +1,363 @@
 +unsigned char data_radio_b_intPA_GM_new1[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -36955,9 +36955,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x31, 0x38, 0x20, 0x30, 0x78, 0x30, 0x66, 0x34, 0x30, 0x31, 0x20, 0x2f, 0x2f,
 +  0x32, 0x47, 0x20, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x0a, 0x30, 0x78,
 +  0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new.c drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new.c	2026-07-25 15:04:24.662059421 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_GM_new.c	2026-07-25 15:04:24.662059421 +0530
 @@ -0,0 +1,356 @@
 +unsigned char data_radio_b_intPA_GM_new[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -37315,9 +37315,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x78, 0x31, 0x38, 0x20, 0x30, 0x78, 0x30, 0x66, 0x34, 0x30, 0x31, 0x20, 0x2f,
 +  0x2f, 0x32, 0x47, 0x20, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x0a, 0x30,
 +  0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_new.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_new.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_new.c drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_new.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_new.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_new.c	2026-07-25 15:04:24.669059331 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_b_intPA_new.c	2026-07-25 15:04:24.669059331 +0530
 @@ -0,0 +1,356 @@
 +unsigned char data_radio_b_intPA_new[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -37675,9 +37675,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x78, 0x31, 0x38, 0x20, 0x30, 0x78, 0x30, 0x66, 0x34, 0x30, 0x31, 0x20, 0x2f,
 +  0x2f, 0x32, 0x47, 0x20, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x0a, 0x30,
 +  0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n_92d_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n_92d_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n_92d_hp.c drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n_92d_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n_92d_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n_92d_hp.c	2026-07-25 15:04:24.694059010 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n_92d_hp.c	2026-07-25 15:04:24.694059010 +0530
 @@ -0,0 +1,341 @@
 +unsigned char data_radio_b_n_92d_hp[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -38020,9 +38020,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x78, 0x31, 0x38, 0x20, 0x30, 0x78, 0x30, 0x66, 0x34, 0x30, 0x31, 0x20, 0x2f,
 +  0x2f, 0x32, 0x47, 0x20, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x0a, 0x30,
 +  0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66, 0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n.c drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n.c	2026-07-25 15:04:24.687059100 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_radio_b_n.c	2026-07-25 15:04:24.687059100 +0530
 @@ -0,0 +1,331 @@
 +unsigned char data_radio_b_n[] = {
 +  0x2f, 0x2f, 0x31, 0x30, 0x30, 0x39, 0x30, 0x39, 0x0a, 0x30, 0x78, 0x30, 0x30,
@@ -38355,9 +38355,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x30, 0x31, 0x20, 0x2f, 0x2f, 0x32, 0x47, 0x20, 0x63, 0x68, 0x61, 0x6e, 0x6e,
 +  0x65, 0x6c, 0x0a, 0x30, 0x78, 0x66, 0x66, 0x20, 0x30, 0x78, 0x66, 0x66, 0x66,
 +  0x66};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d.c drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d.c	2026-07-25 15:04:24.499061513 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d.c	2026-07-25 15:04:24.499061513 +0530
 @@ -0,0 +1,105 @@
 +unsigned char data_REG_TXPWR_TRK_n_92d[] = {
 +  0x0a, 0x2f, 0x2f, 0x3c, 0x42, 0x61, 0x6e, 0x64, 0x5f, 0x50, 0x3e, 0x09, 0x3c,
@@ -38464,9 +38464,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x09, 0x33, 0x20, 0x34, 0x20, 0x36, 0x20, 0x37, 0x20, 0x39, 0x20, 0x31, 0x32,
 +  0x20, 0x31, 0x33, 0x20, 0x31, 0x35, 0x20, 0x31, 0x36, 0x20, 0x31, 0x37, 0x20,
 +  0x31, 0x38, 0x20, 0x31, 0x39, 0x0a, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d_hp.c drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d_hp.c	2026-07-25 15:04:24.512061346 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_REG_TXPWR_TRK_n_92d_hp.c	2026-07-25 15:04:24.512061346 +0530
 @@ -0,0 +1,105 @@
 +unsigned char data_REG_TXPWR_TRK_n_92d_hp[] = {
 +  0x0a, 0x2f, 0x2f, 0x3c, 0x42, 0x61, 0x6e, 0x64, 0x5f, 0x50, 0x3e, 0x09, 0x3c,
@@ -38573,9 +38573,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x09, 0x33, 0x20, 0x34, 0x20, 0x36, 0x20, 0x37, 0x20, 0x39, 0x20, 0x31, 0x32,
 +  0x20, 0x31, 0x33, 0x20, 0x31, 0x35, 0x20, 0x31, 0x36, 0x20, 0x31, 0x37, 0x20,
 +  0x31, 0x38, 0x20, 0x31, 0x39, 0x0a, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192dfw_n.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192dfw_n.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192dfw_n.c drivers/net/wireless/realtek/rtl8192cd/data_rtl8192dfw_n.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192dfw_n.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192dfw_n.c	2026-07-25 15:04:25.280051488 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_rtl8192dfw_n.c	2026-07-25 15:04:25.280051488 +0530
 @@ -0,0 +1,1517 @@
 +unsigned char data_rtl8192dfw_n[] = {
 +  0xd3, 0x92, 0x06, 0x02, 0x19, 0x00, 0x03, 0x00, 0x11, 0x14, 0x19, 0x41, 0xd8,
@@ -40094,9 +40094,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0xa4, 0x24, 0x68, 0xf8, 0xe4, 0xf6, 0x7b, 0x08, 0xfd, 0x02, 0x89, 0xe3, 0x90,
 +  0x9b, 0x05, 0xef, 0xf0, 0xa3, 0xec, 0xf0, 0xa3, 0xed, 0xf0, 0x22, 0x90, 0x9b,
 +  0x32, 0xe0, 0x54, 0xfb, 0xf0, 0x22, 0x00, 0x48, 0xa7};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192Ffw.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192Ffw.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192Ffw.c drivers/net/wireless/realtek/rtl8192cd/data_rtl8192Ffw.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192Ffw.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192Ffw.c	2026-07-25 16:49:00.095919509 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_rtl8192Ffw.c	2026-07-25 17:33:18.112021057 +0530
 @@ -0,0 +1,2355 @@
 +unsigned char data_rtl8192Ffw[] = {
 +  0xf1, 0x92, 0x20, 0x00, 0x05, 0x00, 0x00, 0x00, 0x06, 0x28, 0x18, 0x45, 0x6a,
@@ -42453,9 +42453,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0xf0, 0x18, 0xe5, 0x70, 0x22, 0xe0, 0xff, 0x90, 0xcd, 0x31, 0xe0, 0xfe, 0x22,
 +  0x7d, 0x6f, 0x7f, 0xff, 0x02, 0x05, 0x71, 0x90, 0xa7, 0x74, 0xe0, 0xc4, 0x54,
 +  0x0f, 0x22, 0x90, 0x05, 0x00, 0x74, 0x1c, 0xf0, 0xa3, 0x22, 0x00, 0x5a, 0x8b};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FfwMP.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FfwMP.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FfwMP.c drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FfwMP.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FfwMP.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FfwMP.c	2026-07-25 16:49:00.109919365 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FfwMP.c	2026-07-25 17:33:18.114668848 +0530
 @@ -0,0 +1,2355 @@
 +unsigned char data_rtl8192FfwMP[] = {
 +  0xf1, 0x92, 0x20, 0x00, 0x05, 0x00, 0x00, 0x00, 0x06, 0x28, 0x18, 0x45, 0x6a,
@@ -44812,9 +44812,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0xf0, 0x18, 0xe5, 0x70, 0x22, 0xe0, 0xff, 0x90, 0xcd, 0x31, 0xe0, 0xfe, 0x22,
 +  0x7d, 0x6f, 0x7f, 0xff, 0x02, 0x05, 0x71, 0x90, 0xa7, 0x74, 0xe0, 0xc4, 0x54,
 +  0x0f, 0x22, 0x90, 0x05, 0x00, 0x74, 0x1c, 0xf0, 0xa3, 0x22, 0x00, 0x5a, 0x8b};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FSfwMP.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FSfwMP.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FSfwMP.c drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FSfwMP.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FSfwMP.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FSfwMP.c	2026-07-25 16:49:00.081919653 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_rtl8192FSfwMP.c	2026-07-25 17:33:18.100669932 +0530
 @@ -0,0 +1,1793 @@
 +unsigned char data_rtl8192FSfwMP[] = {
 +  0xe1, 0x92, 0x20, 0x00, 0x19, 0x00, 0x00, 0x00, 0x06, 0x17, 0x13, 0x44, 0xd4,
@@ -46609,9 +46609,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x22, 0xf0, 0xa3, 0xe4, 0xf0, 0xa3, 0xe5, 0x63, 0x22, 0xf5, 0x82, 0xe4, 0x34,
 +  0x9d, 0xf5, 0x83, 0x22, 0xf5, 0x82, 0xe4, 0x34, 0xa3, 0xf5, 0x83, 0x22, 0xe4,
 +  0x4c};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_8192F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_8192F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_8192F.c drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_8192F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_8192F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_8192F.c	2026-07-25 16:49:00.051919962 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_8192F.c	2026-07-25 17:33:18.034675040 +0530
 @@ -0,0 +1,162 @@
 +unsigned char data_TxPowerTrack_AP_8192F[] = {
 +  0x0a, 0x2f, 0x2f, 0x3c, 0x42, 0x61, 0x6e, 0x64, 0x5f, 0x50, 0x3e, 0x09, 0x3c,
@@ -46775,17 +46775,17 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x20, 0x31, 0x32, 0x20, 0x31, 0x33, 0x20, 0x31, 0x33, 0x20, 0x31, 0x34, 0x20,
 +  0x31, 0x34, 0x20, 0x31, 0x34, 0x20, 0x31, 0x34, 0x20, 0x31, 0x34, 0x20, 0x31,
 +  0x34, 0x20, 0x31, 0x34};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_92F.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_92F.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_92F.c drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_92F.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_92F.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_92F.c	2026-07-25 16:49:00.046920013 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_TxPowerTrack_AP_92F.c	2026-07-25 17:33:18.038674730 +0530
 @@ -0,0 +1,4 @@
 +unsigned char data_TxPowerTrack_AP_92F[] = {
 +  0x6c, 0x69, 0x6e, 0x6b, 0x20, 0x54, 0x78, 0x50, 0x6f, 0x77, 0x65, 0x72, 0x54,
 +  0x72, 0x61, 0x63, 0x6b, 0x5f, 0x41, 0x50, 0x5f, 0x38, 0x31, 0x39, 0x32, 0x46,
 +  0x2e, 0x74, 0x78, 0x74, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_1.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_1.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_1.c drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_1.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_1.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_1.c	2026-07-25 15:04:24.535061051 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_1.c	2026-07-25 15:04:24.535061051 +0530
 @@ -0,0 +1,114 @@
 +unsigned char data_TXPWR_LMT_92d_1[] = {
 +  0x2f, 0x2f, 0x20, 0x54, 0x78, 0x20, 0x50, 0x6f, 0x77, 0x65, 0x72, 0x20, 0x4c,
@@ -46901,9 +46901,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x35, 0x47, 0x20, 0x62, 0x61, 0x6e, 0x64, 0x20, 0x31, 0x20, 0x26, 0x20, 0x32,
 +  0x0a, 0x0a, 0x2f, 0x2f, 0x20, 0x35, 0x47, 0x20, 0x62, 0x61, 0x6e, 0x64, 0x20,
 +  0x33, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_2.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_2.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_2.c drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_2.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_2.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_2.c	2026-07-25 15:04:24.535061051 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d_2.c	2026-07-25 15:04:24.535061051 +0530
 @@ -0,0 +1,111 @@
 +unsigned char data_TXPWR_LMT_92d_2[] = {
 +  0x2f, 0x2f, 0x20, 0x54, 0x78, 0x20, 0x50, 0x6f, 0x77, 0x65, 0x72, 0x20, 0x4c,
@@ -47016,9 +47016,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x67, 0x65, 0x0a, 0x0a, 0x2f, 0x2f, 0x20, 0x35, 0x47, 0x20, 0x62, 0x61, 0x6e,
 +  0x64, 0x20, 0x31, 0x20, 0x26, 0x20, 0x32, 0x0a, 0x0a, 0x2f, 0x2f, 0x20, 0x35,
 +  0x47, 0x20, 0x62, 0x61, 0x6e, 0x64, 0x20, 0x33, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d.c drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d.c	2026-07-25 15:04:24.522061218 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92d.c	2026-07-25 15:04:24.522061218 +0530
 @@ -0,0 +1,114 @@
 +unsigned char data_TXPWR_LMT_92d[] = {
 +  0x2f, 0x2f, 0x20, 0x54, 0x78, 0x20, 0x50, 0x6f, 0x77, 0x65, 0x72, 0x20, 0x4c,
@@ -47134,9 +47134,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x35, 0x47, 0x20, 0x62, 0x61, 0x6e, 0x64, 0x20, 0x31, 0x20, 0x26, 0x20, 0x32,
 +  0x0a, 0x0a, 0x2f, 0x2f, 0x20, 0x35, 0x47, 0x20, 0x62, 0x61, 0x6e, 0x64, 0x20,
 +  0x33, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_hp.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_hp.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_hp.c drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_hp.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_hp.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_hp.c	2026-07-25 16:49:00.035920126 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_hp.c	2026-07-25 17:33:18.035674962 +0530
 @@ -0,0 +1,503 @@
 +unsigned char data_TXPWR_LMT_92FE_hp[] = {
 +  0x2f, 0x2f, 0x52, 0x4c, 0x36, 0x33, 0x31, 0x30, 0x5f, 0x4d, 0x41, 0x43, 0x5f,
@@ -47641,9 +47641,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x09, 0x4e, 0x41, 0x09, 0x0a, 0x23, 0x23, 0x09, 0x45, 0x4e, 0x44, 0x09, 0x09,
 +  0x09, 0x09, 0x09, 0x09, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a,
 +  0x0a, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_new.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_new.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_new.c drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_new.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_new.c	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_new.c	2026-07-25 16:49:00.044920034 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/data_TXPWR_LMT_92FE_new.c	2026-07-25 17:33:18.039674653 +0530
 @@ -0,0 +1,502 @@
 +unsigned char data_TXPWR_LMT_92FE_new[] = {
 +  0x2f, 0x2f, 0x52, 0x4c, 0x36, 0x33, 0x31, 0x30, 0x5f, 0x4d, 0x41, 0x43, 0x5f,
@@ -48147,9 +48147,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +  0x48, 0x31, 0x35, 0x35, 0x09, 0x31, 0x37, 0x09, 0x31, 0x35, 0x09, 0x4e, 0x41,
 +  0x09, 0x0a, 0x23, 0x23, 0x09, 0x45, 0x4e, 0x44, 0x09, 0x09, 0x09, 0x09, 0x09,
 +  0x09, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a};
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/.Hal8192CDMOutSrc.o.d /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/.Hal8192CDMOutSrc.o.d
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/.Hal8192CDMOutSrc.o.d drivers/net/wireless/realtek/rtl8192cd/.Hal8192CDMOutSrc.o.d
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/.Hal8192CDMOutSrc.o.d	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/.Hal8192CDMOutSrc.o.d	2026-07-25 15:04:32.591018908 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/.Hal8192CDMOutSrc.o.d	2026-07-25 15:04:32.591018908 +0530
 @@ -0,0 +1,618 @@
 +Hal8192CDMOutSrc.o: \
 + drivers/net/wireless/realtek/rtl8192cd/Hal8192CDMOutSrc.c \
@@ -48769,9 +48769,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 + include/asm-generic/irq_work.h include/linux/perf_regs.h \
 + include/linux/sched/task_stack.h include/uapi/linux/magic.h \
 + arch/mips/include/uapi/asm/perf_regs.h
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/ipx_compat.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/ipx_compat.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/ipx_compat.h drivers/net/wireless/realtek/rtl8192cd/ipx_compat.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/ipx_compat.h	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/ipx_compat.h	2026-07-25 15:09:04.536564629 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/ipx_compat.h	2026-07-25 15:09:04.536564629 +0530
 @@ -0,0 +1,21 @@
 +/* IPX was removed from the kernel (net/ipx.h). rtw_br_ext.c's bridge helper
 + * still parses IPX frames, so provide just the on-wire definitions it needs.
@@ -48794,9 +48794,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +	struct ipx_address	ipx_source __packed;
 +};
 +#endif
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/Kconfig /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/Kconfig
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/Kconfig drivers/net/wireless/realtek/rtl8192cd/Kconfig
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/Kconfig	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/Kconfig	2026-07-25 14:08:46.626595997 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/Kconfig	2026-07-25 14:08:46.626595997 +0530
 @@ -238,10 +238,6 @@
  	bool "Realtek 8192D wireless support"
  	select RTL_5G_SLOT_0
@@ -48825,9 +48825,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  choice
  	prompt "Thermal Control"
  	depends on SLOT_0_8814BE
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/Makefile /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/Makefile
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/Makefile drivers/net/wireless/realtek/rtl8192cd/Makefile
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/Makefile	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/Makefile	2026-07-25 15:31:26.462392709 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/Makefile	2026-07-25 15:31:26.462392709 +0530
 @@ -1009,3 +1009,87 @@
  	@sed -i 's/=/\ /g' config_8192cd.h
  	@sed -i 's/CONFIG_/#define CONFIG_/g' config_8192cd.h
@@ -48916,9 +48916,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +ccflags-y += -Dstart_clnt_auth=rtl8192cd_start_clnt_auth
 +ccflags-y += -Dstart_clnt_join=rtl8192cd_start_clnt_join
 +ccflags-y += -Dtcp_ack_merge=rtl8192cd_tcp_ack_merge
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/osdep_service.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/osdep_service.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/osdep_service.h drivers/net/wireless/realtek/rtl8192cd/osdep_service.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/osdep_service.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/osdep_service.h	2026-07-25 15:09:04.537143834 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/osdep_service.h	2026-07-25 15:09:04.537143834 +0530
 @@ -286,7 +286,7 @@
  #define DEFINE_TIMER_CALLBACK(_timerCb) \
  	void _timerCb ## _wrapper(struct timer_list *t) \
@@ -48982,9 +48982,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +
  #endif // __OSDEP_SERVICE_H_
  
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/phydm/phydm_interface.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/phydm/phydm_interface.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/phydm/phydm_interface.c drivers/net/wireless/realtek/rtl8192cd/phydm/phydm_interface.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/phydm/phydm_interface.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/phydm/phydm_interface.c	2026-07-25 14:35:30.648212323 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/phydm/phydm_interface.c	2026-07-25 14:35:30.648212323 +0530
 @@ -765,9 +765,9 @@
  #if (DM_ODM_SUPPORT_TYPE & ODM_AP)
  	_cancel_timer_ex(timer);
@@ -48997,9 +48997,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #elif (DM_ODM_SUPPORT_TYPE & ODM_CE)
  	_cancel_timer_ex(timer);
  #elif (DM_ODM_SUPPORT_TYPE & ODM_WIN)
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/romeperf.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/romeperf.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/romeperf.h drivers/net/wireless/realtek/rtl8192cd/romeperf.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/romeperf.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/romeperf.h	2026-07-25 15:12:18.267811008 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/romeperf.h	2026-07-25 15:12:18.267811008 +0530
 @@ -12,7 +12,9 @@
  #define _ROMEPERF_H_
  
@@ -49011,9 +49011,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  
  /*
  typedef unsigned long long	uint64;
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/rtk_wds_compat.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/rtk_wds_compat.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/rtk_wds_compat.h drivers/net/wireless/realtek/rtl8192cd/rtk_wds_compat.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/rtk_wds_compat.h	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/rtk_wds_compat.h	2026-07-25 15:09:04.538584617 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/rtk_wds_compat.h	2026-07-25 15:09:04.538584617 +0530
 @@ -0,0 +1,25 @@
 +/* PHOEBUS 6.18: struct rtk_wds_config, lifted verbatim from the vendor's
 + * net80211/ieee80211_ioctl.h. Including that whole header here collides with
@@ -49040,14 +49040,14 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
 +	char			*wdsPskPassPhrase;
 +};
 +#endif
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/tmp_TXPWR /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/tmp_TXPWR
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/tmp_TXPWR drivers/net/wireless/realtek/rtl8192cd/tmp_TXPWR
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/tmp_TXPWR	1970-01-01 05:30:00.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/tmp_TXPWR	2026-07-25 15:04:25.283060320 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/tmp_TXPWR	2026-07-25 15:04:25.283060320 +0530
 @@ -0,0 +1 @@
 +TXPWR_LMT_92d TXPWR_LMT_92d_1 TXPWR_LMT_92d_2
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/HalCfg.h /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/HalCfg.h
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/HalCfg.h drivers/net/wireless/realtek/rtl8192cd/WlanHAL/HalCfg.h
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/HalCfg.h	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/HalCfg.h	2026-07-25 14:37:30.804221862 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/WlanHAL/HalCfg.h	2026-07-25 14:37:30.804221862 +0530
 @@ -1725,8 +1725,8 @@
  #define HAL_VIRT_TO_BUS(ptr)                                    virt_to_phys(ptr)
  #define HAL_VIRT_TO_BUS1(Adapter, ptr, size, direction)         get_physical_addr(Adapter, ptr, size, direction)
@@ -49059,9 +49059,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  
  #ifdef CONFIG_NET_PCI
  #define HAL_CACHE_SYNC_WBACK(Adapter, start, size, direction)   rtl_cache_sync_wback(Adapter, bus_to_virt(start), size, direction)
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXRxDesc.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXRxDesc.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXRxDesc.c drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXRxDesc.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXRxDesc.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXRxDesc.c	2026-07-25 14:59:24.793027356 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXRxDesc.c	2026-07-25 14:59:24.793027356 +0530
 @@ -100,14 +100,14 @@
  	{
  		PROC_PRINT("pRXBD_head=%p, %08lx, reg(%x):%08x\n",
@@ -49106,9 +49106,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #endif
  
          rtl_kfree_skb(GET_ROOT(Adapter), (struct sk_buff*)(GET_HW(Adapter)->rx_infoL[rxbd_idx].pbuf), _SKB_RX_);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXTxDesc.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXTxDesc.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXTxDesc.c drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXTxDesc.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXTxDesc.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXTxDesc.c	2026-07-25 14:59:24.796924218 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/Hal88XXTxDesc.c	2026-07-25 14:59:24.796924218 +0530
 @@ -852,7 +852,7 @@
  		// With CCI400 ,Do nothing for cache coherent code
  #else
@@ -49403,9 +49403,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #endif //CONFIG_ENABLE_CCI400
  #else
                  _dma_cache_wback((unsigned long)(&(ptxbd_bcn_cur->TXBD_ELE[0])), 
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814BFirmware.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814BFirmware.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814BFirmware.c drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814BFirmware.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814BFirmware.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814BFirmware.c	2026-07-25 14:37:30.841221265 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814BFirmware.c	2026-07-25 14:37:30.841221265 +0530
 @@ -1577,9 +1577,9 @@
          dnld_htxbd->HTXBD_BD[1].word1 = SET_DESC(ctx_info_dma+(unsigned long)(*content)-(unsigned long)ctx_info);
  
@@ -49419,9 +49419,9 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -
  #endif
  
  //        __dump_HTXBD(Adapter, (struct HTXBD_t *)dnld_htxbd);
-diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814HTxDesc.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814HTxDesc.c
+diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod*' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814HTxDesc.c drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814HTxDesc.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814HTxDesc.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814HTxDesc.c	2026-07-25 14:37:30.835221362 +0530
++++ drivers/net/wireless/realtek/rtl8192cd/WlanHAL/RTL88XX/RTL8814B/Hal8814HTxDesc.c	2026-07-25 14:37:30.835221362 +0530
 @@ -334,7 +334,7 @@
              // With CCI400 ,Do nothing for cache coherent code
  #else
