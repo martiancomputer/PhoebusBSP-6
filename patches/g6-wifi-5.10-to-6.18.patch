@@ -647,7 +647,7 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  
 diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile	2026-07-25 01:28:46.594820687 +0530
++++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/Makefile	2026-07-25 08:38:26.837466118 +0530
 @@ -992,3 +992,19 @@
  	rm -fr .tmp_versions
  endif
@@ -662,7 +662,7 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
 +             -Wno-error=implicit-fallthrough -Wno-error=empty-body \
 +             -Wno-error=old-style-declaration -Wno-error=address \
 +             -Wno-error=unused-result -Wno-error=discarded-qualifiers \
-+             -Wno-error=incompatible-pointer-types -Wno-error=sign-compare \
++             -Wno-error=sign-compare \
 +             -Wno-error=unused-but-set-variable -Wno-error=unused-variable \
 +             -Wno-error=maybe-uninitialized -Wno-error=stringop-overflow \
 +             -Wno-error=array-bounds -Wno-error=restrict \
@@ -670,7 +670,7 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
 +             -Wno-error=enum-int-mismatch -Wno-error=unused-function
 diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' -x '.tmp*' -x modules.order -x '*.ko' /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c
 --- /home/wrldmk2_/OpenWRT1500/rtl8198d-sdk-main/linux-5.10.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c	2025-08-31 18:28:43.000000000 +0530
-+++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c	2026-07-25 01:35:57.225848921 +0530
++++ /home/wrldmk2_/OpenWRT1500/sdk-rtl9607c-6.18/linux-6.18.x/drivers/net/wireless/realtek/g6_wifi_driver/os_dep/linux/ioctl_cfg80211.c	2026-07-25 08:39:06.321494899 +0530
 @@ -491,7 +491,8 @@
  
  #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0))
@@ -699,7 +699,141 @@ diff -urN --no-dereference -x '*.o' -x '*.cmd' -x '*.a' -x '*.mod' -x '*.mod.c' 
  		roam_info.req_ie = pmlmepriv->assoc_req + sizeof(struct rtw_ieee80211_hdr_3addr) + 2;
  		roam_info.req_ie_len = pmlmepriv->assoc_req_len - sizeof(struct rtw_ieee80211_hdr_3addr) - 2;
  		roam_info.resp_ie = pmlmepriv->assoc_rsp + sizeof(struct rtw_ieee80211_hdr_3addr) + 6;
-@@ -12205,7 +12206,7 @@
+@@ -11863,27 +11864,90 @@
+ 	return SUCCESS;
+ }
+ 
++
++/* ---- Phoebus 6.18 cfg80211 signature shims -------------------------------
++ * 6.x added radio_idx / link_id parameters to several cfg80211_ops (multi-radio
++ * and MLO). The driver's handlers predate that and live inside
++ * LINUX_VERSION_CODE #if mazes, so adapt them here instead of editing each one.
++ * Single-radio, non-MLO part: the new ids are ignored.
++ * These MUST match include/net/cfg80211.h exactly -- a mismatch is a runtime
++ * crash, not a warning. (An unnoticed get_antenna mismatch panicked the board.)
++ */
++static int ph_add_key(struct wiphy *w, struct net_device *nd, int link_id,
++	u8 key_index, bool pairwise, const u8 *mac_addr, struct key_params *params)
++{ return cfg80211_rtw_add_key(w, nd, key_index, pairwise, mac_addr, params); }
++
++static int ph_get_key(struct wiphy *w, struct net_device *nd, int link_id,
++	u8 keyid, bool pairwise, const u8 *mac_addr, void *cookie,
++	void (*cb)(void *, struct key_params *))
++{ return cfg80211_rtw_get_key(w, nd, keyid, pairwise, mac_addr, cookie, cb); }
++
++static int ph_del_key(struct wiphy *w, struct net_device *nd, int link_id,
++	u8 key_index, bool pairwise, const u8 *mac_addr)
++{ return cfg80211_rtw_del_key(w, nd, key_index, pairwise, mac_addr); }
++
++static int ph_set_default_key(struct wiphy *w, struct net_device *nd, int link_id,
++	u8 key_index, bool unicast, bool multicast)
++{ return cfg80211_rtw_set_default_key(w, nd, key_index, unicast, multicast); }
++
++static int ph_set_default_mgmt_key(struct wiphy *w, struct net_device *nd,
++	int link_id, u8 key_index)
++{ return cfg80211_rtw_set_default_mgmt_key(w, nd, key_index); }
++
++static int ph_set_wiphy_params(struct wiphy *w, int radio_idx, u32 changed)
++{ return cfg80211_rtw_set_wiphy_params(w, changed); }
++
++static int ph_set_tx_power(struct wiphy *w, struct wireless_dev *wdev,
++	int radio_idx, enum nl80211_tx_power_setting type, int mbm)
++{ return cfg80211_rtw_set_txpower(w, wdev, type, mbm); }
++
++static int ph_get_tx_power(struct wiphy *w, struct wireless_dev *wdev,
++	int radio_idx, unsigned int link_id, int *dbm)
++{ return cfg80211_rtw_get_txpower(w, wdev, dbm); }
++
++static int ph_change_beacon(struct wiphy *w, struct net_device *nd,
++	struct cfg80211_ap_update *info)
++{ return cfg80211_rtw_change_beacon(w, nd, &info->beacon); }
++
++static int ph_stop_ap(struct wiphy *w, struct net_device *nd, unsigned int link_id)
++{ return cfg80211_rtw_stop_ap(w, nd); }
++
++static int ph_set_monitor_channel(struct wiphy *w, struct net_device *nd,
++	struct cfg80211_chan_def *chandef)
++{ return cfg80211_rtw_set_monitor_channel(w, chandef); }
++
++static int ph_get_channel(struct wiphy *w, struct wireless_dev *wdev,
++	unsigned int link_id, struct cfg80211_chan_def *chandef)
++{ return cfg80211_rtw_get_channel(w, wdev, chandef); }
++
++static int ph_set_antenna(struct wiphy *w, int radio_idx, u32 tx_ant, u32 rx_ant)
++{ return cfg80211_rtw_set_antenna(w, tx_ant, rx_ant); }
++
++static int ph_get_antenna(struct wiphy *w, int radio_idx, u32 *tx_ant, u32 *rx_ant)
++{ return cfg80211_rtw_get_antenna(w, tx_ant, rx_ant); }
++/* ------------------------------------------------------------------------- */
++
+ struct cfg80211_ops rtw_cfg80211_ops = {
+ 	.change_virtual_intf = cfg80211_rtw_change_iface,
+-	.add_key = cfg80211_rtw_add_key,
+-	.get_key = cfg80211_rtw_get_key,
+-	.del_key = cfg80211_rtw_del_key,
+-	.set_default_key = cfg80211_rtw_set_default_key,
++	.add_key = ph_add_key,
++	.get_key = ph_get_key,
++	.del_key = ph_del_key,
++	.set_default_key = ph_set_default_key,
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 30))
+-	.set_default_mgmt_key = cfg80211_rtw_set_default_mgmt_key,
++	.set_default_mgmt_key = ph_set_default_mgmt_key,
+ #endif
+ #if defined(CONFIG_GTK_OL) && (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 1, 0))
+ 	.set_rekey_data = cfg80211_rtw_set_rekey_data,
+ #endif /*CONFIG_GTK_OL*/
+ 	.get_station = cfg80211_rtw_get_station,
+ 	.scan = cfg80211_rtw_scan,
+-	.set_wiphy_params = cfg80211_rtw_set_wiphy_params,
++	.set_wiphy_params = ph_set_wiphy_params,
+ 	.connect = cfg80211_rtw_connect,
+ 	.disconnect = cfg80211_rtw_disconnect,
+ 	.join_ibss = cfg80211_rtw_join_ibss,
+ 	.leave_ibss = cfg80211_rtw_leave_ibss,
+-	.set_tx_power = cfg80211_rtw_set_txpower,
+-	.get_tx_power = cfg80211_rtw_get_txpower,
++	.set_tx_power = ph_set_tx_power,
++	.get_tx_power = ph_get_tx_power,
+ 	.set_power_mgmt = cfg80211_rtw_set_power_mgmt,
+ 	.set_pmksa = cfg80211_rtw_set_pmksa,
+ 	.del_pmksa = cfg80211_rtw_del_pmksa,
+@@ -11899,8 +11963,8 @@
+ 	.del_beacon = cfg80211_rtw_del_beacon,
+ #else
+ 	.start_ap = cfg80211_rtw_start_ap,
+-	.change_beacon = cfg80211_rtw_change_beacon,
+-	.stop_ap = cfg80211_rtw_stop_ap,
++	.change_beacon = ph_change_beacon,
++	.stop_ap = ph_stop_ap,
+ #endif
+ 
+ #if CONFIG_RTW_MACADDR_ACL && (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 9, 0))
+@@ -11939,10 +12003,10 @@
+ #endif
+ 
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 6, 0))
+-	.set_monitor_channel = cfg80211_rtw_set_monitor_channel,
++	.set_monitor_channel = ph_set_monitor_channel,
+ #endif
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
+-	.get_channel = cfg80211_rtw_get_channel,
++	.get_channel = ph_get_channel,
+ #endif
+ 
+ #ifdef CONFIG_P2P
+@@ -11993,8 +12057,8 @@
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 3, 0))
+ 	.probe_client = cfg80211_rtw_probe_client,
+ #endif
+-	.set_antenna = cfg80211_rtw_set_antenna,
+-	.get_antenna = cfg80211_rtw_get_antenna,
++	.set_antenna = ph_set_antenna,
++	.get_antenna = ph_get_antenna,
+ };
+ 
+ #if defined(WFO_VIRT_RECEIVER)
+@@ -12205,7 +12269,7 @@
  	rtw_cfg80211_indicate_scan_done(adapter, _TRUE);
  
  	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0)) || defined(COMPAT_KERNEL_RELEASE)
