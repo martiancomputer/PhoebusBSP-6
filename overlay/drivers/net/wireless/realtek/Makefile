@@ -11,3 +11,4 @@ obj-$(CONFIG_RTW88)		+= rtw88/
 obj-$(CONFIG_RTW89)		+= rtw89/
 
 obj-$(CONFIG_RTLWIFI6)		+= g6_wifi_driver/
+obj-$(CONFIG_RTL8192CD)		+= rtl8192cd/
