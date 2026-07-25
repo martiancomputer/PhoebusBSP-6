@@ -18,5 +18,6 @@ source "drivers/net/wireless/realtek/rtl8xxxu/Kconfig"
 source "drivers/net/wireless/realtek/rtw88/Kconfig"
 source "drivers/net/wireless/realtek/rtw89/Kconfig"
 source "drivers/net/wireless/realtek/g6_wifi_driver/Kconfig"
+source "drivers/net/wireless/realtek/rtl8192cd/Kconfig"
 
 endif # WLAN_VENDOR_REALTEK
