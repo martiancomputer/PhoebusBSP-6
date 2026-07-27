@@ -46,6 +46,8 @@ rm -rf "$K"; tar xf "linux-$KVER.tar.xz"
 
 # --- 3. graft pristine vendor SoC code (must match the baseline the patch was cut against) ---
 cp -a "$SDK/vendor/realtek-net/."                            "$K/drivers/net/ethernet/realtek/"
+mkdir -p "$K/drivers/net/wireless/realtek"
+cp -a "$SDK/vendor/realtek-wireless/."                       "$K/drivers/net/wireless/realtek/"
 cp -a "$SDK/vendor/platform/arch/mips/rtl9607c"              "$K/arch/mips/"
 cp -a "$SDK/vendor/platform/arch/mips/boot/dts/realtek/."    "$K/arch/mips/boot/dts/realtek/"
 cp -a "$SDK/vendor/platform/arch/mips/include/asm/mach-rtl960xc" "$K/arch/mips/include/asm/"
