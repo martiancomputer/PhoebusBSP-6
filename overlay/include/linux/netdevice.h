@@ -5635,10 +5635,6 @@ static inline bool netif_is_rxfh_configured(const struct net_device *dev)
 {
 	return dev->priv_flags & IFF_RXFH_CONFIGURED;
 }
-#ifdef CONFIG_RTK_MIRROR
-	extern void rtk_mirror_tx(struct sk_buff *skb);
-	rtk_mirror_tx(skb);
-#endif
 
 static inline bool netif_is_failover(const struct net_device *dev)
 {
