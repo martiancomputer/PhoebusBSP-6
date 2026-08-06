@@ -53,8 +53,8 @@ cleanly, write a shim.
 
 ## Vendor bugs found and fixed
 
-These are bugs in the vendor code, not porting artifacts. All four were hit on
-real hardware.
+These are bugs in the vendor code (or in the RTL8198D SDK snapshot we staged
+from), not porting artifacts. All were hit on real hardware.
 
 ### 1. `mgmt_tx` rejects `chan == NULL` — no probe responses
 
@@ -197,6 +197,77 @@ Both trees are vendor forks carrying copies of the same shared Realtek code
 together. Resolved by namespacing `rtl8192cd`'s copies via
 `-D<sym>=rtl8192cd_<sym>` in its Makefile.
 
+### 9. 2.4 GHz was configured for the wrong crystal — the radio tuned nowhere
+
+The 8192F came up looking perfect and heard nothing. Beacons transmitted
+(`beacon_ok` climbing), every register read back correct, the RF die's thermal
+sensor reported ~36, the baseband ran — and `rx_packets`, `rx_mgnt_pkts` and
+hostapd's `olbc` sat at exactly zero across every configuration. The SSID was
+never visible to any client, so it was not receiving *or* transmitting.
+
+The cause is one Kconfig default:
+
+```
+config PHY_EAT_40MHZ
+	bool "HOST Clock Source, Select is 40MHz, otherwise 25MHz"
+	default y
+```
+
+It feeds `ClkSel` into `InitPONHandler()` — the RF power-on and PLL setup — in
+`rtl8192cd_init_hw_PCI()`. The AX10v3 vendor config sets
+`# CPTCFG_PHY_EAT_40MHZ is not set`; we inherited the `default y` and told the
+radio it had a 40 MHz crystal when the board has 25 MHz. A 1.6x error in the
+PLL reference puts the synthesiser nowhere near 2.437 GHz, which is why nothing
+was heard in either direction while every register looked right.
+
+`# CONFIG_PHY_EAT_40MHZ is not set` in `configs/rtl9607c.config`. Confirm with
+`clock 25MHz` in dmesg at wlan1 open — the stock firmware prints the same line.
+
+### 10. RFE type 23 exists on this board and not in the 8198D SDK snapshot
+
+`CPTCFG_SLOT_1_RFE_TYPE_23=y` in the AX10v3 product config. Our rtl8192cd came
+from the RTL8198D SDK, whose tables and code stop at type 22:
+
+| | rfe_type branches |
+|---|---|
+| 8198D SDK (ours, before) | ... 20 21 22 |
+| AX10v3 GPL (vendor) | ... 20 21 22 **23** |
+
+Missing in three places, all ported from the vendor driver:
+
+- `phydm/rtl8192f/phydm_hal_api8192f.c` — `phydm_init_hw_info_by_rfe_type_8192f()`
+  had no branch for 23 and **no default**, so the external front end was never
+  configured. Verified by register readback: `BB_0x944` `0x3f3f0000` -> `0x3f3f081c`
+  and `BB_0x940` `0x000007ff` -> `0x00400100`.
+- `phydm/rtl8192f/halhwimg8192f_bb.c` and `phydm/halrf/rtl8192f/halhwimg8192f_rf.c` —
+  the in-table `0x91000017` conditionals (0x17 = 23) were absent, so the AGC gain
+  map and RadioA/B init had no type-23 block. Vendor phydm is v67 (2022-09-15);
+  the 8198D snapshot is v64 (2021-10-15). Both files are strict supersets, so they
+  drop in whole.
+- `phydm/halrf/rtl8192f/halrf_dpk_8192f.c` — 23 was missing from the DPK gate, so
+  pre-distortion calibration bailed out entirely.
+
+Set `rfe2g=23` on the kernel cmdline (see the `rfe2g=` override in
+`8192cd_osdep.c`); the Kconfig only offers 3/12/16/17/18 for slots, so 23 cannot
+be expressed there.
+
+### 11. `is_WRT_scan_iface()` sits outside its `#ifdef` in the 8198D snapshot
+
+In `is_iface_ready_nl80211()` the vendor has this check inside the
+`CONFIG_OPENWRT_SDK` block; our copy has the `#endif` five lines earlier, so it
+runs unconditionally. Harmless in practice — `is_WRT_scan_iface()` only matches
+`tmp.phy0`/`tmp.phy1` and returns 0 otherwise — but it shows the SDK snapshot
+carries hand-edits that diverge structurally from the vendor tree. Worth
+checking the surrounding preprocessor when anything in that path misbehaves.
+
+### 12. The driver's default beacon interval is 400 TU
+
+hostapd never sets `beacon_int`, so the driver's own default applies: 400 TU
+(~410 ms). With `dtim_period 2` that is ~820 ms between DTIM beacons, and a
+client in power save only wakes for DTIM. Measured 15% ICMP loss and 8 ms
+latency spikes from a laptop at -34 dBm negotiating MCS15 — which reads as a bad
+radio and is not. `beacon_int=100` is set explicitly in `hostapd-2g.conf`.
+
 ## hostapd
 
 Built from `sdk/ap/` — hostapd 2.11, `CONFIG_DRIVER_NL80211`, `CONFIG_LIBNL32`,
@@ -233,11 +304,18 @@ next — which is why they were only findable in order:
 3. stale beacon buffer → wrong bytes on air
 4. TIM misplacement → no parseable RSN IE → "WEP", drop after the 4-way
 
-**2.4 GHz (`wlan1`) does not work.** It reaches `AP-ENABLED` but never appears in
-scans. Untriaged. `rtl8192cd` is a separate driver with its own beacon and TIM
-paths, so none of the fixes above apply to it automatically — though #4 in
-particular is worth checking first, since its 2.4 GHz beacons *do* carry a DS
-Parameter Set IE and would therefore mask that specific arithmetic error.
+**2.4 GHz (`wlan1`) works**, validated on hardware after fixes #9-#12: a laptop
+associates to `Phoebus2.4` at -34 dBm and negotiates MCS 15 (2x2, 144 Mbit/s),
+gets a DHCP lease, and SSH reaches authentication in ~100 ms on 6/6 attempts.
+
+```
+rx_packets:    728
+rx_mgnt_pkts:  18216
+beacon_ok:     713
+```
+
+The blocker was #9 (wrong crystal). #10-#12 are real defects found on the way and
+worth keeping, but none of them alone brought the radio up.
 
 Not related to Wi-Fi, but visible in the same logs: the WAN DHCP client keeps
 broadcasting on `nas0`, so clients get a LAN address and no internet. The uplink
