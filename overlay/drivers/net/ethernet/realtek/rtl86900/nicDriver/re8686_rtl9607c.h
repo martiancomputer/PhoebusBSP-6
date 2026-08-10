@@ -203,13 +203,15 @@ enum {
 		||port==LAN_PORT6||port==APOLLOPRO_SGMII0_PORT||port==APOLLOPRO_SGMII1_PORT||port==APOLLOPRO_PON_PORT)
 #elif !defined(CONFIG_ETHWAN_USE_USB_SGMII) && !defined(CONFIG_ETHWAN_USE_PCIE1_SGMII)
 #define MAX_LAN_PORT		8
-/* APOLLOPRO_PON_PORT added. IS_LAN_PORT() gates gmacintr_notifier_link_change()
- * -- a port missing from this list has its link-change interrupts dropped and
- * netif_carrier_on() never called, so its LCDev status sits at 0xFF forever.
- * Port 5 is our WAN_PORT (nas0) in this configuration, and it was absent here
- * while the RTL8198D branch above includes it, meaning nas0 could not report
- * carrier under any circumstances. */
-#define IS_LAN_PORT(port)	(port==LAN_PORT1||port==LAN_PORT2||port==LAN_PORT3||port==LAN_PORT4||port==LAN_PORT5||port==LAN_PORT6||port==APOLLOPRO_SGMII0_PORT||port==APOLLOPRO_SGMII1_PORT||port==APOLLOPRO_PON_PORT)
+/* APOLLOPRO_PON_PORT is deliberately NOT in this list.
+ *
+ * Adding it was tried: IS_LAN_PORT() gates gmacintr_notifier_link_change(), so
+ * with port 5 included, nas0 finally got netif_carrier_on() calls. What came
+ * through was the PON SerDes's permanent "up" -- nas0 then reported carrier=1
+ * with no cable attached to the router at all, exactly like eth0.9 (SGMII1).
+ * A carrier that is always 1 is worse than no carrier: it reads as a live WAN
+ * to anything that checks, while rx_packets stays 0. */
+#define IS_LAN_PORT(port)	(port==LAN_PORT1||port==LAN_PORT2||port==LAN_PORT3||port==LAN_PORT4||port==LAN_PORT5||port==LAN_PORT6||port==APOLLOPRO_SGMII0_PORT||port==APOLLOPRO_SGMII1_PORT)
 #elif !defined(CONFIG_ETHWAN_USE_USB_SGMII)
 #define MAX_LAN_PORT		7
 #define IS_LAN_PORT(port)	(port==LAN_PORT1||port==LAN_PORT2||port==LAN_PORT3||port==LAN_PORT4||port==LAN_PORT5||port==LAN_PORT6||port==APOLLOPRO_SGMII0_PORT)
