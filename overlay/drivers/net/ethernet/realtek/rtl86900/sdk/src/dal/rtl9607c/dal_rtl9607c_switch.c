@@ -28,6 +28,7 @@
 #include <rtk/switch.h>
 #include <rtk/mdio.h>
 #include <rtk/gpio.h>
+#include <rtk/port.h>
 #include <rtk/acl.h>
 #include <rtk/qos.h>
 #include <rtk/rate.h>
@@ -4998,6 +4999,314 @@ static ssize_t phoebus_extmdio_write(struct file *file, const char __user *buffe
 	 * bus. TP-Link's network_arch.sh puts the WAN on phyport 6, which the GPHY
 	 * power loop (0..5) skips and which no probe has ever addressed -- every
 	 * hal_miim test so far used port 8. */
+	/* "sweep [first_mdc] [last_mdc]" brute-forces the MDC/MDIO pin pair.
+	 *
+	 * TP-Link's network_arch.sh puts the WAN on phyport 6, and a MIIM scan
+	 * shows no PHY there, so its PHY is external. ext_phy_poll.c documents
+	 * set0=pins 6/7 and set1=pins 12/10; both were swept across every mdio
+	 * port and address and found nothing, so this board wires MDC/MDIO
+	 * somewhere else. The chip has 66 GPIOs (0-10, 12-42, 44-69) and the GPIO
+	 * application note says there is no hardware mux -- a pin's alternate
+	 * function only appears once GPIO is disabled on it.
+	 *
+	 * Deliberately one-way: pins are only ever released to their alternate
+	 * function, never put back under GPIO. Re-enabling GPIO on a pin could
+	 * claim one belonging to the console UART and cost us the board mid-sweep.
+	 *
+	 * The pair is printed BEFORE it is tested, so if freeing some pin wedges
+	 * the machine the last line on the console names the culprit. Range args
+	 * let the sweep be resumed past a pin that turns out to be hostile.
+	 */
+	/* "gpiostate" -- read-only census of which pins are under GPIO control.
+	 *
+	 * A pin whose GPIO function is DISABLED is already handed to its alternate
+	 * function, which is where a hardware-strapped or U-Boot-configured
+	 * MDC/MDIO pair would already be. Those pins are also safe to probe: asking
+	 * to disable GPIO on a pin that is already disabled changes nothing.
+	 *
+	 * Blind-sweeping instead reset the board inside the first 20 pins, because
+	 * freeing a pin hands it to whatever the silicon assigns and something in
+	 * that range was load-bearing. Read first, then only touch what is already
+	 * free.
+	 */
+	/* "up <mdc> <mdio> <addr>" -- bring the external WAN PHY out of power-down.
+	 *
+	 * Found by the force sweep: an RTL8211F (PHY id 001c:c916, distinct from
+	 * the internal LAN GPHYs at 001c:c981) answering at MDC=65 / MDIO=10,
+	 * addresses 0 and 6.
+	 *
+	 * Freeing 65 and 10 alone is not sufficient -- the non-force sweep covered
+	 * that exact pair over already-free pins and saw nothing. The bus only came
+	 * alive once force mode had also freed the GPIO-held pins, so one of those
+	 * gates it. Until we know which, replicate what worked: free everything
+	 * except the two PCIe resets. 39/40 hold the WiFi cards and freeing them
+	 * reset the board.
+	 */
+	if (!strncmp(tmp, "up", 2) && tmp[2] == ' ') {
+		static const int allpins[] = {
+			0,1,2,3,4,5,6,7,8,9,10, 12,13,14,15,16,17,18,19,20,21,22,23,24,
+			25,26,27,28,29,30,31,32,33,34,35,36,37,38,41,42,
+			44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,
+			65,66,67,68,69
+		};
+		int mdc = 65, mdio = 10, addr = 6, i;
+		uint16 bmcr = 0xffff, id1 = 0, id2 = 0, stat = 0;
+
+		sscanf(tmp + 3, "%d %d %d", &mdc, &mdio, &addr);
+
+		for (i = 0; i < (int)(sizeof(allpins)/sizeof(allpins[0])); i++)
+			rtk_gpio_state_set(allpins[i], DISABLED);
+
+		if (rtk_mdio_init() != RT_ERR_OK) {
+			printk("extmdio-up: rtk_mdio_init failed\n");
+			return count;
+		}
+		if (rtk_mdio_cfg_set(0, 0, addr, MDIO_FMT_C22) != RT_ERR_OK) {
+			printk("extmdio-up: cfg_set(addr %d) failed\n", addr);
+			return count;
+		}
+
+		rtk_mdio_c22_read(2, &id1);
+		rtk_mdio_c22_read(3, &id2);
+		rtk_mdio_c22_read(0, &bmcr);
+		rtk_mdio_c22_read(1, &stat);
+		printk("extmdio-up: before: mdc=%d mdio=%d addr=%d id=%04x:%04x BMCR=%04x BMSR=%04x link=%s\n",
+		       mdc, mdio, addr, id1, id2, bmcr, stat,
+		       (stat != 0xffff && (stat & 0x0004)) ? "UP" : "down");
+
+		/* Reset + autoneg + full duplex + 1000M, the value the working LAN
+		 * PHYs report. BIT(15) is a PHY reset; it self-clears. */
+		rtk_mdio_c22_write(0, 0x8000);
+		osal_time_mdelay(50);
+		rtk_mdio_c22_write(0, 0x1140);
+
+		/* Autonegotiation takes 2-4 seconds on copper gigabit. Reading link
+		 * state 200ms after kicking it off -- as the first version did -- can
+		 * only ever report "down". Poll for up to 6s and report when it
+		 * settles, so a genuine failure is distinguishable from impatience. */
+		for (i = 0; i < 24; i++) {
+			osal_time_mdelay(250);
+			stat = 0xffff;
+			if (rtk_mdio_c22_read(1, &stat) != RT_ERR_OK)
+				continue;
+			if (stat != 0xffff && (stat & 0x0024) == 0x0024)
+				break;                  /* link up + autoneg complete */
+		}
+		rtk_mdio_c22_read(0, &bmcr);
+		printk("extmdio-up: after %dms: BMCR=%04x BMSR=%04x link=%s autoneg_done=%s\n",
+		       (i + 1) * 250, bmcr, stat,
+		       (stat != 0xffff && (stat & 0x0004)) ? "UP" : "down",
+		       (stat != 0xffff && (stat & 0x0020)) ? "yes" : "no");
+		return count;
+	}
+
+	/* "force <port>" -- force a switch port's MAC link up at 1000/full.
+	 *
+	 * The WAN PHY (external RTL8211FS on the ext-MDIO bus) negotiates fine with
+	 * its link partner once powered -- the partner's LEDs come on -- but the
+	 * switch never learns about it: nothing polls that PHY, which is exactly
+	 * why stock ships an ext_phy_polling kthread. So port 6's MAC sits with no
+	 * link and eth0.8 stays at carrier 0 with zero packets.
+	 *
+	 * Forcing the MAC is the standard answer for a PHY the switch cannot see.
+	 * Both halves are implemented for this chip in dal_rtl9607c_mapper.c.
+	 */
+	if (!strncmp(tmp, "force", 5) && tmp[5] == ' ') {
+		rtk_port_macAbility_t ab;
+		int port = 6;
+		int32 r1, r2;
+
+		sscanf(tmp + 6, "%d", &port);
+
+		/* Read-modify-write, exactly as stock's ext_phy_poll.c config_mac_speed()
+		 * does. Building this struct from a memset(0) instead clobbers
+		 * linkFib1g, masterMod, nwayAbility and the LPI fields with zeros --
+		 * carrier still comes up because linkStatus is right, but the rest of
+		 * the MAC config is trampled and nothing is received. */
+		osal_memset(&ab, 0, sizeof(ab));
+		r1 = rtk_port_macForceAbility_get(port, &ab);
+		printk("extmdio-force: port %d before: get=%d speed=%d duplex=%d link=%d "
+		       "txFc=%d rxFc=%d nway=%d fib1g=%d\n",
+		       port, r1, ab.speed, ab.duplex, ab.linkStatus,
+		       ab.txFc, ab.rxFc, ab.nwayAbility, ab.linkFib1g);
+
+		ab.speed      = PORT_SPEED_1000M;
+		ab.duplex     = PORT_FULL_DUPLEX;
+		ab.linkStatus = PORT_LINKUP;
+		ab.txFc       = ENABLED;
+		ab.rxFc       = ENABLED;
+
+		r1 = rtk_port_macForceAbility_set(port, ab);
+		r2 = rtk_port_macForceAbilityState_set(port, ENABLED);
+		printk("extmdio-force: port %d 1000/full link-up forced (ability=%d state=%d)\n",
+		       port, r1, r2);
+		return count;
+	}
+
+	if (!strncmp(tmp, "gpiostate", 9)) {
+		static const int pins[] = {
+			0,1,2,3,4,5,6,7,8,9,10, 12,13,14,15,16,17,18,19,20,21,22,23,24,
+			25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,
+			44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,
+			65,66,67,68,69
+		};
+		const int npins = sizeof(pins) / sizeof(pins[0]);
+		rtk_enable_t st;
+		int i, nfree = 0;
+		char buf[128];
+		int len = 0;
+
+		printk("gpiostate: pins NOT under GPIO (already alternate-function):\n");
+		for (i = 0; i < npins; i++) {
+			st = ENABLED;
+			if (rtk_gpio_state_get(pins[i], &st) != RT_ERR_OK)
+				continue;
+			if (st == DISABLED) {
+				nfree++;
+				len += scnprintf(buf + len, sizeof(buf) - len, "%d ", pins[i]);
+				if (len > 100) { printk("gpiostate:   %s\n", buf); len = 0; buf[0] = 0; }
+			}
+		}
+		if (len) printk("gpiostate:   %s\n", buf);
+		printk("gpiostate: %d of %d pins are free for alternate functions\n",
+		       nfree, npins);
+
+		/* Profile the pins still under GPIO. These are the only remaining
+		 * candidates for the WAN PHY's MDC/MDIO -- the 3080-pair sweep over
+		 * already-free pins found nothing -- but freeing one of them reset the
+		 * board once already, so rank them before touching any.
+		 *
+		 * An output driving a level is holding something (enable, reset, power);
+		 * releasing it to an alternate function drops that line. An input is a
+		 * strap or a button and is far more likely to be harmless. */
+		printk("gpiostate: pins UNDER GPIO control (risky to free):\n");
+		for (i = 0; i < npins; i++) {
+			rtk_gpio_mode_t md = 0;
+			uint32 dat = 0;
+
+			st = ENABLED;
+			if (rtk_gpio_state_get(pins[i], &st) != RT_ERR_OK || st != ENABLED)
+				continue;
+
+			if (rtk_gpio_mode_get(pins[i], &md) != RT_ERR_OK)
+				md = 0xff;
+			if (rtk_gpio_databit_get(pins[i], &dat) != RT_ERR_OK)
+				dat = 0xff;
+
+			printk("gpiostate:   pin %-2d mode=%u data=%u %s\n",
+			       pins[i], (unsigned)md, (unsigned)dat,
+			       (md == 0xff) ? "" :
+			       (dat == 1 ? "(driving/see high -- likely an enable)" :
+			                   "(low -- may be holding a reset)"));
+		}
+		return count;
+	}
+
+	if (!strncmp(tmp, "sweep", 5)) {
+		static const int pins[] = {
+			0,1,2,3,4,5,6,7,8,9,10, 12,13,14,15,16,17,18,19,20,21,22,23,24,
+			25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,
+			44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,
+			65,66,67,68,69
+		};
+		const int npins = sizeof(pins) / sizeof(pins[0]);
+		int first = -1, last = -1, a, b, tried = 0, hits = 0;
+		int force = (strstr(tmp, "force") != NULL);
+		uint16 id1, id2;
+		uint32 addr;
+
+		sscanf(tmp + 5, "%d %d", &first, &last);
+
+		printk("extmdio-sweep: start (%d pins, mdc range %d..%d, force=%d, 39/40 excluded)\n",
+		       npins, first, last, force);
+
+		for (a = 0; a < npins; a++) {
+			if (first >= 0 && pins[a] < first) continue;
+			if (last  >= 0 && pins[a] > last)  continue;
+
+			/* Never free the PCIe reset lines.
+			 *
+			 * The boot log says "Port0 Device gpio reset pin (40)" and
+			 * "Port1 Device gpio reset pin (39)" -- these hold the two WiFi
+			 * cards out of reset. The first sweep ranged mdc over 0..20 but
+			 * mdio over every pin, so it freed 39 and 40 and dropped both
+			 * radios' reset lines mid-transaction, which is what reset the
+			 * board. They are GPIO outputs by definition and can never be
+			 * MDC/MDIO, so excluding them costs nothing. */
+			if (pins[a] == 39 || pins[a] == 40)
+				continue;
+
+			/* Only touch pins already released to their alternate function.
+			 *
+			 * Asking to disable GPIO on a pin that is already disabled is a
+			 * no-op, so this whole sweep becomes non-destructive. Freeing a
+			 * pin that IS under GPIO is what reset the board: pins 0,1,4,12,
+			 * 15,16,25,34,37,39,40,60 are still GPIO-controlled here and are
+			 * evidently driving something. Note pin 12 is among them, so the
+			 * reference design's "set1 = pins 12/10" was never safe to probe
+			 * on this board, while "set0 = 6/7" was, since both are free. */
+			{
+				rtk_enable_t st = ENABLED;
+				/* continue, not break: skip THIS mdc pin, not the whole sweep.
+				 * pins[0] is 0, which is GPIO-held, so a break here ended the
+				 * run at "0 pairs tried".
+				 * With "force", GPIO-held pins are included too -- 39/40 stay
+				 * excluded unconditionally above. */
+				if (!force && (rtk_gpio_state_get(pins[a], &st) != RT_ERR_OK
+				               || st != DISABLED))
+					continue;
+			}
+
+			for (b = 0; b < npins; b++) {
+				rtk_enable_t stb = ENABLED;
+
+				if (a == b)
+					continue;
+				if (pins[b] == 39 || pins[b] == 40)
+					continue;                       /* PCIe resets, see above */
+				if (!force && (rtk_gpio_state_get(pins[b], &stb) != RT_ERR_OK
+				               || stb != DISABLED))
+					continue;
+
+				if ((tried % 50) == 0)
+					printk("extmdio-sweep: at mdc=%d mdio=%d (%d tried, %d hits)\n",
+					       pins[a], pins[b], tried, hits);
+				tried++;
+
+				rtk_gpio_state_set(pins[a], DISABLED);
+				rtk_gpio_state_set(pins[b], DISABLED);
+				if (rtk_mdio_init() != RT_ERR_OK)
+					continue;
+
+				for (addr = 0; addr < 32; addr++) {
+					if (rtk_mdio_cfg_set(0, 0, addr, MDIO_FMT_C22) != RT_ERR_OK)
+						continue;
+					id1 = id2 = 0xffff;
+					if (rtk_mdio_c22_read(2, &id1) != RT_ERR_OK)
+						continue;
+					if (rtk_mdio_c22_read(3, &id2) != RT_ERR_OK)
+						continue;
+					if (id1 == 0xffff || (id1 == 0 && id2 == 0))
+						continue;
+
+					printk("extmdio-sweep: HIT mdc=%d mdio=%d addr=%u id=%04x:%04x\n",
+					       pins[a], pins[b], addr, id1, id2);
+					hits++;
+					extmdio_last_set = 0;
+					extmdio_last_mdc = pins[a];
+					extmdio_last_mdio = pins[b];
+					extmdio_last_found = addr;
+					extmdio_last_port = 0;
+					extmdio_last_id1 = id1;
+					extmdio_last_id2 = id2;
+				}
+				cond_resched();
+			}
+		}
+		printk("extmdio-sweep: done, %d pairs tried, %d hits\n", tried, hits);
+		return count;
+	}
+
 	if (!strncmp(tmp, "miim", 4)) {
 		uint32 p;
 		uint32 bmcr, id1, id2;
@@ -5028,8 +5337,11 @@ static ssize_t phoebus_extmdio_write(struct file *file, const char __user *buffe
 
 static int phoebus_extmdio_read(struct seq_file *seq, void *v)
 {
-	seq_printf(seq, "usage: echo \"<set> <mdc_pin> <mdio_pin>\" > this file\n");
-	seq_printf(seq, "  stock reference design: set 0 -> pins 6/7, set 1 -> pins 12/10\n");
+	seq_printf(seq, "usage:\n");
+	seq_printf(seq, "  echo \"<set> <mdc> <mdio>\"     probe one pin pair, all mdio ports/addrs\n");
+	seq_printf(seq, "  echo miim                    scan switch ports 0-10 via port-indexed MIIM\n");
+	seq_printf(seq, "  echo \"sweep [first] [last]\"   brute-force MDC/MDIO pins (optional mdc range)\n");
+	seq_printf(seq, "  reference design: set 0 -> pins 6/7, set 1 -> pins 12/10\n");
 	if (extmdio_last_set < 0) {
 		seq_printf(seq, "no probe run yet\n");
 		return 0;
