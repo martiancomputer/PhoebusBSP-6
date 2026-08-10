@@ -12284,7 +12284,15 @@ static int rtk_gmac_multi_lan_device_init(void)
 	change_dev_port_mapping(LAN_PORT4,"eth0.5");
 	change_dev_port_mapping(LAN_PORT5,"eth0.6");
 	change_dev_port_mapping(LAN_PORT6,"eth0.7");
-	change_dev_port_mapping(WAN_PORT,"nas0");	
+	change_dev_port_mapping(WAN_PORT,"nas0");
+	/* SGMII0 (port 6) is this board's Ethernet WAN: TP-Link's own
+	 * network_arch.sh says WAN_PHY_PORT_SET="1:6", and there is an external
+	 * RTL8211FS hanging off it. eth0.8 already existed with a txPortMask for
+	 * port 6, so transmit worked -- but ingress had no mapping here and fell
+	 * through to the CPU root device eth0. The symptom is deceptive: carrier
+	 * up, tx_packets counting, rx_packets stuck at exactly 0, because udhcpc
+	 * binds eth0.8 and the replies were being delivered as eth0. */
+	change_dev_port_mapping(APOLLOPRO_SGMII0_PORT,"eth0.8");
 	#if defined(CONFIG_RTL_MULTI_PHY_ETH_WAN)
 	change_dev_port_mapping(LAN_PORT6,"ifprobe");
 	#endif

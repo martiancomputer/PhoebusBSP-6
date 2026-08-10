@@ -29,6 +29,7 @@
 #include <rtk/mdio.h>
 #include <rtk/gpio.h>
 #include <rtk/port.h>
+#include <rtk/stat.h>
 #include <rtk/acl.h>
 #include <rtk/qos.h>
 #include <rtk/rate.h>
@@ -5140,6 +5141,42 @@ static ssize_t phoebus_extmdio_write(struct file *file, const char __user *buffe
 		r2 = rtk_port_macForceAbilityState_set(port, ENABLED);
 		printk("extmdio-force: port %d 1000/full link-up forced (ability=%d state=%d)\n",
 		       port, r1, r2);
+		return count;
+	}
+
+	/* "mib <port>" -- per-port switch MAC counters.
+	 *
+	 * Distinguishes two very different failures that look identical from the
+	 * netdev: eth0.8 shows carrier with rx_packets stuck at 0 and no errors.
+	 * Either the SGMII link between port 6 and the external PHY is not carrying
+	 * frames at all (the port MAC counts nothing), or frames do arrive and the
+	 * switch discards them before the CPU (in-octets climb, discards climb).
+	 * Guessing between those two has already cost several flash cycles.
+	 */
+	if (!strncmp(tmp, "mib", 3) && tmp[3] == ' ') {
+		static const struct { int idx; const char *name; } c[] = {
+			{ IF_IN_OCTETS_INDEX,            "in_octets"    },
+			{ IF_IN_UCAST_PKTS_INDEX,        "in_ucast"     },
+			{ IF_IN_MULTICAST_PKTS_INDEX,    "in_mcast"     },
+			{ IF_IN_BROADCAST_PKTS_INDEX,    "in_bcast"     },
+			{ IF_IN_DISCARDS_INDEX,          "in_discards"  },
+			{ IF_OUT_OCTETS_INDEX,           "out_octets"   },
+			{ IF_OUT_DISCARDS_INDEX,         "out_discards" },
+			{ DOT3_STATS_FCS_ERRORS_INDEX,   "fcs_errors"   },
+		};
+		int port = 6, i;
+		uint64 v;
+
+		sscanf(tmp + 4, "%d", &port);
+		for (i = 0; i < (int)(sizeof(c)/sizeof(c[0])); i++) {
+			v = 0;
+			if (rtk_stat_port_get(port, c[i].idx, &v) != RT_ERR_OK) {
+				printk("mib: port %d %-13s <read failed>\n", port, c[i].name);
+				continue;
+			}
+			printk("mib: port %d %-13s %llu\n", port, c[i].name,
+			       (unsigned long long)v);
+		}
 		return count;
 	}
 
