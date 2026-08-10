@@ -26,6 +26,8 @@
  */
 #include <ioal/mem32.h>
 #include <rtk/switch.h>
+#include <rtk/mdio.h>
+#include <rtk/gpio.h>
 #include <rtk/acl.h>
 #include <rtk/qos.h>
 #include <rtk/rate.h>
@@ -948,8 +950,33 @@ static int32 _dal_rtl9607c_switch_phyCmd_checkBusy(void)
 }
 
 static int32
-/* RGMII port index, per rtl9607c_port_info.rgmiiPort in hal/chipdef/chip.c. */
-#define PHOEBUS_RGMII_PHY_PORT  8
+/* The WAN jack's PHY is an external one on the ext-MDIO bus, not a switch port.
+ *
+ * Taken from stock firmware's /lib/switch/base.sh, recovered from a read-only
+ * NAND dump:
+ *
+ *   link_up_all_ports() {
+ *       diag port set phy-force-power-down port all state disable
+ *       diag debug ext-mdio c22 init 0 0 6
+ *       diag debug ext-mdio c22 set 0 0x1140
+ *   }
+ *
+ * `debug ext-mdio c22 init <set> <port> <phyid>` maps to rtk_mdio_cfg_set(),
+ * so the external PHY sits at MDIO address 6 on set 0 / port 0, and 0x1140 is
+ * BMCR = autoneg + full duplex + 1000M -- the same value the four internal UTP
+ * PHYs report. link_down_all_ports() writes 0x1940, i.e. the same word with
+ * bit 11 (power-down) set.
+ *
+ * This is why every previous probe missed it: hal_miim_*() addresses the
+ * switch's internal port-indexed MIIM, which cannot see this bus, so port 8
+ * read back BMCR 0x0000 and looked unpopulated.
+ */
+#define PHOEBUS_EXT_WAN_MDIO_SET   0
+#define PHOEBUS_EXT_WAN_MDIO_PORT  0
+#define PHOEBUS_EXT_MDC_PIN        6   /* RTL9607C_SET0_MDC_PIN  */
+#define PHOEBUS_EXT_MDIO_PIN       7   /* RTL9607C_SET0_MDIO_PIN */
+#define PHOEBUS_EXT_WAN_BMCR_UP    0x1140
+#define PHOEBUS_EXT_WAN_BMCR_DOWN  0x1940
 
 _dal_rtl9607c_switch_phyPower_set(rtk_enable_t enable)
 {
@@ -1027,50 +1054,81 @@ _dal_rtl9607c_switch_phyPower_set(rtk_enable_t enable)
         }
     }
 
-    /* Port 8 (RGMII) is deliberately outside the loop above.
+    /* The WAN jack's external PHY, which is not a switch port at all.
      *
-     * The loop covers 0..5 and drives RTL9607C_GPHY_IND_CMDr, the *internal*
-     * GPHY indirect interface, which cannot reach the external PHY hanging off
-     * the RGMII port. On this board port 4 is fused off (the capability
-     * register in mac_probe.c rewrites portType[4] to RT_PORT_NONE), so port 8
-     * carries the remaining RJ45 -- the blue WAN jack -- and nothing here ever
-     * powered it. Its LCDev status sat at 0xFF and a device plugged into that
-     * jack saw no link partner at all.
-     *
-     * Stock firmware gets away with the same loop because it powers ports on
-     * individually from userspace via rtk_port_phyPowerDown_set(), which goes
-     * through MIIM and does reach port 8. We have no such daemon, so do it here
-     * over the same MDIO path.
+     * Mirrors stock's link_up_all_ports()/link_down_all_ports(): after the
+     * internal UTP PHYs, reconfigure the ext-MDIO bus onto the external PHY and
+     * write BMCR directly. The read-back is logged because it is the one value
+     * that tells us whether anything is actually out there -- a bus with no PHY
+     * answers 0xffff, and the four working internal PHYs answer 0x1140.
      */
-    /* page 0, reg 0 = BMCR; matches how this file already calls hal_miim_*. */
-    if (HAL_IS_PORT_EXIST(PHOEBUS_RGMII_PHY_PORT))
+    if (enable)
     {
-        uint32 bmcr = 0;
+        int32  mret;
+        uint16 id1 = 0, id2 = 0, bmcr = 0;
+        uint32 addr, found = 0xff;
 
-        if ((ret = hal_miim_read(PHOEBUS_RGMII_PHY_PORT, 0, 0, &bmcr)) != RT_ERR_OK)
+        /* Release the MDC/MDIO pins from GPIO first -- without this the bus
+         * does not physically exist and every address reads 0xffff, which is
+         * exactly what the first attempt at this saw. */
+        if ((mret = rtk_gpio_state_set(PHOEBUS_EXT_MDC_PIN, DISABLED)) != RT_ERR_OK)
+            printk("PHOEBUS-PHY: gpio release MDC pin %d failed (%d)\n",
+                   PHOEBUS_EXT_MDC_PIN, mret);
+        if ((mret = rtk_gpio_state_set(PHOEBUS_EXT_MDIO_PIN, DISABLED)) != RT_ERR_OK)
+            printk("PHOEBUS-PHY: gpio release MDIO pin %d failed (%d)\n",
+                   PHOEBUS_EXT_MDIO_PIN, mret);
+
+        if ((mret = rtk_mdio_init()) != RT_ERR_OK)
         {
-            printk("PHOEBUS-PHY: port %d MIIM read failed (%d)\n",
-                   PHOEBUS_RGMII_PHY_PORT, ret);
+            printk("PHOEBUS-PHY: ext-mdio init failed (%d)\n", mret);
         }
         else
         {
-            uint32 want = enable ? (bmcr & 0xf7ff) : (bmcr | 0x0800);
-
-            printk("PHOEBUS-PHY: port %d BMCR 0x%04x -> 0x%04x (%s, via MIIM)\n",
-                   PHOEBUS_RGMII_PHY_PORT, bmcr, want,
-                   enable ? "power up" : "power down");
-
-            if ((ret = hal_miim_write(PHOEBUS_RGMII_PHY_PORT, 0, 0, want)) != RT_ERR_OK)
+            /* Scan rather than trust either candidate: stock's shell script
+             * passes phyid 6 while its ext_phy_poll.c uses xGMII_EXT_PHYID 5,
+             * so one of the two is stale and a wrong guess costs a boot.
+             * Registers 2/3 are the PHY identifier -- a real PHY returns a
+             * vendor OUI, an empty address returns 0xffff or 0x0000. */
+            for (addr = 0; addr < 32; addr++)
             {
-                printk("PHOEBUS-PHY: port %d MIIM write failed (%d)\n",
-                       PHOEBUS_RGMII_PHY_PORT, ret);
+                if (rtk_mdio_cfg_set(PHOEBUS_EXT_WAN_MDIO_SET,
+                                     PHOEBUS_EXT_WAN_MDIO_PORT,
+                                     addr, MDIO_FMT_C22) != RT_ERR_OK)
+                    continue;
+                if (rtk_mdio_c22_read(2, &id1) != RT_ERR_OK)
+                    continue;
+                if (rtk_mdio_c22_read(3, &id2) != RT_ERR_OK)
+                    continue;
+                if (id1 == 0xffff || (id1 == 0 && id2 == 0))
+                    continue;
+
+                printk("PHOEBUS-PHY: ext-mdio addr %2u responds, PHY id %04x:%04x\n",
+                       addr, id1, id2);
+                if (found == 0xff)
+                    found = addr;
+            }
+
+            if (found == 0xff)
+            {
+                printk("PHOEBUS-PHY: ext-mdio scan found no PHY on set %d port %d\n",
+                       PHOEBUS_EXT_WAN_MDIO_SET, PHOEBUS_EXT_WAN_MDIO_PORT);
+            }
+            else
+            {
+                rtk_mdio_cfg_set(PHOEBUS_EXT_WAN_MDIO_SET,
+                                 PHOEBUS_EXT_WAN_MDIO_PORT, found, MDIO_FMT_C22);
+                if (rtk_mdio_c22_read(0, &bmcr) != RT_ERR_OK)
+                    bmcr = 0xffff;
+
+                /* Power-down/up cycle then autoneg, as ext_phy_poll.c does. */
+                rtk_mdio_c22_write(0, (uint16)(bmcr | 0x0800));
+                osal_time_mdelay(100);
+                rtk_mdio_c22_write(0, PHOEBUS_EXT_WAN_BMCR_UP);
+
+                printk("PHOEBUS-PHY: ext WAN PHY addr %u BMCR 0x%04x -> 0x%04x (power up)\n",
+                       found, bmcr, PHOEBUS_EXT_WAN_BMCR_UP);
             }
         }
-    }
-    else
-    {
-        printk("PHOEBUS-PHY: port %d SKIPPED (HAL_IS_PORT_EXIST false)\n",
-               PHOEBUS_RGMII_PHY_PORT);
     }
 
     return RT_ERR_OK;
@@ -4851,6 +4909,164 @@ static int phy_recovery_cfg_open_proc(struct inode *inode, struct file *file)
 	return single_open(file, phy_recovery_cfg_read, NULL);
 }
 
+/* ---- runtime ext-MDIO prober -------------------------------------------
+ *
+ * The WAN jack's PHY sits on an external MDIO bus whose MDC/MDIO pins are
+ * muxed as GPIO at reset. Doing that release from switch init and scanning
+ * found nothing, and the remaining unknowns -- which pin pair (set 0 uses
+ * 6/7, set 1 uses 12/10), which MDIO "set", and whether it only works later
+ * in boot -- are each one reflash to test. That is too slow, so expose the
+ * probe here and try combinations from a shell instead.
+ *
+ *   echo "<set> <mdc_pin> <mdio_pin>" > /proc/phy_recovery/extmdio
+ *
+ * Results go to the kernel log. Read the file for usage and the last result.
+ */
+static int   extmdio_last_set = -1, extmdio_last_mdc = -1, extmdio_last_mdio = -1;
+static int   extmdio_last_found = -1, extmdio_last_port = -1;
+static uint16 extmdio_last_id1, extmdio_last_id2;
+
+static int phoebus_extmdio_probe(int set, int mdc, int mdio)
+{
+	uint16 id1 = 0, id2 = 0;
+	uint32 addr, port;
+	int found = -1;
+	int32 ret;
+
+	extmdio_last_set = set; extmdio_last_mdc = mdc; extmdio_last_mdio = mdio;
+	extmdio_last_found = -1;
+
+	if ((ret = rtk_gpio_state_set(mdc, DISABLED)) != RT_ERR_OK)
+		printk("extmdio: gpio release MDC %d failed (%d)\n", mdc, ret);
+	if ((ret = rtk_gpio_state_set(mdio, DISABLED)) != RT_ERR_OK)
+		printk("extmdio: gpio release MDIO %d failed (%d)\n", mdio, ret);
+
+	if ((ret = rtk_mdio_init()) != RT_ERR_OK) {
+		printk("extmdio: rtk_mdio_init failed (%d)\n", ret);
+		return -1;
+	}
+
+	/* Sweep the MDIO "port" too, not just address.
+	 *
+	 * rtk_mdio_cfg_set(set, port, phyid, fmt) takes a port that diag validates
+	 * as 0..3, and every probe so far hardcoded 0 -- so three quarters of the
+	 * search space was never looked at. Stock passes port 0, but stock's shell
+	 * path only runs in non-router mode, so it is not authoritative for how
+	 * this board is wired.
+	 */
+	for (port = 0; port < 4; port++) {
+		for (addr = 0; addr < 32; addr++) {
+			if (rtk_mdio_cfg_set(set, port, addr, MDIO_FMT_C22) != RT_ERR_OK)
+				continue;
+			if (rtk_mdio_c22_read(2, &id1) != RT_ERR_OK)
+				continue;
+			if (rtk_mdio_c22_read(3, &id2) != RT_ERR_OK)
+				continue;
+			if (id1 == 0xffff || (id1 == 0 && id2 == 0))
+				continue;
+			printk("extmdio: set %d port %d pins %d/%d addr %2u -> PHY id %04x:%04x\n",
+			       set, port, mdc, mdio, addr, id1, id2);
+			if (found < 0) {
+				found = addr;
+				extmdio_last_port = port;
+				extmdio_last_id1 = id1;
+				extmdio_last_id2 = id2;
+			}
+		}
+	}
+
+	if (found < 0)
+		printk("extmdio: set %d pins %d/%d -- no PHY on any address\n", set, mdc, mdio);
+	else
+		printk("extmdio: set %d pins %d/%d -- first PHY at addr %d\n", set, mdc, mdio, found);
+
+	extmdio_last_found = found;
+	return found;
+}
+
+static ssize_t phoebus_extmdio_write(struct file *file, const char __user *buffer,
+                                     size_t count, loff_t *off)
+{
+	char tmp[32] = {0};
+	int len = (count > sizeof(tmp) - 1) ? sizeof(tmp) - 1 : count;
+	int set = 0, mdc = 6, mdio = 7;
+
+	if (!buffer || copy_from_user(tmp, buffer, len))
+		return -EFAULT;
+
+	/* "miim" scans the switch's own port-indexed MIIM instead of the external
+	 * bus. TP-Link's network_arch.sh puts the WAN on phyport 6, which the GPHY
+	 * power loop (0..5) skips and which no probe has ever addressed -- every
+	 * hal_miim test so far used port 8. */
+	if (!strncmp(tmp, "miim", 4)) {
+		uint32 p;
+		uint32 bmcr, id1, id2;
+		for (p = 0; p <= 10; p++) {
+			if (!HAL_IS_PORT_EXIST(p)) {
+				printk("miim: port %2u does not exist\n", p);
+				continue;
+			}
+			bmcr = id1 = id2 = 0xffff;
+			hal_miim_read(p, 0, 0, &bmcr);
+			hal_miim_read(p, 0, 2, &id1);
+			hal_miim_read(p, 0, 3, &id2);
+			printk("miim: port %2u BMCR %04x id %04x:%04x%s\n",
+			       p, bmcr, id1, id2,
+			       (id1 != 0xffff && !(id1 == 0 && id2 == 0)) ? "  <-- PHY" : "");
+		}
+		return count;
+	}
+
+	if (sscanf(tmp, "%d %d %d", &set, &mdc, &mdio) < 1)
+		return -EINVAL;
+	if (set < 0 || set > 1 || mdc < 0 || mdc > 31 || mdio < 0 || mdio > 31)
+		return -EINVAL;
+
+	phoebus_extmdio_probe(set, mdc, mdio);
+	return count;
+}
+
+static int phoebus_extmdio_read(struct seq_file *seq, void *v)
+{
+	seq_printf(seq, "usage: echo \"<set> <mdc_pin> <mdio_pin>\" > this file\n");
+	seq_printf(seq, "  stock reference design: set 0 -> pins 6/7, set 1 -> pins 12/10\n");
+	if (extmdio_last_set < 0) {
+		seq_printf(seq, "no probe run yet\n");
+		return 0;
+	}
+	seq_printf(seq, "last probe: set %d pins %d/%d -> ",
+	           extmdio_last_set, extmdio_last_mdc, extmdio_last_mdio);
+	if (extmdio_last_found < 0)
+		seq_printf(seq, "no PHY found\n");
+	else
+		seq_printf(seq, "PHY at port %d addr %d, id %04x:%04x\n",
+		           extmdio_last_port, extmdio_last_found, extmdio_last_id1, extmdio_last_id2);
+	return 0;
+}
+
+static int phoebus_extmdio_open(struct inode *inode, struct file *file)
+{
+	return single_open(file, phoebus_extmdio_read, NULL);
+}
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5,6,0)
+static struct proc_ops phoebus_extmdio_fop = {
+	.proc_open    = phoebus_extmdio_open,
+	.proc_write   = phoebus_extmdio_write,
+	.proc_read    = seq_read,
+	.proc_lseek   = seq_lseek,
+	.proc_release = single_release,
+};
+#else
+static struct file_operations phoebus_extmdio_fop = {
+	.open    = phoebus_extmdio_open,
+	.write   = phoebus_extmdio_write,
+	.read    = seq_read,
+	.llseek  = seq_lseek,
+	.release = single_release,
+};
+#endif
+
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(5,6,0)
 struct proc_ops phy_recovery_cfg_fop = {
@@ -4971,6 +5187,10 @@ int32 _dal_phy_recovery_init(void)
 			if(phy_recovery_proc_dir)
 			{
 		    	phy_recovery_cfg_proc = proc_create("stop_recovery", 0, phy_recovery_proc_dir, &phy_recovery_cfg_fop);
+		    	/* Piggybacking this dir rather than making another one: it is
+		    	 * created unconditionally at switch init, which is exactly the
+		    	 * lifetime the ext-MDIO prober needs. */
+		    	proc_create("extmdio", 0, phy_recovery_proc_dir, &phoebus_extmdio_fop);
 	        }
         }
     }

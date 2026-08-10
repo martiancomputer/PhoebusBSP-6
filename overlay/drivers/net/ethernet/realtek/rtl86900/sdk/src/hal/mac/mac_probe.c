@@ -312,28 +312,19 @@ _hal_portInfo_prepare(rt_device_t *pDev)
             }
         }
 
-        /* Force port 4 back on, and note this only means anything with xPON off.
+        /* Port 4 is genuinely absent on this SKU -- do not force it back on.
          *
-         * Port 4 is UTP4, and the RTL9600 LED application note lists the LED
-         * source select as "0b00101: UTP4 (if not PON)" -- UTP4 and the PON
-         * block are muxed onto the same hardware. An earlier build forced this
-         * override with CONFIG_GPON_FEATURE/CONFIG_EPON_FEATURE still enabled
-         * and read BMCR 0x0000, which is exactly what a PHY muxed away to PON
-         * looks like, so that result did not disprove anything on its own.
+         * Tested twice: overriding portType[4] to RT_GE_PORT makes the driver
+         * probe it, and BMCR reads 0x0000 both with xPON enabled and with it
+         * disabled. capability is (chipSubType >> 1) & 0x7FFF -- an SKU
+         * identifier, not a mode -- so it is describing silicon, not
+         * configuration. (The "UTP4 (if not PON)" mux language belongs to the
+         * older RTL9600 family; the RTL9607C LED note lists UTP4 and PON as
+         * separate sources.)
          *
-         * The vendor ships this board with both GPON and EPON disabled (see
-         * AX10v3 sdk_config/linux-4.4.x/.config) while its fifth jack is
-         * copper, which is the same conclusion from the other direction.
-         *
-         * No eFuse is written; this only changes the driver's view. If BMCR
-         * still reads 0x0000 with PON off, port 4 really is absent and both
-         * this override and the xPON change should be reverted.
+         * Leaving the override in makes the bridge treat eth0.6 as a live
+         * member and forward into a port that does not exist.
          */
-        if(pDev->pPortinfo->portType[4] == RT_PORT_NONE)
-        {
-            printk("PHOEBUS-CAP:   forcing port 4 back to RT_GE_PORT (probe)\n");
-            pDev->pPortinfo->portType[4] = RT_GE_PORT;
-        }
     }
 #endif
 
