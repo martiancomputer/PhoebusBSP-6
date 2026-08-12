@@ -978,6 +978,22 @@ static const int PHOEBUS_FREE_PINS[] = {
 #define PHOEBUS_FREE_PINS_CNT \
 	((int)(sizeof(PHOEBUS_FREE_PINS)/sizeof(PHOEBUS_FREE_PINS[0])))
 
+/* The ext-MDIO address the boot scan actually found and powered up.
+ *
+ * Seeded with the documented value but overwritten by the scan, because the
+ * PHY answers at BOTH 0 and 6 and the scan takes the first. The power-up write
+ * goes to that address, so anything polling a different one is watching a
+ * register set nobody enabled -- which is what happened: the poller hardcoded
+ * 6, the scan powered 0, and the poller then reported link-down forever while
+ * the boot dump read the PHY perfectly through the address the prober had left
+ * configured. Power one address and poll another and this is what you get.
+ *
+ * Seeded with the literal 6 rather than PHOEBUS_EXT_WAN_PHY_ADDR because that
+ * macro is defined further down, inside the split declaration this block had
+ * to be hoisted above. Keep the two in step.
+ */
+static uint32 phoebus_ext_phy_addr = 6;
+
 /* Defined with the /proc prober further down; declared here because the
  * boot-time bring-up runs the same code paths. */
 static void phoebus_force_port(int port);
@@ -1185,6 +1201,8 @@ _dal_rtl9607c_switch_phyPower_set(rtk_enable_t enable)
             {
                 rtk_mdio_cfg_set(PHOEBUS_EXT_WAN_MDIO_SET,
                                  PHOEBUS_EXT_WAN_MDIO_PORT, found, MDIO_FMT_C22);
+                /* Tell the poller which address is the live one. */
+                phoebus_ext_phy_addr = found;
                 if (rtk_mdio_c22_read(0, &bmcr) != RT_ERR_OK)
                     bmcr = 0xffff;
 
@@ -5307,7 +5325,7 @@ static int phoebus_wan_state_get(void)
 	uint16 bmsr = 0, bmcr = 0, anar = 0, anlp = 0, gcr = 0, gsr = 0;
 
 	if (rtk_mdio_cfg_set(PHOEBUS_EXT_WAN_MDIO_SET, PHOEBUS_EXT_WAN_MDIO_PORT,
-	                     PHOEBUS_EXT_WAN_PHY_ADDR, MDIO_FMT_C22) != RT_ERR_OK)
+	                     phoebus_ext_phy_addr, MDIO_FMT_C22) != RT_ERR_OK)
 		return -1;
 
 	/* BMSR link status is latch-low: it reports 0 if the link has dropped at
@@ -5319,7 +5337,12 @@ static int phoebus_wan_state_get(void)
 		return -1;
 	if (rtk_mdio_c22_read(PHOEBUS_MII_BMSR, &bmsr) != RT_ERR_OK)
 		return -1;
-	if (bmsr == 0xffff)
+	/* Reject BOTH float values. An unpopulated MDIO address floats high and
+	 * reads 0xffff, but a present-yet-unpowered one reads 0x0000 -- and a
+	 * valid BMSR always has capability bits set, so zero is never real. The
+	 * first version only rejected 0xffff, so polling the wrong address
+	 * decoded as a permanent, entirely silent "link down". */
+	if (bmsr == 0xffff || bmsr == 0x0000)
 		return -1;
 
 	if (!(bmsr & PHOEBUS_BMSR_LINK))
@@ -5397,6 +5420,7 @@ static void phoebus_wan_apply(int state)
 
 static struct task_struct *phoebus_wan_poll_task;
 static int phoebus_wan_last_state = -2;   /* -2: nothing applied yet */
+static unsigned int phoebus_wan_fail_ticks;
 
 static int phoebus_wan_poll_thread(void *data)
 {
@@ -5409,8 +5433,19 @@ static int phoebus_wan_poll_thread(void *data)
 			break;
 
 		st = phoebus_wan_state_get();
-		if (st < 0)
-			continue;                     /* bus not ready; say nothing */
+		if (st < 0) {
+			/* Say so, rate-limited. A poller that goes quiet because it
+			 * cannot read the bus looks exactly like a poller with nothing
+			 * to report, and the previous version spent a whole boot in that
+			 * state while the log stayed clean. Once every ~30s is enough to
+			 * tell "idle" from "blind" without flooding the console. */
+			if (++phoebus_wan_fail_ticks % 60 == 1)
+				printk("PHOEBUS-WAN: cannot read PHY at ext-mdio addr %u "
+				       "(%u failed polls)\n",
+				       phoebus_ext_phy_addr, phoebus_wan_fail_ticks);
+			continue;
+		}
+		phoebus_wan_fail_ticks = 0;
 
 		if (st != phoebus_wan_last_state) {
 			phoebus_wan_apply(st);
