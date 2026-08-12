@@ -1017,10 +1017,26 @@ static int32
 #define PHOEBUS_EXT_MDIO_PIN       10
 /* The external PHY answers at both 0 and 6. 6 matches stock's phyid. */
 #define PHOEBUS_EXT_WAN_PHY_ADDR   6
-/* Both candidate switch ports for the WAN. 6 is SGMII0 (an RTL8211FS would
- * sit here), 8 is the RGMII port (a plain RTL8211F would). The PHY id cannot
- * tell the two chips apart and the board is under soldered RF cans, so both
- * get driven and both get measured rather than picking one. */
+/* The WAN is switch port 7 -- SGMII1 -- and this is now measured, not inferred.
+ *
+ * With a device in the WAN jack and nothing forced on port 7, the switch's own
+ * counters read:
+ *
+ *   port 1 (LAN, cable in)   in_octets 19820   out_octets 77902   <- control
+ *   port 7 (WAN, carrier up) in_octets     0   out_octets  4470
+ *   port 6                   in_octets     0   out_octets     0
+ *   port 8                   in_octets     0   out_octets     0
+ *
+ * Port 7 was the only one of the three carrying anything, and its 4470 bytes
+ * out are the DHCP discovers sent from eth0.9. Ports 6 and 8 are wired to
+ * nothing on this board. An earlier reading of TP-Link's WAN_PHY_PORT_SET="1:6"
+ * treated that 6 as a switch port; it is a PHY address, which is also where the
+ * external PHY answers on the ext-MDIO bus. Two different sixes, and conflating
+ * them cost several flash cycles.
+ */
+#define PHOEBUS_WAN_PORT           7
+/* Kept only so the /proc prober can still be pointed at them. Neither is the
+ * WAN; see the counters above before spending time on either again. */
 #define PHOEBUS_WAN_PORT_SGMII     6
 #define PHOEBUS_WAN_PORT_RGMII     8
 #define PHOEBUS_EXT_WAN_BMCR_UP    0x1140
@@ -1180,15 +1196,16 @@ _dal_rtl9607c_switch_phyPower_set(rtk_enable_t enable)
                 printk("PHOEBUS-PHY: ext WAN PHY addr %u BMCR 0x%04x -> 0x%04x (power up)\n",
                        found, bmcr, PHOEBUS_EXT_WAN_BMCR_UP);
 
-                /* Drive BOTH candidate switch ports. Which one the external
-                 * PHY actually feeds is still unknown: an RTL8211F is RGMII
-                 * (port 8) and an RTL8211FS is SGMII (port 6), the two chips
-                 * report the same PHY id, and the board is under soldered RF
-                 * cans so the marking cannot be read. Forcing the wrong one
-                 * costs nothing -- it is an unconnected MAC -- and forcing
-                 * only the wrong one has already cost a night. */
-                phoebus_force_port(PHOEBUS_WAN_PORT_SGMII);
-                phoebus_force_port(PHOEBUS_WAN_PORT_RGMII);
+                /* No forcing here any more. The WAN is port 7, and its speed is
+                 * whatever the copper side negotiates -- 100M on the house
+                 * wiring, gigabit off the roof. Pinning it at boot is how this
+                 * port stayed dead: the MAC sat at 1000M while the PHY had
+                 * settled at 100M, and nothing crossed. phoebus_wan_poll_thread
+                 * owns port 7's ability from here on.
+                 *
+                 * Ports 6 and 8 are not forced either. Both measured completely
+                 * idle -- zero in AND zero out -- with a device in the WAN jack,
+                 * so nothing is attached to them on this board. */
 
                 /* Autoneg needs seconds, not milliseconds. An earlier 200ms
                  * settle read link=down every time and sent this whole effort
@@ -1197,12 +1214,13 @@ _dal_rtl9607c_switch_phyPower_set(rtk_enable_t enable)
 
                 printk("PHOEBUS-DIAG: ==== boot dump ====\n");
                 phoebus_dump_extphy();
-                phoebus_dump_port(PHOEBUS_WAN_PORT_SGMII);
-                phoebus_dump_port(PHOEBUS_WAN_PORT_RGMII);
-                /* Control. Port 3 is a LAN jack known to pass traffic -- the
-                 * counters above are unreadable without a working port beside
-                 * them showing what "alive" looks like on this switch. */
-                phoebus_dump_port(3);
+                phoebus_dump_port(PHOEBUS_WAN_PORT);
+                /* Control: port 1 is LAN jack eth0.3. It has to be a port with
+                 * a cable in it, or its zeroes prove nothing. The first version
+                 * of this dump used port 3 -- a jack with nothing plugged in --
+                 * so the "control" read all zeros exactly like the failure it
+                 * was supposed to distinguish from. */
+                phoebus_dump_port(1);
                 printk("PHOEBUS-DIAG: ==== boot dump end ====\n");
             }
         }
@@ -5218,6 +5236,193 @@ static void phoebus_force_port(int port)
 	       port, r1, r2);
 }
 
+/* ------------------------------------------------------------------------
+ * External WAN PHY link poller.
+ *
+ * The switch's SGMII1 MAC does not learn its speed from the PHY on this board.
+ * It sits at whatever macForceAbility last set, and if that disagrees with what
+ * the copper side negotiated, nothing crosses -- measured directly: copper up
+ * at 100M full (PHYSR page 0xa43 reg 0x1a = 0x311c), port 7 forced to 1000M,
+ * the PHY's own SerDes-side status stuck at 0x6189 with autoneg incomplete, and
+ * port 7 in_octets frozen at 0 while its carrier read up the whole time.
+ *
+ * Hardcoding 100M would fix today's link and break the next one. The house
+ * wiring is 100M but the roof uplink is gigabit, so the speed genuinely changes
+ * depending on what this port is plugged into.
+ *
+ * So poll, which is what the vendor does too -- their module is literally named
+ * ext_phy_polling and its config_mac_speed() is the function this file's force
+ * path was copied from. Re-derive the state every 500ms and push it into the
+ * MAC whenever it changes.
+ *
+ * Deviation from the vendor: they act only on the link up/down edge, so a
+ * renegotiation to a different speed that never drops link would be missed.
+ * This tracks the decoded state instead and re-applies on any change, which
+ * costs one extra comparison and removes a whole class of "worked yesterday".
+ * ------------------------------------------------------------------------ */
+#define PHOEBUS_MII_BMCR        0   /* control            */
+#define PHOEBUS_MII_BMSR        1   /* status             */
+#define PHOEBUS_MII_ANAR        4   /* our advertisement  */
+#define PHOEBUS_MII_ANLPAR      5   /* partner's          */
+#define PHOEBUS_MII_GCR         9   /* 1000BASE-T control */
+#define PHOEBUS_MII_GSR        10   /* 1000BASE-T status  */
+
+#define PHOEBUS_BMSR_LINK      (1 << 2)
+#define PHOEBUS_BMCR_ANEG      (1 << 12)
+#define PHOEBUS_BMCR_DUPLEX    (1 << 8)
+#define PHOEBUS_BMCR_SPD_LSB   (1 << 13)   /* reg0.13 */
+#define PHOEBUS_BMCR_SPD_MSB   (1 << 6)    /* reg0.6  */
+#define PHOEBUS_GCR_1000_FULL  (1 << 9)
+#define PHOEBUS_GSR_1000_FULL  (1 << 11)
+#define PHOEBUS_GSR_1000_HALF  (1 << 10)
+#define PHOEBUS_AN_100_FULL    (1 << 8)
+#define PHOEBUS_AN_100_HALF    (1 << 7)
+#define PHOEBUS_AN_10_FULL     (1 << 6)
+#define PHOEBUS_AN_10_HALF     (1 << 5)
+
+enum {
+	PHOEBUS_PS_DOWN = 0,
+	PHOEBUS_PS_1000F, PHOEBUS_PS_1000H,
+	PHOEBUS_PS_100F,  PHOEBUS_PS_100H,
+	PHOEBUS_PS_10F,   PHOEBUS_PS_10H,
+	PHOEBUS_PS_END
+};
+
+static const char *phoebus_ps_str[PHOEBUS_PS_END] = {
+	"down", "1000F", "1000H", "100F", "100H", "10F", "10H"
+};
+static const rtk_port_speed_t phoebus_ps_speed[PHOEBUS_PS_END] = {
+	PORT_SPEED_10M, PORT_SPEED_1000M, PORT_SPEED_1000M,
+	PORT_SPEED_100M, PORT_SPEED_100M, PORT_SPEED_10M, PORT_SPEED_10M
+};
+static const rtk_port_duplex_t phoebus_ps_duplex[PHOEBUS_PS_END] = {
+	PORT_HALF_DUPLEX, PORT_FULL_DUPLEX, PORT_HALF_DUPLEX,
+	PORT_FULL_DUPLEX, PORT_HALF_DUPLEX, PORT_FULL_DUPLEX, PORT_HALF_DUPLEX
+};
+
+/* Decode the PHY's copper-side state. Returns a PHOEBUS_PS_* value, or -1 if
+ * the bus did not answer (no PHY, or the MDIO pins are not free yet). */
+static int phoebus_wan_state_get(void)
+{
+	uint16 bmsr = 0, bmcr = 0, anar = 0, anlp = 0, gcr = 0, gsr = 0;
+
+	if (rtk_mdio_cfg_set(PHOEBUS_EXT_WAN_MDIO_SET, PHOEBUS_EXT_WAN_MDIO_PORT,
+	                     PHOEBUS_EXT_WAN_PHY_ADDR, MDIO_FMT_C22) != RT_ERR_OK)
+		return -1;
+
+	/* BMSR link status is latch-low: it reports 0 if the link has dropped at
+	 * any point since the previous read, and only the SECOND read shows the
+	 * current state. The boot-time dump in this file reads each register once
+	 * and consequently reported link=down on a link that was up -- do not
+	 * "simplify" this dummy read away. The vendor's poller does the same. */
+	if (rtk_mdio_c22_read(PHOEBUS_MII_BMSR, &bmsr) != RT_ERR_OK)
+		return -1;
+	if (rtk_mdio_c22_read(PHOEBUS_MII_BMSR, &bmsr) != RT_ERR_OK)
+		return -1;
+	if (bmsr == 0xffff)
+		return -1;
+
+	if (!(bmsr & PHOEBUS_BMSR_LINK))
+		return PHOEBUS_PS_DOWN;
+
+	if (rtk_mdio_c22_read(PHOEBUS_MII_BMCR, &bmcr) != RT_ERR_OK)
+		return -1;
+	if (rtk_mdio_c22_read(PHOEBUS_MII_ANAR, &anar) != RT_ERR_OK)
+		return -1;
+
+	if (!(bmcr & PHOEBUS_BMCR_ANEG)) {
+		/* Forced mode: speed is reg0.6/reg0.13, duplex reg0.8. */
+		if ((bmcr & PHOEBUS_BMCR_SPD_MSB) && (bmcr & PHOEBUS_BMCR_SPD_LSB))
+			return -1;                       /* reserved encoding */
+		if (bmcr & PHOEBUS_BMCR_SPD_MSB)
+			return PHOEBUS_PS_1000F;
+		if (bmcr & PHOEBUS_BMCR_SPD_LSB)
+			return (bmcr & PHOEBUS_BMCR_DUPLEX) ? PHOEBUS_PS_100F
+			                                    : PHOEBUS_PS_100H;
+		return (bmcr & PHOEBUS_BMCR_DUPLEX) ? PHOEBUS_PS_10F : PHOEBUS_PS_10H;
+	}
+
+	/* Autoneg: the result is what BOTH sides advertised. */
+	if (rtk_mdio_c22_read(PHOEBUS_MII_GCR, &gcr) != RT_ERR_OK)
+		return -1;
+	if (rtk_mdio_c22_read(PHOEBUS_MII_GSR, &gsr) != RT_ERR_OK)
+		return -1;
+	if (rtk_mdio_c22_read(PHOEBUS_MII_ANLPAR, &anlp) != RT_ERR_OK)
+		return -1;
+
+	if ((gcr & PHOEBUS_GCR_1000_FULL) && (gsr & PHOEBUS_GSR_1000_FULL))
+		return PHOEBUS_PS_1000F;
+	if ((gcr & PHOEBUS_GCR_1000_FULL) && (gsr & PHOEBUS_GSR_1000_HALF))
+		return PHOEBUS_PS_1000H;
+	if (anar & anlp & PHOEBUS_AN_100_FULL)
+		return PHOEBUS_PS_100F;
+	if (anar & anlp & PHOEBUS_AN_100_HALF)
+		return PHOEBUS_PS_100H;
+	if (anar & anlp & PHOEBUS_AN_10_FULL)
+		return PHOEBUS_PS_10F;
+	if (anar & anlp & PHOEBUS_AN_10_HALF)
+		return PHOEBUS_PS_10H;
+
+	return -1;
+}
+
+/* Push a decoded state into the WAN port's MAC. */
+static void phoebus_wan_apply(int state)
+{
+	rtk_port_macAbility_t ab;
+
+	osal_memset(&ab, 0, sizeof(ab));
+	/* Read-modify-write. Building this from a zeroed struct clobbers
+	 * linkFib1g, masterMod, nwayAbility and the LPI fields, which leaves
+	 * carrier up and traffic dead -- a failure that looks exactly like a bad
+	 * cable. */
+	if (rtk_port_macForceAbility_get(PHOEBUS_WAN_PORT, &ab) != RT_ERR_OK)
+		return;
+
+	if (state == PHOEBUS_PS_DOWN) {
+		ab.linkStatus = PORT_LINKDOWN;
+		rtk_port_macForceAbility_set(PHOEBUS_WAN_PORT, ab);
+		return;
+	}
+
+	ab.speed      = phoebus_ps_speed[state];
+	ab.duplex     = phoebus_ps_duplex[state];
+	ab.linkStatus = PORT_LINKUP;
+	ab.txFc       = ENABLED;
+	ab.rxFc       = ENABLED;
+
+	rtk_port_macForceAbility_set(PHOEBUS_WAN_PORT, ab);
+	rtk_port_macForceAbilityState_set(PHOEBUS_WAN_PORT, ENABLED);
+}
+
+static struct task_struct *phoebus_wan_poll_task;
+static int phoebus_wan_last_state = -2;   /* -2: nothing applied yet */
+
+static int phoebus_wan_poll_thread(void *data)
+{
+	while (!kthread_should_stop()) {
+		int st;
+
+		set_current_state(TASK_INTERRUPTIBLE);
+		schedule_timeout(HZ / 2);
+		if (kthread_should_stop())
+			break;
+
+		st = phoebus_wan_state_get();
+		if (st < 0)
+			continue;                     /* bus not ready; say nothing */
+
+		if (st != phoebus_wan_last_state) {
+			phoebus_wan_apply(st);
+			printk("PHOEBUS-WAN: port %d link %s -> MAC %s\n",
+			       PHOEBUS_WAN_PORT, phoebus_ps_str[st],
+			       st == PHOEBUS_PS_DOWN ? "link-down" : phoebus_ps_str[st]);
+			phoebus_wan_last_state = st;
+		}
+	}
+	return 0;
+}
+
 static ssize_t phoebus_extmdio_write(struct file *file, const char __user *buffer,
                                      size_t count, loff_t *off)
 {
@@ -5813,6 +6018,27 @@ int32 _dal_phy_recovery_init(void)
 		    	 * created unconditionally at switch init, which is exactly the
 		    	 * lifetime the ext-MDIO prober needs. */
 		    	proc_create("extmdio", 0, phy_recovery_proc_dir, &phoebus_extmdio_fop);
+	        }
+
+	        /* Keep the WAN MAC in step with whatever the external PHY
+	         * negotiates. Started here because this runs once at switch init
+	         * and the ext-MDIO bus is already up by this point. */
+	        if (NULL == phoebus_wan_poll_task)
+	        {
+	            struct task_struct *t;
+
+	            t = kthread_create(phoebus_wan_poll_thread, NULL, "phoebus_wan");
+	            if (IS_ERR(t))
+	            {
+	                printk("PHOEBUS-WAN: poller failed to start (%ld)\n", PTR_ERR(t));
+	            }
+	            else
+	            {
+	                phoebus_wan_poll_task = t;
+	                wake_up_process(phoebus_wan_poll_task);
+	                printk("PHOEBUS-WAN: link poller started for port %d\n",
+	                       PHOEBUS_WAN_PORT);
+	            }
 	        }
         }
     }
