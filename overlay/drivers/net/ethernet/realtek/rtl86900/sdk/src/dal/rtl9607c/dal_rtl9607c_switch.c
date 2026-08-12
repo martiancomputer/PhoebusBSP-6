@@ -5633,6 +5633,34 @@ static ssize_t phoebus_extmdio_write(struct file *file, const char __user *buffe
 		return count;
 	}
 
+	/* "sds <num> <mode>" -- configure a LAN SerDes.
+	 *
+	 * num 1 is SDS1, which the vendor's own _rtl9607c_lan_sds1_modeV3_set
+	 * confirms is port 7: it force-link-downs port 7 by literal number before
+	 * touching the SerDes. mode is rtk_port_sds_mode_t:
+	 *
+	 *   1 FIBER_1G   2 SGMII_PHY   3 SGMII_MAC   4 HSGMII_PHY   5 HSGMII_MAC
+	 *
+	 * Exposed as a command rather than only wired into init because SGMII_PHY
+	 * and SGMII_MAC share a code path in the DAL (both set CFG_SDS_MODE=0x2)
+	 * and differ only in what the link partner is expected to drive. Which one
+	 * this board wants is not documented anywhere we have, and finding out by
+	 * rebuilding and reflashing for each guess costs a TFTP cycle apiece.
+	 */
+	if (!strncmp(tmp, "sds", 3) && tmp[3] == ' ') {
+		unsigned int num = 1, mode = LAN_SDS_MODE_SGMII_MAC;
+		uint8 before = 0xff, after = 0xff;
+		int32 r;
+
+		sscanf(tmp + 4, "%u %u", &num, &mode);
+		rtk_port_serdesMode_get((uint8)num, &before);
+		r = rtk_port_serdesMode_set((uint8)num, (uint8)mode);
+		rtk_port_serdesMode_get((uint8)num, &after);
+		printk("PHOEBUS-SDS: sds%u mode %u -> %u (set=%d, reads back %u)\n",
+		       num, before, mode, r, after);
+		return count;
+	}
+
 	/* "diag" -- every port, the external PHY, and VLAN membership in one shot.
 	 *
 	 * Deliberately dumps ALL ports rather than the one under suspicion. Every
@@ -6053,6 +6081,36 @@ int32 _dal_phy_recovery_init(void)
 		    	 * created unconditionally at switch init, which is exactly the
 		    	 * lifetime the ext-MDIO prober needs. */
 		    	proc_create("extmdio", 0, phy_recovery_proc_dir, &phoebus_extmdio_fop);
+	        }
+
+	        /* Bring up the WAN SerDes.
+	         *
+	         * Nothing in this build ever configured it. rtk_port_serdesMode_set
+	         * is wired in the 9607c mapper but its only caller is an ioctl in
+	         * rtdrv_netfilter.c, so on a plain boot SDS1 is left at whatever
+	         * reset gave it -- and SDS1 is port 7, per the vendor's own
+	         * _rtl9607c_lan_sds1_modeV3_set, which force-link-downs port 7 by
+	         * literal number before touching it.
+	         *
+	         * That is the missing piece behind the symptom this port has shown
+	         * from the start: copper link up and negotiated, MAC speed matched
+	         * to it, and in_octets stuck at exactly 0 -- because the SerDes
+	         * carrying frames between the PHY and the switch was never started.
+	         * The PHY has said so at every single reading, page 0xdc0 reg 0x11
+	         * = 0x6189: 100BASE-X capable, autoneg never completing, link down.
+	         *
+	         * Called here rather than in the early switch path because
+	         * serdesMode_set does RT_INIT_CHK(port_init) and the port module is
+	         * not up yet at that point.
+	         */
+	        {
+	            uint8 m = 0xff;
+	            int32 r;
+
+	            r = rtk_port_serdesMode_set(1, LAN_SDS_MODE_SGMII_MAC);
+	            rtk_port_serdesMode_get(1, &m);
+	            printk("PHOEBUS-SDS: sds1 -> SGMII_MAC (set=%d, reads back %u)\n",
+	                   r, m);
 	        }
 
 	        /* Keep the WAN MAC in step with whatever the external PHY
