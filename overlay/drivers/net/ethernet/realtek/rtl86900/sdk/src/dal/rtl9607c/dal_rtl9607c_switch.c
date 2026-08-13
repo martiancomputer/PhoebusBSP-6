@@ -5661,6 +5661,21 @@ static ssize_t phoebus_extmdio_write(struct file *file, const char __user *buffe
 		return count;
 	}
 
+	/* "nway <num> <cfg>" -- 0 AUTO (in-band autoneg runs), 1 FORCE. */
+	if (!strncmp(tmp, "nway", 4) && tmp[4] == ' ') {
+		unsigned int num = 1, cfg = LAN_SDS_NWAY_AUTO;
+		uint8 before = 0xff, after = 0xff;
+		int32 r;
+
+		sscanf(tmp + 5, "%u %u", &num, &cfg);
+		rtk_port_serdesNWay_get((uint8)num, &before);
+		r = rtk_port_serdesNWay_set((uint8)num, (uint8)cfg);
+		rtk_port_serdesNWay_get((uint8)num, &after);
+		printk("PHOEBUS-SDS: sds%u nway %u -> %u (set=%d, reads back %u)\n",
+		       num, before, cfg, r, after);
+		return count;
+	}
+
 	/* "diag" -- every port, the external PHY, and VLAN membership in one shot.
 	 *
 	 * Deliberately dumps ALL ports rather than the one under suspicion. Every
@@ -6104,13 +6119,29 @@ int32 _dal_phy_recovery_init(void)
 	         * not up yet at that point.
 	         */
 	        {
-	            uint8 m = 0xff;
-	            int32 r;
+	            uint8 m = 0xff, nw = 0xff;
+	            int32 r, rn;
 
 	            r = rtk_port_serdesMode_set(1, LAN_SDS_MODE_SGMII_MAC);
 	            rtk_port_serdesMode_get(1, &m);
 	            printk("PHOEBUS-SDS: sds1 -> SGMII_MAC (set=%d, reads back %u)\n",
 	                   r, m);
+
+	            /* And enable in-band autoneg on the SerDes.
+	             *
+	             * Separate call, separate API, also called by nothing in this
+	             * tree: rtk_port_serdesNWay_set writes SP_SDS_FRC_AN on
+	             * HSG1_SDS_REG2, and AUTO means clear the force bit so in-band
+	             * negotiation actually runs. Setting the mode alone brings the
+	             * lane up but leaves AN forced off, and "autoneg not complete"
+	             * is precisely what the PHY reports on its SerDes side
+	             * (0xdc0 reg 0x11 = 0x6189, bit5 clear). Doing both here rather
+	             * than finding out serially -- each guess is a TFTP cycle.
+	             */
+	            rn = rtk_port_serdesNWay_set(1, LAN_SDS_NWAY_AUTO);
+	            rtk_port_serdesNWay_get(1, &nw);
+	            printk("PHOEBUS-SDS: sds1 nway -> AUTO (set=%d, reads back %u)\n",
+	                   rn, nw);
 	        }
 
 	        /* Keep the WAN MAC in step with whatever the external PHY
