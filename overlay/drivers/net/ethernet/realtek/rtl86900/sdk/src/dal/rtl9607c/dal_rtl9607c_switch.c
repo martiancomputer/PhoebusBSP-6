@@ -5422,8 +5422,62 @@ static struct task_struct *phoebus_wan_poll_task;
 static int phoebus_wan_last_state = -2;   /* -2: nothing applied yet */
 static unsigned int phoebus_wan_fail_ticks;
 
+/* SerDes bring-up is opt-in from the kernel command line: sds=1
+ *
+ * Not on by default, and not because it is unfinished -- because of how it
+ * fails. _rtl9607c_lan_sds1_modeV3_set stops the GLI clock, reconfigures, then
+ * restores it, and EVERY error path in between returns early without restoring
+ * it. One failed reg_field_write leaves the switch clock stopped, the CPU
+ * wedges, and the watchdog resets the board. That is not theoretical: calling
+ * it at runtime on a live system did exactly that, and the board fell back to
+ * the stock image in NAND.
+ *
+ * Behind a cmdline flag, a boot loop costs one bootarg edit instead of a TFTP
+ * cycle: boot without sds=1 to get a known-good system back.
+ */
+static int phoebus_sds_enable;
+static int __init phoebus_sds_setup(char *str)
+{
+	if (!str || kstrtoint(str, 0, &phoebus_sds_enable))
+		phoebus_sds_enable = 0;
+	return 1;
+}
+__setup("sds=", phoebus_sds_setup);
+
+/* Configure SDS1 once, as early as the port module allows.
+ *
+ * Called from the poll thread rather than from _dal_phy_recovery_init because
+ * that runs before the port module is up: serdesMode_set does
+ * RT_INIT_CHK(port_init) and returned RT_ERR_NOT_INIT (15) there, so both
+ * calls silently no-oped. From the poller we get a retry every 500ms for free,
+ * and we land at ~2s of uptime -- before userspace, WiFi or any traffic, which
+ * is the least dangerous moment to stop a clock.
+ *
+ * Returns 1 when it should not be called again.
+ */
+static int phoebus_sds_bringup(void)
+{
+	uint8 m = 0xff, nw = 0xff;
+	int32 r, rn;
+
+	r = rtk_port_serdesMode_set(1, LAN_SDS_MODE_SGMII_MAC);
+	if (r == RT_ERR_NOT_INIT)
+		return 0;                    /* port module not up yet; retry */
+
+	rtk_port_serdesMode_get(1, &m);
+	printk("PHOEBUS-SDS: sds1 -> SGMII_MAC (set=%d, reads back %u)\n", r, m);
+
+	rn = rtk_port_serdesNWay_set(1, LAN_SDS_NWAY_AUTO);
+	rtk_port_serdesNWay_get(1, &nw);
+	printk("PHOEBUS-SDS: sds1 nway -> AUTO (set=%d, reads back %u)\n", rn, nw);
+
+	return 1;
+}
+
 static int phoebus_wan_poll_thread(void *data)
 {
+	int sds_done = !phoebus_sds_enable;   /* nothing to do unless sds=1 */
+
 	while (!kthread_should_stop()) {
 		int st;
 
@@ -5431,6 +5485,9 @@ static int phoebus_wan_poll_thread(void *data)
 		schedule_timeout(HZ / 2);
 		if (kthread_should_stop())
 			break;
+
+		if (!sds_done)
+			sds_done = phoebus_sds_bringup();
 
 		st = phoebus_wan_state_get();
 		if (st < 0) {
