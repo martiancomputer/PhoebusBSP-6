@@ -1033,24 +1033,29 @@ static int32
 #define PHOEBUS_EXT_MDIO_PIN       10
 /* The external PHY answers at both 0 and 6. 6 matches stock's phyid. */
 #define PHOEBUS_EXT_WAN_PHY_ADDR   6
-/* The WAN is switch port 7 -- SGMII1 -- and this is now measured, not inferred.
+/* The WAN is switch port 6 -- SGMII0 -- which is what stock said all along.
  *
- * With a device in the WAN jack and nothing forced on port 7, the switch's own
- * counters read:
+ * Settled by configuring the SerDes, not by reading counters. With sds=0 the
+ * PHY's SerDes-side status finally moved off the 0x6189 it had read under
+ * every previous condition:
  *
- *   port 1 (LAN, cable in)   in_octets 19820   out_octets 77902   <- control
- *   port 7 (WAN, carrier up) in_octets     0   out_octets  4470
- *   port 6                   in_octets     0   out_octets     0
- *   port 8                   in_octets     0   out_octets     0
+ *   sds=1 (SDS1/port 7): dc0 reg 0x11 = 6189, unchanged. Port 7 in_octets 0.
+ *                        PCIe port 1 also failed to link and wlan1 vanished --
+ *                        SGMII1 shares a lane with it (SGMII_SEL_PCIE).
+ *   sds=0 (SDS0/port 6): dc0 reg 0x11 = 61ad -- link UP, autoneg COMPLETE.
+ *                        Port 6 in_octets went 0 -> 741158. Both radios fine.
  *
- * Port 7 was the only one of the three carrying anything, and its 4470 bytes
- * out are the DHCP discovers sent from eth0.9. Ports 6 and 8 are wired to
- * nothing on this board. An earlier reading of TP-Link's WAN_PHY_PORT_SET="1:6"
- * treated that 6 as a switch port; it is a PHY address, which is also where the
- * external PHY answers on the ext-MDIO bus. Two different sixes, and conflating
- * them cost several flash cycles.
+ * The earlier case for port 7 does not survive. Its out_octets were our own
+ * DHCP discovers, and the unplug/replug test that looked decisive was circular:
+ * phoebus_wan_poll_thread reads the external PHY and forces this port's MAC
+ * from it, so pulling the cable drops the PHY, the poller drops the port, and
+ * the netdev carrier follows. That correlation was manufactured here.
+ *
+ * The three sixes are still three different things -- WAN_PHY_PORT_SET="1:6"
+ * and ext-mdio "init 0 0 6" are a PHY address, and this one is a switch port --
+ * they just happen to agree.
  */
-#define PHOEBUS_WAN_PORT           7
+#define PHOEBUS_WAN_PORT           6
 /* Kept only so the /proc prober can still be pointed at them. Neither is the
  * WAN; see the counters above before spending time on either again. */
 #define PHOEBUS_WAN_PORT_SGMII     6
