@@ -5433,13 +5433,26 @@ static unsigned int phoebus_wan_fail_ticks;
  * the stock image in NAND.
  *
  * Behind a cmdline flag, a boot loop costs one bootarg edit instead of a TFTP
- * cycle: boot without sds=1 to get a known-good system back.
+ * cycle: boot without sds= at all to get a known-good system back.
+ *
+ * The value selects WHICH SerDes: sds=0 configures SDS0 (port 6 / eth0.8),
+ * sds=1 configures SDS1 (port 7 / eth0.9). Absent means do nothing.
+ *
+ * Which one is the WAN is unresolved. sds=1 was tried and is a net negative:
+ * the config took (mode reads back 3, nway 0) and port 7 in_octets stayed at
+ * 0, while PCIe port 1 failed to link and wlan1 never came up. The vendor
+ * function writes SGMII_SEL_PCIE / SPDSEL_SGMII_PCIE on CPU_PLL_CTRL_DUMMY, so
+ * SGMII1 and PCIe port 1 share a lane -- and since stock runs both radios AND
+ * a working WAN at once, stock cannot be using SGMII1 for the WAN. That points
+ * back at port 6, which is what stock's own base.sh says (wan_port=6, eth1).
  */
-static int phoebus_sds_enable;
+static int phoebus_sds_num = -1;
 static int __init phoebus_sds_setup(char *str)
 {
-	if (!str || kstrtoint(str, 0, &phoebus_sds_enable))
-		phoebus_sds_enable = 0;
+	if (!str || kstrtoint(str, 0, &phoebus_sds_num))
+		phoebus_sds_num = -1;
+	if (phoebus_sds_num != 0 && phoebus_sds_num != 1)
+		phoebus_sds_num = -1;
 	return 1;
 }
 __setup("sds=", phoebus_sds_setup);
@@ -5457,26 +5470,27 @@ __setup("sds=", phoebus_sds_setup);
  */
 static int phoebus_sds_bringup(void)
 {
+	uint8 n = (uint8)phoebus_sds_num;
 	uint8 m = 0xff, nw = 0xff;
 	int32 r, rn;
 
-	r = rtk_port_serdesMode_set(1, LAN_SDS_MODE_SGMII_MAC);
+	r = rtk_port_serdesMode_set(n, LAN_SDS_MODE_SGMII_MAC);
 	if (r == RT_ERR_NOT_INIT)
 		return 0;                    /* port module not up yet; retry */
 
-	rtk_port_serdesMode_get(1, &m);
-	printk("PHOEBUS-SDS: sds1 -> SGMII_MAC (set=%d, reads back %u)\n", r, m);
+	rtk_port_serdesMode_get(n, &m);
+	printk("PHOEBUS-SDS: sds%u -> SGMII_MAC (set=%d, reads back %u)\n", n, r, m);
 
-	rn = rtk_port_serdesNWay_set(1, LAN_SDS_NWAY_AUTO);
-	rtk_port_serdesNWay_get(1, &nw);
-	printk("PHOEBUS-SDS: sds1 nway -> AUTO (set=%d, reads back %u)\n", rn, nw);
+	rn = rtk_port_serdesNWay_set(n, LAN_SDS_NWAY_AUTO);
+	rtk_port_serdesNWay_get(n, &nw);
+	printk("PHOEBUS-SDS: sds%u nway -> AUTO (set=%d, reads back %u)\n", n, rn, nw);
 
 	return 1;
 }
 
 static int phoebus_wan_poll_thread(void *data)
 {
-	int sds_done = !phoebus_sds_enable;   /* nothing to do unless sds=1 */
+	int sds_done = (phoebus_sds_num < 0);   /* nothing to do unless sds=0|1 */
 
 	while (!kthread_should_stop()) {
 		int st;
@@ -6155,51 +6169,6 @@ int32 _dal_phy_recovery_init(void)
 		    	proc_create("extmdio", 0, phy_recovery_proc_dir, &phoebus_extmdio_fop);
 	        }
 
-	        /* Bring up the WAN SerDes.
-	         *
-	         * Nothing in this build ever configured it. rtk_port_serdesMode_set
-	         * is wired in the 9607c mapper but its only caller is an ioctl in
-	         * rtdrv_netfilter.c, so on a plain boot SDS1 is left at whatever
-	         * reset gave it -- and SDS1 is port 7, per the vendor's own
-	         * _rtl9607c_lan_sds1_modeV3_set, which force-link-downs port 7 by
-	         * literal number before touching it.
-	         *
-	         * That is the missing piece behind the symptom this port has shown
-	         * from the start: copper link up and negotiated, MAC speed matched
-	         * to it, and in_octets stuck at exactly 0 -- because the SerDes
-	         * carrying frames between the PHY and the switch was never started.
-	         * The PHY has said so at every single reading, page 0xdc0 reg 0x11
-	         * = 0x6189: 100BASE-X capable, autoneg never completing, link down.
-	         *
-	         * Called here rather than in the early switch path because
-	         * serdesMode_set does RT_INIT_CHK(port_init) and the port module is
-	         * not up yet at that point.
-	         */
-	        {
-	            uint8 m = 0xff, nw = 0xff;
-	            int32 r, rn;
-
-	            r = rtk_port_serdesMode_set(1, LAN_SDS_MODE_SGMII_MAC);
-	            rtk_port_serdesMode_get(1, &m);
-	            printk("PHOEBUS-SDS: sds1 -> SGMII_MAC (set=%d, reads back %u)\n",
-	                   r, m);
-
-	            /* And enable in-band autoneg on the SerDes.
-	             *
-	             * Separate call, separate API, also called by nothing in this
-	             * tree: rtk_port_serdesNWay_set writes SP_SDS_FRC_AN on
-	             * HSG1_SDS_REG2, and AUTO means clear the force bit so in-band
-	             * negotiation actually runs. Setting the mode alone brings the
-	             * lane up but leaves AN forced off, and "autoneg not complete"
-	             * is precisely what the PHY reports on its SerDes side
-	             * (0xdc0 reg 0x11 = 0x6189, bit5 clear). Doing both here rather
-	             * than finding out serially -- each guess is a TFTP cycle.
-	             */
-	            rn = rtk_port_serdesNWay_set(1, LAN_SDS_NWAY_AUTO);
-	            rtk_port_serdesNWay_get(1, &nw);
-	            printk("PHOEBUS-SDS: sds1 nway -> AUTO (set=%d, reads back %u)\n",
-	                   rn, nw);
-	        }
 
 	        /* Keep the WAN MAC in step with whatever the external PHY
 	         * negotiates. Started here because this runs once at switch init
