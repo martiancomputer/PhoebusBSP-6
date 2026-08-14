@@ -1248,9 +1248,26 @@ struct sk_buff *re8670_getAlloc(unsigned int size)
 #if defined(CONFIG_RTL865X_ETH_PRIV_SKB)
 			dynamic_alloc_skb_num++;
 #endif
-			skb = dev_alloc_skb(size);
-			if(skb && (unsigned int)skb->data&0xf) {
-				skb->data = (((unsigned int)skb->data)&0xfffffff0)+0x10;
+			/* Align the payload to 16 bytes for the DMA engine.
+			 *
+			 * The vendor did this by rewriting skb->data directly, which moves
+			 * data away from head without telling the skb. Linux 6.18's slab
+			 * checks catch the resulting free:
+			 *
+			 *   WARNING mm/slub.c free_large_kmalloc
+			 *   skb_release_data -> sk_skb_reason_drop -> arp_process
+			 *   page dumped because: Not a kmalloc allocation
+			 *
+			 * skb_reserve() moves data AND tail and leaves head alone, which
+			 * is the same alignment with an skb the kernel can still free.
+			 * Over-allocate by 16 so reserving cannot eat into the payload.
+			 */
+			skb = dev_alloc_skb(size + 16);
+			if (skb) {
+				unsigned int misalign = (unsigned long)skb->data & 0xf;
+
+				if (misalign)
+					skb_reserve(skb, 16 - misalign);
 			}
 		}
 #if 0
@@ -1263,9 +1280,14 @@ struct sk_buff *re8670_getAlloc(unsigned int size)
 #else
 	if (check_memory_avaliable(size))
 	{
-		skb = dev_alloc_skb(size);
-		if(skb && (unsigned int)skb->data&0xf) {
-			skb->data = (((unsigned int)skb->data)&0xfffffff0)+0x10;
+		/* Same 16-byte alignment via skb_reserve rather than by rewriting
+		 * skb->data -- see the comment on the other allocation path above. */
+		skb = dev_alloc_skb(size + 16);
+		if (skb) {
+			unsigned int misalign = (unsigned long)skb->data & 0xf;
+
+			if (misalign)
+				skb_reserve(skb, 16 - misalign);
 		}
 	}
 #if 0
@@ -11993,7 +12015,19 @@ static int rtk_gmac_re_private_data_init(void)
 	root_cp->re_private_data_ptr[1]->rx_buff_size = SKB_BUF_SIZE;
 	root_cp->re_private_data_ptr[2]->rx_buff_size = SKB_BUF_SIZE;
 	
-	root_cp->skb_dynamic_allocate_disable = (u8)GMAC_ON;
+	/* Allow the driver to fall back to dev_alloc_skb when the recycle pool is
+	 * empty. The vendor default is GMAC_ON, i.e. "never allocate dynamically",
+	 * and with it the WAN silently dropped 22688 of 26264 received frames:
+	 *
+	 *   rx_hw_num 26264   rx_sw_num 3576   rx_no_mem 22688
+	 *
+	 * with 116MB free. The frames reached the port MAC and incremented
+	 * eth0.8's rx_packets, but re8670_getAlloc returned NULL for almost every
+	 * one, so nothing was ever handed to the stack -- tcpdump saw zero packets
+	 * on an interface whose counters were climbing by ~50/s, and ARP never
+	 * resolved. Clearing this at runtime made ARP traffic appear immediately.
+	 */
+	root_cp->skb_dynamic_allocate_disable = (u8)GMAC_OFF;
 
 	for (i=0U ; i<SW_PORT_NUM ; i++)
 	{
