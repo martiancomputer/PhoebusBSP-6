@@ -12015,19 +12015,22 @@ static int rtk_gmac_re_private_data_init(void)
 	root_cp->re_private_data_ptr[1]->rx_buff_size = SKB_BUF_SIZE;
 	root_cp->re_private_data_ptr[2]->rx_buff_size = SKB_BUF_SIZE;
 	
-	/* Allow the driver to fall back to dev_alloc_skb when the recycle pool is
-	 * empty. The vendor default is GMAC_ON, i.e. "never allocate dynamically",
-	 * and with it the WAN silently dropped 22688 of 26264 received frames:
+	/* Vendor default, deliberately restored.
 	 *
-	 *   rx_hw_num 26264   rx_sw_num 3576   rx_no_mem 22688
+	 * This was briefly set to GMAC_OFF to work around the recycle pool being
+	 * permanently empty, which was starving rx: 22688 of 26264 frames dropped
+	 * with 116MB free. That did let traffic through, and then killed the box
+	 * under load -- pool exhaustion is what triggers rx_pause_by_software, so
+	 * making allocation always succeed removed the driver's only flow control.
+	 * A speedtest filled memory with queued skbs until the OOM killer took
+	 * every service and the kernel panicked: "System is deadlocked on memory".
 	 *
-	 * with 116MB free. The frames reached the port MAC and incremented
-	 * eth0.8's rx_packets, but re8670_getAlloc returned NULL for almost every
-	 * one, so nothing was ever handed to the stack -- tcpdump saw zero packets
-	 * on an interface whose counters were climbing by ~50/s, and ARP never
-	 * resolved. Clearing this at runtime made ARP traffic appear immediately.
+	 * The pool is the actual bug, and it is fixed by not using it -- see
+	 * CONFIG_RTL_ETH_RECYCLED_SKB in the defconfig. This flag is not consulted
+	 * on the non-pool path at all; it is left at the vendor value so that
+	 * re-enabling the pool later cannot silently reintroduce the OOM.
 	 */
-	root_cp->skb_dynamic_allocate_disable = (u8)GMAC_OFF;
+	root_cp->skb_dynamic_allocate_disable = (u8)GMAC_ON;
 
 	for (i=0U ; i<SW_PORT_NUM ; i++)
 	{
