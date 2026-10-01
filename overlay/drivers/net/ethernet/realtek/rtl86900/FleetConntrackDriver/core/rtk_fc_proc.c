@@ -20622,11 +20622,6 @@ void rtk_fc_proc_exit(void)
 	{
 		struct proc_dir_entry *tmpDir=NULL;
 
-		if(fcProc[i].pProc_fops)
-		{
-			RTK_FC_HELPER_MGR_PROC_FOPS_KFREE(fcProc[i].pProc_fops);
-			fcProc[i].pProc_fops = NULL;
-		}
 		switch(fcProc[i].dir)
 		{
 			case PROC_DIR_SW_DUMP:
@@ -20646,6 +20641,12 @@ void rtk_fc_proc_exit(void)
 		}
 
 		remove_proc_entry(fcProc[i].name, tmpDir);
+		/* Removal drains proc readers before their operations are released. */
+		if(fcProc[i].pProc_fops)
+		{
+			RTK_FC_HELPER_MGR_PROC_FOPS_KFREE(fcProc[i].pProc_fops);
+			fcProc[i].pProc_fops = NULL;
+		}
 	}
 
 	proc_remove(rtk_rg_hw_dump_proc_dir);
@@ -20653,4 +20654,3 @@ void rtk_fc_proc_exit(void)
 	proc_remove(rtk_rg_ctrl_proc_dir);
 	proc_remove(rtk_fc_proc_dir);
 }
-

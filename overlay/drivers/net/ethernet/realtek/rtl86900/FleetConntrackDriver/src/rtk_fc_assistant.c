@@ -17,13 +17,13 @@
 #include <linux/in.h>
 #include <linux/ip.h>
 #include <net/addrconf.h>
-#ifdef CONFIG_RTK_FC_TCP_SPI_SUPPORT
 #include <net/netfilter/nf_conntrack.h>
+#include <net/netfilter/nf_conntrack_core.h>
+#ifdef CONFIG_RTK_FC_TCP_SPI_SUPPORT
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5,10,0)
 #include <net/netfilter/nf_conntrack_l3proto.h>
 #endif
 #include <net/netfilter/nf_conntrack_l4proto.h>
-#include <net/netfilter/nf_conntrack_core.h>
 #endif
 
 #if defined(CONFIG_RTK_L34_XPON_PLATFORM)
@@ -65,9 +65,6 @@ void (*g_rcu_read_unlock_bh)(void);
 void (*g_call_rcu)(struct rcu_head *head, rcu_callback_t func);
 void (*g_synchronize_rcu)(void);
 int (*g_irq_set_affinity_hint)(unsigned int irq, const struct cpumask *m);
-void (*g_nf_ct_iterate_cleanup)(struct net *net,
-			   int (*iter)(struct nf_conn *i, void *data),
-			   void *data, u32 portid, int report);
 #ifdef CONFIG_RTK_FC_TCP_SPI_SUPPORT
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(5,10,0)
 bool (*g_nf_ct_get_tuple)(const struct sk_buff *skb,
@@ -637,13 +634,18 @@ void rtk_fc_g_nf_ct_iterate_cleanup(struct net *net,
 			   int (*iter)(struct nf_conn *i, void *data),
 			   void *data, u32 portid, int report)
 {
-
 #if IS_BUILTIN(CONFIG_NF_CONNTRACK)
-	g_nf_ct_iterate_cleanup(net, iter, data, portid, report);
+	const struct nf_ct_iter_data iter_data = {
+		.net = net,
+		.data = data,
+		.portid = portid,
+		.report = report,
+	};
+
+	nf_ct_iterate_cleanup_net(iter, &iter_data);
 #else
-	printk("[FCEXT] %s not support \n",__func__);
+	pr_warn_once("FleetConntrack: conntrack cleanup unavailable\n");
 #endif
-	return;
 }
 
 #ifdef CONFIG_RTK_FC_TCP_SPI_SUPPORT
@@ -712,13 +714,6 @@ int rtk_fc_g_ct_helper_exist_check(struct nf_conn *ct, struct nf_conntrack_helpe
 	g_irq_set_affinity_hint = irq_set_affinity_hint;
 	
 #if IS_BUILTIN(CONFIG_NF_CONNTRACK)
-
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,14,0)
-	g_nf_ct_iterate_cleanup = nf_ct_iterate_cleanup_net;
-#else
-	g_nf_ct_iterate_cleanup = nf_ct_iterate_cleanup;
-#endif
-
 #ifdef CONFIG_RTK_FC_TCP_SPI_SUPPORT
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(5,10,0)
 	g_nf_ct_get_tuple = rtk_fc_nf_ct_get_tuple;
@@ -817,5 +812,3 @@ EXPORT_SYMBOL(rtk_fc_g_nf_ct_iterate_cleanup);
 EXPORT_SYMBOL(rtk_fc_g_nf_ct_get_tuple);
 #endif
 EXPORT_SYMBOL(rtk_fc_g_ct_helper_exist_check);
-
-

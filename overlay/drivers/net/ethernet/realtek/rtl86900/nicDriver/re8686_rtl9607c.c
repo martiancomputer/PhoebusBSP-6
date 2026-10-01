@@ -7,6 +7,8 @@
 
 
 #include <generated/autoconf.h>
+#include <linux/mutex.h>
+#include <linux/rcupdate.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/compiler.h>
@@ -1353,11 +1355,31 @@ static inline void rtk_gmac_set_rxbufsize (struct re_private_root *root_cp)
 }
 
 
+
+static DEFINE_MUTEX(re8686_tx_hook_mutex);
+
 int re8686_register_txfunc(tfunc_t pfunc){
 	struct re_private_root *root_cp = &re_private_data_root;
 
-	root_cp->txfunc = pfunc;
+	mutex_lock(&re8686_tx_hook_mutex);
+	WRITE_ONCE(root_cp->txfunc, pfunc);
+	mutex_unlock(&re8686_tx_hook_mutex);
 	
+	return 0;
+}
+
+int re8686_unregister_txfunc(tfunc_t pfunc)
+{
+	struct re_private_root *root_cp = &re_private_data_root;
+
+	mutex_lock(&re8686_tx_hook_mutex);
+	if (READ_ONCE(root_cp->txfunc) != pfunc) {
+		mutex_unlock(&re8686_tx_hook_mutex);
+		return -ENOENT;
+	}
+	WRITE_ONCE(root_cp->txfunc, NULL);
+	synchronize_rcu();
+	mutex_unlock(&re8686_tx_hook_mutex);
 	return 0;
 }
 
@@ -1519,6 +1541,7 @@ struct net_device* decideRxDevice(struct re_private *cp, struct rx_info *pRxInfo
 
 EXPORT_SYMBOL(decideRxDevice);
 EXPORT_SYMBOL(dynamic_sram_desc);
+EXPORT_SYMBOL(nic_decide_rx_device_by_spa);
 #endif
 
 #endif
@@ -5332,11 +5355,17 @@ TX_BACKUP_RING_RETRY:
 __IRAM_NIC int re8670_start_xmit (struct sk_buff *skb, struct net_device *dev)	//shlee temp, fix this later
 {
 	struct re_private_root *root_cp = &re_private_data_root;
-	
-	if (root_cp->txfunc)
-		return root_cp->txfunc(skb, dev);
+	tfunc_t txfunc;
+	int ret;
+
+	rcu_read_lock();
+	txfunc = READ_ONCE(root_cp->txfunc);
+	if (txfunc)
+		ret = txfunc(skb, dev);
 	else
-		return re8670_start_xmit_txInfo(skb,dev,NULL,NULL);
+		ret = re8670_start_xmit_txInfo(skb,dev,NULL,NULL);
+	rcu_read_unlock();
+	return ret;
 }
 
 /* Set or clear the multicast filter for this adaptor.
@@ -12802,4 +12831,3 @@ EXPORT_SYMBOL(re8686_set_pauseBySw);
 EXPORT_SYMBOL(re8686_set_vlan_register);
 EXPORT_SYMBOL(re8686_get_vlan_register);	
 EXPORT_SYMBOL(re8686_customized_rx_and_tx);
-

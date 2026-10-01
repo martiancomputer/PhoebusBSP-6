@@ -76,6 +76,19 @@ sed -i "s|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE=\"$WORK/rootfs-tre
 command -v bc >/dev/null 2>&1 || export PATH="$SDK/tools/hostbin:$PATH"
 make -C "$K" olddefconfig
 make -C "$K" -j"$JOBS" uImage.lzma
+make -C "$K" -j"$JOBS" \
+	drivers/net/ethernet/realtek/rtl86900/FleetConntrackDriver/rtk_fc.ko
+KREL=$(make -s -C "$K" kernelrelease)
+FC_KO="$K/drivers/net/ethernet/realtek/rtl86900/FleetConntrackDriver/rtk_fc.ko"
+[ -f "$FC_KO" ] || { echo "ERROR: FleetConntrack module was not built" >&2; exit 1; }
+MODDIR="$WORK/rootfs-tree/lib/modules/$KREL/kernel/drivers/net/ethernet/realtek"
+mkdir -p "$MODDIR"
+cp "$FC_KO" "$MODDIR/rtk_fc.ko"
+printf 'kernel/drivers/net/ethernet/realtek/rtk_fc.ko:\n' > "$WORK/rootfs-tree/lib/modules/$KREL/modules.dep"
+# Relink the initramfs after adding the module to its source tree.
+rm -f "$K/usr/initramfs_data.cpio" "$K/usr/initramfs_data.cpio.lz4" \
+	"$K/usr/initramfs_inc_data"
+make -C "$K" -j"$JOBS" uImage.lzma
 
 # --- 7. package ---
 # (initramfs is baked in via CONFIG_INITRAMFS_SOURCE; for a separate squashfs+vm.img
