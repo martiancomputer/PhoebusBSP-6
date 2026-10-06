@@ -38,6 +38,12 @@ Host prerequisites (build.sh preflights these):
 `mkimage` (uboot-tools) wraps the uImage; `bc` is needed by the kernel's
 `timeconst.h` rule; the cross toolchain is fetched automatically.
 
+The shared SDK also cross-builds btop for MIPS32r2, replacing BusyBox `top`.
+Its CPU panel discovers all four logical VPEs; its network panel can select
+each LAN/WAN netdev, including bridge members without individual IP addresses.
+See the SDK's resource-monitor section for UTF-8 setup, runtime libraries and
+hardware-offload counter limitations. Host GNU `localedef` is required.
+
 > **`bc` really is required.** The kernel regenerates
 > `include/generated/timeconst.h` on *every* build via a `filechk` rule with a
 > `FORCE` prerequisite, so a cached header does not save you. Without `bc` the
