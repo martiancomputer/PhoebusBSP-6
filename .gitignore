@@ -11,3 +11,5 @@
 
 # Internal bring-up notes; do not publish.
 /PORT_NOTES.md
+/proposal.md
+/tools/__pycache__/

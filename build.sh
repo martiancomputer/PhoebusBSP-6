@@ -18,6 +18,7 @@ WORK="$BSP/build"
 K="$WORK/linux-$KVER"
 CROSS_COMPILE="${CROSS_COMPILE:-mips-buildroot-linux-gnu-}"
 JOBS="${JOBS:-$(nproc)}"
+SKIP_USERSPACE="${SKIP_USERSPACE:-}"
 
 [ -d "$SDK/vendor/realtek-net" ] || { echo "ERROR: Phoebus-SDK submodule missing. Run: git submodule update --init"; exit 1; }
 
@@ -38,6 +39,7 @@ fi
 "$SDK/scripts/fetch-toolchain.sh" "$BSP/toolchain"
 export PATH="$BSP/toolchain/mips32--glibc--stable-2025.08-1/bin:$PATH"
 export ARCH=mips CROSS_COMPILE
+export KBUILD_BUILD_USER=builder KBUILD_BUILD_HOST=build
 
 # --- 2. pristine kernel ---
 mkdir -p "$WORK"; cd "$WORK"
@@ -66,12 +68,18 @@ cp -a "$BSP/overlay/." "$K/"
 # --- 5. rootfs (BEFORE the kernel: the initramfs is baked in during the kernel build) ---
 "$SDK/rootfs/build-rootfs.sh" "$WORK/rootfs-tree"
 
+# Build the same pinned network services and dual-stack firewall applets as
+# BSP-7. A BusyBox/s6-only image cannot run the complete router service bundle.
+if [ -z "$SKIP_USERSPACE" ]; then
+	"$BSP/tools/build-userspace.sh" "$WORK/rootfs-tree"
+fi
+
 # --- 6. configure + build ---
 cp "$BSP/configs/rtl9607c.config" "$K/.config"
 # Point the built-in initramfs at the rootfs we just built. This overrides any
 # CONFIG_INITRAMFS_SOURCE value in the committed config (which must NOT carry a
 # machine-specific absolute path — that was a portability bug).
-sed -i "s|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE=\"$WORK/rootfs-tree $SDK/rootfs/initramfs-devnodes.txt\"|" "$K/.config"
+sed -i 's|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE="../rootfs-tree ../../sdk/rootfs/initramfs-devnodes.txt"|' "$K/.config"
 # host bc is required by the kernel build; the SDK ships a fallback if the host lacks it
 command -v bc >/dev/null 2>&1 || export PATH="$SDK/tools/hostbin:$PATH"
 make -C "$K" olddefconfig
@@ -95,6 +103,7 @@ make -C "$K" -j"$JOBS" uImage.lzma
 #  use the SDK image tools — see README)
 mkdir -p "$BSP/images"
 cp "$K/arch/mips/boot/uImage.lzma" "$BSP/images/uImage"
+ln -sfn uImage "$BSP/images/uImage-initramfs"
 echo
 echo "Build complete: $BSP/images/uImage  (load 0x80001000)"
 echo "RAM-boot test on the board (no flash writes):"
